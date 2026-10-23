@@ -1,7 +1,7 @@
 # Sonic Riders: Zero Gravity — Static Recompilation (SR-ZGS)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-lightgrey)](#)
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-green)](#)
 [![Engine](https://img.shields.io/badge/Recompiler-DolRecomp-orange)](#)
 
 A modern, high-performance static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii).  
