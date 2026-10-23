@@ -1,3 +1,5 @@
+![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Banner.png)
+
 # Sonic Riders: Zero Gravity — Static Recompilation (SR-ZGS)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
