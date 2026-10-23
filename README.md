@@ -4,7 +4,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20Android-green)](#)
 [![Engine](https://img.shields.io/badge/Recompiler-DolRecomp-orange)](#)
 
-A modern, high-performance static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii) for native PC (Linux and Windows). Requires your own copy of the game.
+A modern, high-performance static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii) for native PC (Linux and Windows) & Android. Requires your own copy of the game.
 Designed with a clean, modular architecture isolating recompiled game logic, modding facilities, and hardware-agnostic platform hooks.
 
 ---
