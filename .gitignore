@@ -1,0 +1,26 @@
+# Directorios de compilación (CMake / GCC / Clang)
+build/
+bin/
+out/
+
+# Archivos objeto y binarios generados
+*.o
+*.obj
+*.elf
+*.exe
+*.a
+*.so
+*.dylib
+
+# Archivos temporales de DolRecomp / Herramientas de Recompilación
+*.tmp
+*.log
+
+# Configuración de editores e IDEs (VS Code, CLion, etc.)
+.vscode/
+.idea/
+*.user
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
