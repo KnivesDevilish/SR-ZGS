@@ -31,10 +31,3 @@ The repository enforces strict separation of concerns to guarantee performance a
 * **Game Assets**: Legally acquired `main.dol` extracted from *Sonic Riders: Zero Gravity* (RS9E01 / RS9P01).
 
 ---
-
-## 🚀 Getting Started
-
-1. **Clone the Repository**
-   ```bash
-   git clone [https://github.com/KnivesDevilish/SR-ZGS.git](https://github.com/KnivesDevilish/SR-ZGS.git)
-   cd SR-ZGS
