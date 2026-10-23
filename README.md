@@ -25,7 +25,7 @@ The repository enforces strict separation of concerns to guarantee performance a
 ## ⚙️ Prerequisites & Setup
 
 ### Requirements
-* **Compiler**: GCC 12+ or Clang 15+ (C++20 support required)
+* **Compiler**: GCC 12+, Clang 15+, or Android NDK r25+ (C++20 support required)
 * **Build System**: CMake 3.22+
 * **Recompilation Tool**: [DolRecomp](https://github.com/zelda264/DolRecomp)
 * **Game Assets**: Legally acquired `main.dol` extracted from *Sonic Riders: Zero Gravity* (RS9E01 / RS9P01).
