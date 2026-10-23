@@ -31,3 +31,14 @@ The repository enforces strict separation of concerns to guarantee performance a
 * **Game Assets**: Legally acquired `main.dol` extracted from *Sonic Riders: Zero Gravity* (RS9E01 / RS9P01).
 
 ---
+
+## 🚀 Getting Started
+
+1. **Prepare the DOL Binary**  
+   Place your extracted `main.dol` into the designated workspace for `DolRecomp` processing.
+
+2. **Configure and Build** *(To be finalized as toolchain pipelines are configured)*  
+   ```bash
+   mkdir build && cd build
+   cmake ..
+   make -j$(nproc)
