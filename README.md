@@ -1,6 +1,6 @@
 ![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Banner.png)
 
-# Sonic Riders: Zero Gravity — Static Recompilation (SR-ZGS)
+# Sonic Riders: Zero Gravity — Static Recompilation
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20Android-green)](#)
@@ -107,6 +107,32 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 
 ---
 
+## How to Install
+
+1) You must have access to the following:
+    - A clean, legally acquired copy of **Sonic Riders: Zero Gravity** for Nintendo Wii (NTSC-U / Game ID: `RS9E8P` / `0001000052533945`).
+    - Standard tools to extract game files from a Wii disc image (e.g., Dolphin Emulator, Wiimms ISO Tools, or CleanRip on an original Wii console).
+
+> [!TIP]
+> Make sure your ISO or WBFS dump is clean and unmodified. Modified game dumps or scrubbed files with missing data may cause errors during the recompilation and setup steps.
+
+2) **Extract Game Executable:**
+    - Extract `main.dol` from the root partition of your game dump.
+    - Place the extracted `main.dol` file inside the `game_assets/` folder of this project.
+
+3) **Run Static Recompilation (DolRecomp):**
+    - Execute DolRecomp using the project configurations located in `tools/dolrecomp/`.
+    - Verify that the generated recompiled C/C++ source files are placed in `src/recompiled/`.
+
+4) **Build & Run:**
+    - Configure and compile the repository using CMake (refer to the [Building & Getting Started](#-getting-started) section below).
+    - Launch the compiled executable.
+
+> [!NOTE]
+> This repository **does not provide or distribute any copyrighted game binaries or assets**. You must extract `main.dol` from your own legally obtained game copy to compile and run SR-ZGS.
+
+---
+
 ## 🚀 Getting Started
 
 1. **Clone Repository & Submodules:**
@@ -130,7 +156,50 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 
 5. **Build Project (Android):**
    - Open the Android CMake target using Android Studio or build via `./gradlew assembleRelease` with the NDK toolchain configured.
-   
+
+---
+
+## Troubleshooting & FAQ
+
+### How can I install mods?
+**Do not install mods by modifying the raw game assets directly**. Use the built-in mod loader subsystem (`src/mod_loader/`) or compatible mod directories instead[cite: 2]. You will not get support for modifying your extracted files directly[cite: 2].
+
+> [!WARNING]
+> Manually editing or replacing core game files within `game_assets/` is not recommended, as it can cause structural conflicts with the recompiled engine.
+
+### How can I force the game to run under X11 or Wayland (Linux)?
+Use either of the following arguments to force SDL to run under your preferred video driver[cite: 2]:
+- X11: `--sdl-video-driver x11`[cite: 2]
+- Wayland: `--sdl-video-driver wayland`[cite: 2]
+
+### How can I improve performance?
+If you experience performance drops, you can adjust the following settings in your configuration file or options menu:
+- Resolution Scale
+- Anti-Aliasing Quality
+- Shadow Resolution
+
+> [!NOTE]
+> Since this project targets native multi-platform compilation, running on Linux distributions can sometimes offer better thread scheduling performance compared to Windows on modest hardware.
+
+### Why is my controller not being recognized properly?
+If you are using third-party input translation layers (such as Steam Input or external wrappers), try toggling them off if you experience button mapping conflicts, as the engine utilizes native SDL input handling.
+
+### Will Android be supported?
+While Phase 1 focuses strictly on native PC builds (Linux/Windows), modular architecture is kept clean via the platform layer (`src/platform/`) to evaluate mobile/Android builds in future phases.
+
+### Can I use files from the PS2 or GameCube versions?
+**No.** This project strictly targets the Nintendo Wii NTSC-U release (`RS9E8P` / `0001000052533945`). The PS2 version uses a completely different executable structure and rendering pipeline, while the original *Sonic Riders* (GameCube/PS2/PC) is a different game entirely.
+
+### What languages and audio localizations will be supported?
+
+Out of the box, the game will natively support:
+- **English:** Full original voice track featuring the iconic Sonic Riders: Zero Gravity cast.
+- **Japanese:** Full original Japanese voice track and text localization.
+- **Latin American Spanish (New feature):** For the first time ever, *Sonic Riders: Zero Gravity* will feature a fan-dubbed Latin American Spanish voice track produced in collaboration with community voice actors working closely with the project team.
+
+### Do you have plans to recompile other Sonic games?
+**No.** The primary focus of this repository is strictly the preservation, modernization, and modular expansion of *Sonic Riders: Zero Gravity*. Anyone interested in recompiling other Wii or GameCube titles is encouraged to explore [DolRecomp](https://github.com/ExpansionPak/DolRecomp) and build their own project repositories.
+
 ---
 
 ## 📜 AI Context Prompt Template
