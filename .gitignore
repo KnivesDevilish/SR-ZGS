@@ -2,6 +2,7 @@
 build/
 bin/
 out/
+game_assets/
 
 # Archivos objeto y binarios generados
 *.o
