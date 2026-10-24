@@ -84,7 +84,7 @@ SR-ZGS/
 
 ---
 
-![SR:ZGS x NTH - Forgotten District](docs/SR-ZGSxNTH.png)
+![SR-ZGSxNTH](docs/SR-ZGSxNTH.png)
 
 ## 🛠️ Code Standards & Architecture Guidelines
 
