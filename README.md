@@ -85,6 +85,8 @@ SR-ZGS/
 
 ---
 
+![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Logo.png)
+
 ## 🛠️ Code Standards & Architecture Guidelines
 
 When developing features or requesting AI assistance (e.g., via Claude AI), adhere to these principles:
@@ -96,8 +98,6 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 5. **Performance First:** Keep hot path loops clean and minimal to ensure smooth framerates on low-power devices.
 
 ---
-
-![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Logo.png)
 
 ## 💻 Target System Compatibility
 
