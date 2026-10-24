@@ -97,7 +97,7 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 
 ---
 
-![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Banner.png)
+![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Logo.png)
 
 ## 💻 Target System Compatibility
 
