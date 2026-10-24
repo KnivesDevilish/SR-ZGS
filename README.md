@@ -11,7 +11,7 @@ Designed with a clean, modular architecture isolating recompiled game logic, mod
 
 ---
 
-## 🏗️ Architecture
+## 🐧 Architecture
 
 The repository enforces strict separation of concerns to guarantee performance and maintainability across all system layers:
 
