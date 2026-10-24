@@ -97,6 +97,8 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 
 ---
 
+![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Banner.png)
+
 ## 💻 Target System Compatibility
 
 - **Minimum Specification Target (PC):** Intel Core i5-5200U, Intel HD Graphics 5500, 16 GB RAM (720p/1080p @ 60 FPS target).
