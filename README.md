@@ -43,7 +43,7 @@ The repository enforces strict separation of concerns to guarantee performance a
 
 ---
 
-## 🎯 Key Goals & Features
+## 📝 Key Goals & Features
 
 - **Native Performance & Scalability:** 
   - Direct execution without traditional emulation overhead.
@@ -107,7 +107,7 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 
 ---
 
-## How to Install
+## 🚧 How to Install
 
 1) You must have access to the following:
     - A clean, legally acquired copy of **Sonic Riders: Zero Gravity** for Nintendo Wii (NTSC-U / Game ID: `RS9E8P` / `0001000052533945`).
@@ -159,7 +159,12 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 
 ---
 
-## Troubleshooting & FAQ
+### 💽 Custom Story Expansions & Modding Support
+The modular nature of `Sonic Riders: Zero Gravity Source` isolates custom expansions (`src/expansions/`) from the base game code. This allows the integration of rich, original story campaigns, unique characters, and custom tracks (such as the upcoming *Forgotten District* expansion) without modifying raw original game assets.
+
+---
+
+## ❔ Troubleshooting & FAQ
 
 ### How can I install mods?
 **Do not install mods by modifying the raw game assets directly**. Use the built-in mod loader subsystem (`src/mod_loader/`) or compatible mod directories instead[cite: 2]. You will not get support for modifying your extracted files directly[cite: 2].
@@ -190,8 +195,10 @@ While Phase 1 focuses strictly on native PC builds (Linux/Windows), modular arch
 ### Can I use files from the PS2 or GameCube versions?
 **No.** This project strictly targets the Nintendo Wii NTSC-U release (`RS9E8P` / `0001000052533945`). The PS2 version uses a completely different executable structure and rendering pipeline, while the original *Sonic Riders* (GameCube/PS2/PC) is a different game entirely.
 
-### What languages and audio localizations will be supported?
+### Will the project support custom story campaigns or fan content?
+**Yes.** Thanks to the non-invasive `src/expansions/` architecture, developers and creators can build custom story expansions, original character additions, and new tracks. Official modular expansions, such as *SR:ZGS × NTH - FORGOTTEN DISTRICT*, will be integrated cleanly on top of the base recompiled engine.
 
+### What languages and audio localizations will be supported?
 Out of the box, the game will natively support:
 - **English:** Full original voice track featuring the iconic Sonic Riders: Zero Gravity cast.
 - **Japanese:** Full original Japanese voice track and text localization.
@@ -199,6 +206,23 @@ Out of the box, the game will natively support:
 
 ### Do you have plans to recompile other Sonic games?
 **No.** The primary focus of this repository is strictly the preservation, modernization, and modular expansion of *Sonic Riders: Zero Gravity*. Anyone interested in recompiling other Wii or GameCube titles is encouraged to explore [DolRecomp](https://github.com/ExpansionPak/DolRecomp) and build their own project repositories.
+
+---
+
+## ❤️‍🔥 Credits & Acknowledgments
+
+### Project Leads & Core Development
+- **奈依茲・悪魔的 | (Naizu Akumateki):** Creator, Lead Developer, and Architect of the static recompilation and modular integration for *Sonic Riders: Zero Gravity Source*.
+
+### Audio & Localizations
+- **Latin American Spanish Voice Cast:** Community voice actors and artists contributing their talents for the brand-new Latin American Spanish dub integration.
+- **Original Audio Tracks:** Based on the official English and Japanese audio assets from the original Nintendo Wii release.
+
+### Tools & Technologies
+- **[DolRecomp](https://github.com/dolrecomp):** The core static recompilation framework utilized for translating the original PowerPC `main.dol` executable of *Sonic Riders: Zero Gravity* into modern C/C++.
+
+### Special Thanks
+- To all open-source contributors, community testers, and fans supporting the preservation and modernization of classic arcade racing titles.
 
 ---
 
