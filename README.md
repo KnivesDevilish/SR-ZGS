@@ -84,7 +84,7 @@ SR-ZGS/
 
 ---
 
-![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Logo.png)
+![SR:ZGS x NTH - Forgotten District](docs/SR-ZGS_x_NTH_Forgotten_District.png)
 
 ## 🛠️ Code Standards & Architecture Guidelines
 
@@ -157,6 +157,8 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
    - Open the Android CMake target using Android Studio or build via `./gradlew assembleRelease` with the NDK toolchain configured.
 
 ---
+
+![SR:ZGS x NTH - Forgotten District](docs/SR-ZGS%20x%20NTH%20-%20Forgotten%20District.png)
 
 ### 💽 Custom Story Expansions & Modding Support
 The modular nature of `Sonic Riders: Zero Gravity Source` isolates custom expansions (`src/expansions/`) from the base game code. This allows the integration of rich, original story campaigns, unique characters, and custom tracks (such as the upcoming *Forgotten District* expansion) without modifying raw original game assets.
