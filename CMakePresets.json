@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "release",
+      "displayName": "Release (Ninja, -O2 generated code)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/game",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "SRZGS_MODULE_OPT_LEVEL": "2"
+      },
+      "environment": {
+        "CMAKE_NINJA_FORCE_RESPONSE_FILE": "1"
+      }
+    },
+    {
+      "name": "quick",
+      "displayName": "Quick first-boot iteration (-O1 generated code)",
+      "inherits": "release",
+      "binaryDir": "${sourceDir}/build/game-quick",
+      "cacheVariables": {
+        "SRZGS_MODULE_OPT_LEVEL": "1"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "release", "configurePreset": "release" },
+    { "name": "quick",   "configurePreset": "quick" }
+  ]
+}

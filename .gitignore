@@ -25,3 +25,10 @@ game_assets/
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+# --- SR:ZGS: append these lines to your .gitignore ---------------------------
+# Everything below is derived from (or is) the game binary. Never commit it,
+# especially while the repository is public.
+/game_assets/
+/src/recompiled/*/
+/build/
