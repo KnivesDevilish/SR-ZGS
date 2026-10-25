@@ -11,7 +11,6 @@
 
 A modern, high-performance static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii) for native PC (Linux and Windows) & Android. Designed with a clean, modular architecture isolating recompiled game logic, modding facilities, and hardware-agnostic platform hooks. Requires your own copy of the game.
 
-![Progress](https://geps.dev/progress/65)
 ---
 
 ## 🐧 Architecture
