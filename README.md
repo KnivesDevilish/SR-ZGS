@@ -223,7 +223,7 @@ Out of the box, the game will natively support:
 - **[DolRecomp](https://github.com/dolrecomp):** The core static recompilation framework utilized for translating the original PowerPC `main.dol` executable of *Sonic Riders: Zero Gravity* into modern C/C++.
 
 ### Special Thanks
-- To all open-source contributors, community testers, and fans supporting the preservation and modernization of classic arcade racing titles, as well as helping bring my passion project, Sonic Riders: Zero Gravity Source, to life.
+- To all open-source contributors, community testers, and fans supporting the preservation and modernization of classic arcade racing titles, as well as helping bring my passion project, Sonic Riders: Zero Gravity Source, to life. 💎
 
 ---
 
