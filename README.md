@@ -153,10 +153,14 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 4. **Launch:**
    Run the compiled executable generated inside the build/ directory.
 
-![SR-ZGSxNTH](docs/SR-ZGSxNTH.png)
+---
+
+## 🧩 New Ecosystem Integration
 
 ### 💽 Custom Story Expansions & Modding Support
 The modular nature of `Sonic Riders: Zero Gravity Source` isolates custom expansions (`src/expansions/`) from the base game code. This allows the integration of rich, original story campaigns, unique characters, and custom tracks (such as the upcoming *Forgotten District* expansion) without modifying raw original game assets.
+
+![SR-ZGSxNTH](docs/SR-ZGSxNTH.png)
 
 ---
 
