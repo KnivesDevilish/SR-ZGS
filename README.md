@@ -147,8 +147,8 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 3. **Build Project (Android):**
    Open the Android CMake target using Android Studio or build via `./gradlew assembleRelease` with the NDK toolchain configured.
    
-4. **Launch:
-    Run the compiled executable generated inside the build/ directory.
+4. **Launch:**
+   Run the compiled executable generated inside the build/ directory.
 
 ![SR-ZGSxNTH](docs/SR-ZGSxNTH.png)
 
