@@ -32,3 +32,4 @@ Thumbs.db
 /game_assets/
 /src/recompiled/*/
 /build/
+extern/wit/
