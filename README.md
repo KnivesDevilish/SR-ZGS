@@ -5,6 +5,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20Android-green)](#)
 [![Engine](https://img.shields.io/badge/Recompiler-DolRecomp-orange)](#)
+[![Chassis](https://img.shields.io/badge/Chassis-ModernGekko-purple)](#)
 
 A modern, high-performance static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii) for native PC (Linux and Windows) & Android. Designed with a clean, modular architecture isolating recompiled game logic, modding facilities, and hardware-agnostic platform hooks. Requires your own copy of the game.
 
@@ -37,8 +38,8 @@ The repository enforces strict separation of concerns to guarantee performance a
 ### Requirements
 * **Compiler**: GCC 12+, Clang 15+, or Android NDK r25+ (C++20 support required)
 * **Build System**: CMake 3.22+
-* **Recompilation Tool**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp)
-* **Game Assets**: Legally acquired `main.dol` extracted from *Sonic Riders: Zero Gravity* (RS9E01 / RS9P01).
+* **Recompilation Tool**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp), [ModernGekko](https://github.com/ExpansionPak/ModernGekko)
+* **Game Assets**: Legally acquired `main.dol` extracted from *Sonic Riders: Zero Gravity* (NTSC-U / Game ID: `RS9E8P`).
 
 ---
 
