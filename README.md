@@ -106,57 +106,49 @@ When developing features or requesting AI assistance (e.g., via Claude AI), adhe
 
 ---
 
-## 🚧 How to Install
+## 🚧 Prerequisites & Asset Setup
 
-1) You must have access to the following:
-    - A clean, legally acquired copy of **Sonic Riders: Zero Gravity** for Nintendo Wii (NTSC-U / Game ID: `RS9E8P` / `0001000052533945`).
-    - Standard tools to extract game files from a Wii disc image (e.g., Dolphin Emulator, Wiimms ISO Tools, or CleanRip on an original Wii console).
+1. **Required Game Copy:**
+   - A clean, legally acquired copy of **Sonic Riders: Zero Gravity** for Nintendo Wii (NTSC-U / Game ID: `RS9E8P`).
+   - Standard tools to extract game files from a Wii disc image (e.g., Dolphin Emulator, Wiimms ISO Tools, or CleanRip on an original Wii console).
 
 > [!TIP]
-> Make sure your ISO or WBFS dump is clean and unmodified. Modified game dumps or scrubbed files with missing data may cause errors during the recompilation and setup steps.
+> Make sure your ISO or WBFS dump is clean and unmodified. Modified game dumps or scrubbed files with missing data will cause errors during the recompilation process.
 
-2) **Extract Game Executable:**
-    - Extract `main.dol` from the root partition of your game dump.
-    - Place the extracted `main.dol` file inside the `game_assets/` folder of this project.
+2. **Extract Game Executable:**
+   - Extract `main.dol` from the root partition of your NTSC-U game dump.
+   - Place the extracted `main.dol` file inside the `game_assets/` directory of this project.
 
-3) **Run Static Recompilation (DolRecomp):**
-    - Execute DolRecomp using the project configurations located in `tools/dolrecomp/`.
-    - Verify that the generated recompiled C/C++ source files are placed in `src/recompiled/`.
-
-4) **Build & Run:**
-    - Configure and compile the repository using CMake (refer to the [Building & Getting Started](#-getting-started) section below).
-    - Launch the compiled executable.
+3. **Run Static Recompilation:**
+   - Execute the recompiler script from the project root:
+     ```bash
+     bash tools/dolrecomp/recompile.sh
+     ```
+   - Verify that the generated C/C++ source files are emitted into `src/recompiled/`.
 
 > [!NOTE]
 > This repository **does not provide or distribute any copyrighted game binaries or assets**. You must extract `main.dol` from your own legally obtained game copy to compile and run SR-ZGS.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Building & Getting Started
 
-1. **Clone Repository & Submodules:**
+1. **Clone Repository with Submodules:**
    ```bash
-   git clone --recursive https://github.com/KnivesDevilish/SR-ZGS.git
+   git clone --recursive [https://github.com/KnivesDevilish/SR-ZGS.git](https://github.com/KnivesDevilish/SR-ZGS.git)
    cd SR-ZGS
-   ```
-
-2. **Obtain Game ROM & Extract DOL:**
-   - Obtain a clean NTSC-U/PAL ISO/WBFS of *Sonic Riders: Zero Gravity* for Nintendo Wii.
-   - Extract `main.dol` using standard Wii tools (e.g., Wiimms ISO Tools / Dolphin) into `game_assets/`.
-
-3. **Run Static Recompiler (DolRecomp):**
-   - Execute DolRecomp using the project configuration in `tools/dolrecomp/` to output C/C++ recompiled code into `src/recompiled/`.
-
-4. **Build Project (PC / Desktop):**
+   
+2. **Build Project (PC / Desktop):**
    ```bash
    cmake -B build -DCMAKE_BUILD_TYPE=Release
    cmake --build build --config Release
    ```
 
-5. **Build Project (Android):**
-   - Open the Android CMake target using Android Studio or build via `./gradlew assembleRelease` with the NDK toolchain configured.
-
----
+3. **Build Project (Android):**
+   Open the Android CMake target using Android Studio or build via `./gradlew assembleRelease` with the NDK toolchain configured.
+   
+4. **Launch:
+    Run the compiled executable generated inside the build/ directory.
 
 ![SR-ZGSxNTH](docs/SR-ZGSxNTH.png)
 
@@ -220,7 +212,8 @@ Out of the box, the game will natively support:
 - **Original Audio Tracks:** Based on the official English and Japanese audio assets from the original Nintendo Wii release.
 
 ### Tools & Technologies
-- **[DolRecomp](https://github.com/dolrecomp):** The core static recompilation framework utilized for translating the original PowerPC `main.dol` executable of *Sonic Riders: Zero Gravity* into modern C/C++.
+- **DolRecomp:** The core static recompilation framework used to translate the original PowerPC `main.dol` executable of *Sonic Riders: Zero Gravity* into native C/C++ source code.
+- **ModernGekko:** The modern runtime chassis and execution environment providing hardware, register, and system-level support for the static recompilation build.
 
 ### Special Thanks
 - To all open-source contributors, community testers, and fans supporting the preservation and modernization of classic arcade racing titles, as well as helping bring my passion project, Sonic Riders: Zero Gravity Source, to life. 💎
