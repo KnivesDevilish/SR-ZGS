@@ -216,14 +216,14 @@ Out of the box, the game will natively support:
 - **奈依茲・悪魔的 | (Naizu Akumateki):** Creator, Lead Developer, and Architect of the static recompilation and modular integration for *Sonic Riders: Zero Gravity Source*.
 
 ### Audio & Localizations
-- **Latin American Spanish Voice Cast:** Community voice actors and artists contributing their talents for the brand-new Latin American Spanish dub integration.
+- **Latin American Spanish Voice Cast:** ***SHOOTING STAR CAST*** Community voice actors and artists contributing their talents for the brand-new Latin American Spanish dub integration.
 - **Original Audio Tracks:** Based on the official English and Japanese audio assets from the original Nintendo Wii release.
 
 ### Tools & Technologies
 - **[DolRecomp](https://github.com/dolrecomp):** The core static recompilation framework utilized for translating the original PowerPC `main.dol` executable of *Sonic Riders: Zero Gravity* into modern C/C++.
 
 ### Special Thanks
-- To all open-source contributors, community testers, and fans supporting the preservation and modernization of classic arcade racing titles.
+- To all open-source contributors, community testers, and fans supporting the preservation and modernization of classic arcade racing titles, as well as helping bring my passion project, Sonic Riders: Zero Gravity Source, to life.
 
 ---
 
