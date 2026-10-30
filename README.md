@@ -1,7 +1,15 @@
+![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Banner.png)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+![Preservation Project](https://img.shields.io/badge/Focus-Game%20Preservation-pink)
+![Platform](https://img.shields.io/badge/Platform-Linux%20x86--64-green)
+[![Engine](https://img.shields.io/badge/Recompiler-DolRecomp-orange)](https://github.com/ExpansionPak/DolRecomp)
+[![Runtime](https://img.shields.io/badge/Runtime-ModernGekko-purple)](https://github.com/ExpansionPak/ModernGekko)
+
 <h1 align="center">Sonic Riders: Zero Gravity Source</h1>
 
 <p align="center">
-  <strong>SR-ZGS</strong> · A static recompilation project for <em>Sonic Riders: Zero Gravity</em> (Nintendo Wii), targeting native Linux x86-64
+  <strong>SR-ZGS</strong> · A static recompilation project for <em>Sonic Riders: Zero Gravity</em> (Nintendo Wii), targeting native Linux x86-64. Requires your own copy of the game.
 </p>
 
 <p align="center">
@@ -32,7 +40,7 @@ SR-ZGS is **not independent of Dolphin**. ModernGekko is built on RecompCore, a 
 
 | Area | Status |
 |---|---|
-| Phase 0: audit | Audit complete. Document synchronization and formal phase closure pending. |
+| Phase 0: audit | Technical audit complete. The five Phase 0 documents are prepared in `docs/`. Documentation review and formal phase closure pending. |
 | Phase 1: initialization | Not started |
 | SR-ZGS source code | None written, built or tested yet |
 | Build environment | Dedicated Fedora 44 container approved, not yet created. Image digest not yet selected. |
@@ -92,11 +100,11 @@ Each upstream component has an approved, fixed revision. Newer upstream revision
 
 ### Immediate objectives
 
-1. Synchronize the Phase 0 documents with the approved decisions, then formally close Phase 0.
-2. Create the Fedora 44 build container, select and pin its image digest, and install the toolchain.
-3. Add the upstream dependencies at their approved revisions.
-4. Commit the technical documentation to `docs/`.
-5. Smoke-build DolRecomp and ModernGekko without any game data.
+1. Review the five Phase 0 documents and resolve the remaining documentation and privacy issues.
+2. Finalize and commit the approved Phase 0 documentation, including the synchronized README.
+3. Obtain explicit approval to close Phase 0.
+4. Begin Phase 1 by creating the dedicated Fedora 44 build container and selecting its image digest.
+5. Add the approved upstream dependencies and perform toolchain smoke builds without game data.
 
 ## Game data and licensing
 
@@ -109,7 +117,7 @@ Do not commit or upload any of the following:
 - generated modules;
 - keys.
 
-Generated modules contain recompiled game code. They are built locally from your own copy and are not distributed.
+Generated modules contain recompiled game code. Under the project's current, provisional policy, they are built locally from your own copy and are not distributed. This policy is pending the Phase 9 legal review.
 
 SR-ZGS is licensed under the [GNU General Public License v3.0](LICENSE). Upstream components keep their own licenses; ModernGekko, for example, is GPL-3.0-or-later.
 
