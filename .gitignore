@@ -1,35 +1,41 @@
-# Directorios de compilación (CMake / GCC / Clang)
-build/
-bin/
-out/
-game_assets/
+# SR-ZGS — files that must never be committed.
+# This repository is public. Game data, and anything derived from it,
+# stays local. These rules are a safety net, not a guarantee.
 
-# Archivos objeto y binarios generados
+# --- Game dumps and extracted game data ---------------------------------------
+/iso/
+/extracted/
+*.iso
+*.wbfs
+*.rvz
+*.wia
+*.gcz
+*.ciso
+*.dol
+*.rel
+
+# --- Generated recompiled code (derived from the game executable) -------------
+/generated/
+
+# --- Build output -------------------------------------------------------------
+/build/
+build-*/
+cmake-build-*/
+CMakeUserPresets.json
+.cache/
+
+# --- Object files and binaries ------------------------------------------------
 *.o
-*.obj
-*.elf
-*.exe
 *.a
 *.so
-*.dylib
+*.bc
 
-# Archivos temporales de DolRecomp / Herramientas de Recompilación
-*.tmp
-*.log
-
-# Configuración de editores e IDEs (VS Code, CLion, etc.)
+# --- Editors ------------------------------------------------------------------
 .vscode/
 .idea/
-*.user
+*.swp
+*~
 
-# Archivos del sistema operativo
+# --- Operating system ---------------------------------------------------------
 .DS_Store
 Thumbs.db
-
-# --- SR:ZGS: append these lines to your .gitignore ---------------------------
-# Everything below is derived from (or is) the game binary. Never commit it,
-# especially while the repository is public.
-/game_assets/
-/src/recompiled/*/
-/build/
-extern/wit/
