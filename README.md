@@ -87,20 +87,6 @@ SR-ZGS/
 
 ---
 
-![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Logo.png)
-
-## 🛠️ Code Standards & Architecture Guidelines
-
-When developing features or requesting AI assistance (e.g., via Claude AI), adhere to these principles:
-
-1. **Strict Modularization:** Keep raw recompilation code (`src/recompiled/`) isolated from core runtime logic (`src/core/`), platform rendering/input drivers (`src/platform/`), and custom features (`src/extensions/` & `src/expansions/`).
-2. **Hardware Abstraction Layer (HAL):** Implement platform-specific graphics (GX translation to Vulkan/OpenGL) and input/audio backend logic exclusively inside `src/platform/` to ensure zero-cost portability between Linux, Windows, and Android.
-3. **Dynamic Memory Allocation over Hardcoded Tables:** Avoid fixed array limits inherited from GameCube/Wii memory constraints. Wrap character and stage tables into expandable vectors or dynamic registries.
-4. **Non-Invasive Patching:** Override game behavior via hook points and event handlers rather than modifying raw decompiled function outputs directly whenever possible.
-5. **Performance First:** Keep hot path loops clean and minimal to ensure smooth framerates on low-power devices.
-
----
-
 ## 💻 Target System Compatibility
 
 - **Minimum Specification Target (PC):** Intel Core i5-5200U, Intel HD Graphics 5500, 16 GB RAM (720p/1080p @ 60 FPS target).
@@ -224,11 +210,3 @@ Out of the box, the game will natively support:
 
 ### Special Thanks
 - To all open-source contributors, community testers, and fans supporting the preservation and modernization of classic arcade racing titles, as well as helping bring my passion project, Sonic Riders: Zero Gravity Source, to life. 💎
-
----
-
-## 📜 AI Context Prompt Template
-
-When feeding tasks to Claude AI or other assistants, prefix requests with:
-
-> *"Project Context: Sonic Riders: Zero Gravity Source (SR:ZGS). Maintain high modularity, prevent spaghetti code, and strictly follow the architecture defined in README.md."*
