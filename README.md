@@ -52,14 +52,24 @@ Requires your own legally obtained copy of the game.
 - [x] DolRecomp code generation for the Wii executable.
 - [x] Integration of the generated game module with ModernGekko.
 - [x] PC execution through the ModernGekko runtime.
-- [x] Game successfully ran from start to finish in developer testing.
-- [x] 60 FPS observed during developer testing.
+- [x] Full game completion successfully tested using ModernGekko's JIT64 CPU core.
+- [x] 60 FPS observed during developer testing using JIT64.
+- [x] StaticRecomp execution path tested.
+- [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
 - [ ] Broader hardware and operating system testing.
 - [ ] Native modding support.
 
-The 60 FPS result is an observation from a developer test, not a universal performance guarantee. Results may vary depending on hardware, configuration and runtime version.
+### Performance Notes
+
+The 60 FPS result was achieved using ModernGekko's JIT64 CPU core with `MODERNGEKKO_STATICRECOMP=0`.
+
+The StaticRecomp CPU core (`MODERNGEKKO_STATICRECOMP=1`) has also been tested, but currently exhibits significantly lower performance on the reference hardware.
+
+Improving the performance of the StaticRecomp execution path is an ongoing development goal.
+
+These results are specific to the tested hardware and configuration and should not be considered universal performance guarantees.
 
 ---
 
@@ -108,9 +118,9 @@ The project does not yet provide its own independent renderer, audio backend or 
 
 ### Requirements
 
-- **Compiler**: C/C++ compiler with C11 and C++20 support. ModernGekko may require a newer toolchain depending on its build requirements.
-- **Build System**: CMake 3.22+ and Ninja.
-- **Additional Tools**: Git and pkg-config.
+- **Compiler:** C11-compatible C compiler and C++23-compatible C++ compiler (required by ModernGekko). The main SR-ZGS module uses C++20.
+- **Build System:** CMake 3.22+ and Ninja.
+- **Additional Tools:** Git and pkg-config.
 - **Recompilation Tools**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp), [ModernGekko](https://github.com/ExpansionPak/ModernGekko).
   - Both components are integrated into the project's build workflow.
 - **Game Assets**: A legally obtained NTSC-U copy of *Sonic Riders: Zero Gravity* (Wii, Game ID: `RS9E8P`), with its extracted game files.
@@ -167,11 +177,9 @@ SR-ZGS is currently in an experimental development stage.
 - **Windows:** Intended desktop target. Compatibility testing is still needed.
 - **Android:** Long-term development target. No working Android build is currently provided.
 
-The game successfully ran from start to finish during developer testing, with 60 FPS observed in the tested configuration.
+For detailed hardware specifications, graphics settings, CPU execution modes and performance results, see [TESTING.md](docs/TESTING.md).
 
 This is an observed test result, not a universal performance guarantee. Actual performance may vary depending on hardware, runtime configuration and future changes.
-
-For detailed hardware specifications, test configurations and validation results, see [TESTING.md](docs/TESTING.md).
 
 ---
 
@@ -204,18 +212,21 @@ game_assets/
 The build configuration expects the extracted game root to contain both `sys/` and `files/`.
 
 > [!NOTE]
-> This repository **does not provide or distribute any copyrighted game binaries or assets**. You must extract `main.dol` from your own legally obtained game copy to compile and run SR-ZGS.
+> This repository does not provide or distribute any copyrighted game binaries or assets. You must extract the required game files from your own legally obtained copy, including `main.dol` and the required game data directories, to build and run SR-ZGS.
 
 ---
-
 ## 🚀 Building & Getting Started
 
-Clone the repository and initialize its submodules:
+### 1. Clone the Repository
+
+Clone SR-ZGS with all its required submodules:
 
 ```bash
 git clone --recursive https://github.com/KnivesDevilish/SR-ZGS.git
 cd SR-ZGS
 ```
+
+### 2. Build DolRecomp and ModernGekko
 
 Build DolRecomp and the ModernGekko runtime:
 
@@ -223,26 +234,68 @@ Build DolRecomp and the ModernGekko runtime:
 bash tools/build_tools.sh --chassis
 ```
 
-Generate the recompiled game code:
+This builds the recompilation tool and the ModernGekko runtime required to execute the game.
+
+### 3. Generate the Recompiled Game Code
+
+Run the recompilation script:
 
 ```bash
 bash tools/dolrecomp/recompile.sh
 ```
 
-Configure and compile SR-ZGS:
+The generated code will be placed inside `src/recompiled/`.
+
+### 4. Configure and Build SR-ZGS
+
+Configure the Release preset:
 
 ```bash
 cmake --preset release
+```
+
+Compile the project:
+
+```bash
 cmake --build --preset release
 ```
 
-Launch the game through the configured runtime:
+### 5. Launch SR-ZGS
+
+SR-ZGS supports two CPU execution modes through ModernGekko.
+
+#### Recommended: JIT64 Mode
+
+For the current reference configuration, use JIT64 mode:
 
 ```bash
-cmake --build --preset release --target srzgs_run
+MODERNGEKKO_STATICRECOMP=0 cmake --build --preset quick --target srzgs_run
 ```
 
-Build scripts and dependencies may change while the project is under development.
+This selects ModernGekko's JIT64 CPU core and corresponds to the configuration in which 60 FPS was observed during developer testing.
+
+#### Experimental: StaticRecomp Mode
+
+To test the StaticRecomp CPU execution path:
+
+```bash
+MODERNGEKKO_STATICRECOMP=1 cmake --build --preset quick --target srzgs_run
+```
+
+StaticRecomp is currently under performance investigation and may run significantly slower on some hardware.
+
+If `MODERNGEKKO_STATICRECOMP` is not specified, ModernGekko selects StaticRecomp by default.
+
+### Build Configuration
+
+The project provides two CMake presets:
+
+- **Quick:** Uses `-O1` for generated game code and is intended for development iterations.
+- **Release:** Uses `-O2` for generated game code and is intended for optimized builds.
+
+Both presets use the same runtime integration and support the JIT64 and StaticRecomp execution modes.
+
+Build scripts and dependencies may change as the project evolves.
 
 ---
 
