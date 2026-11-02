@@ -109,34 +109,27 @@ These are development goals, not features currently promised or available.
 
 ## 📁 Repository Structure
 
-SR-ZGS does not distribute copyrighted game executables or assets.
-
-1. Obtain your own copy of Sonic Riders: Zero Gravity for Wii.
-2. Extract the disc contents.
-3. Place the extracted game files inside `game_assets/`, preserving the original directory structure.
-
-The extracted directory should contain at least:
+The repository is organized as follows:
 
 ```text
 SR-ZGS/
 ├── database/
 ├── docs/
 ├── external/
-│   └── ModernGekko/
-├── game_assets/
-├── mods/
+│   └── ModernGekko/           # Dolphin-derived runtime submodule
+├── game_assets/               # User-provided game files (not distributed)
+├── mods/                      # Reserved for future project mod support
 ├── src/
-│   ├── recompiled/
-│   ├── core/
-│   └── platform/
+│   ├── recompiled/            # DolRecomp-generated game code
+│   ├── core/                  # Optional project-specific hooks and replacements (disabled by default).
+│   └── platform/              # Runtime staging and launch integration
 ├── tools/
-│   └── dolrecomp/
+│   ├── dolrecomp/
+│   └── build_tools.sh
 ├── CMakeLists.txt
 ├── CMakePresets.json
 └── LICENSE
 ```
-
-*Generated recompilation output is placed under src/recompiled/ and should not be edited manually.*
 
 ---
 
@@ -148,11 +141,9 @@ SR-ZGS is currently in an experimental development stage.
 - **Windows:** Intended desktop target. Compatibility testing is still needed.
 - **Android:** Long-term development target. No working Android build is currently provided.
 
-### Performance
+The game successfully ran from start to finish during developer testing, with 60 FPS observed in the tested configuration.
 
-The game has successfully run from start to finish during developer testing, with 60 FPS observed in the tested configuration.
-
-This result is not a universal performance guarantee. Actual performance may vary depending on hardware, runtime configuration and future changes.
+This is an observed test result, not a universal performance guarantee. Actual performance may vary depending on hardware, runtime configuration and future changes.
 
 ---
 
@@ -253,7 +244,7 @@ One of the concepts envisioned for this ecosystem is:
 
 ---
 
-## ❔ Troubleshooting & Contributing
+## 🤝 Contributing & FAQ
 
 SR-ZGS is an experimental project, and contributions, technical feedback and testing reports are welcome.
 
@@ -293,9 +284,6 @@ Additional text and audio localization options may be explored in the future. No
 
 ### Do you plan to recompile other Sonic games?
 SR-ZGS is currently focused on Sonic Riders: Zero Gravity. The project does not currently have plans to expand its scope to other Sonic titles.
-
-> [!NOTE]
-> Since this project targets native multi-platform compilation, running on Linux distributions can sometimes offer better thread scheduling performance compared to Windows on modest hardware.
 
 ---
 
