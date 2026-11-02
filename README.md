@@ -171,6 +171,8 @@ The game successfully ran from start to finish during developer testing, with 60
 
 This is an observed test result, not a universal performance guarantee. Actual performance may vary depending on hardware, runtime configuration and future changes.
 
+For detailed hardware specifications, test configurations and validation results, see [TESTING.md](docs/TESTING.md).
+
 ---
 
 ## 🚧 Game Asset Setup
