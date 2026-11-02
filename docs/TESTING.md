@@ -67,8 +67,10 @@ The container provides the development toolchain separately from the host operat
 |---|---|
 | DolRecomp Build Type | Release |
 | ModernGekko Build Type | Release |
-| Main Project Preset | `release` |
+| Tested Game Build Directory | `build/game-quick/` |
+| Tested Game Build Configuration | Quick |
 | Build Generator | Ninja |
+| Main Project C++ Standard | C++20 |
 
 CMake and Ninja are installed inside the Distrobox container, not on the Bazzite host system.
 
@@ -102,22 +104,62 @@ The listed submodules were initialized at the recorded revisions during the depe
 
 ## 4. Test Results
 
-The following results were reported during developer testing on the Dell Inspiron 3558.
+The following results were observed during developer testing on the Dell Inspiron 3558.
 
 | Test | Result |
 |---|---|
 | Game Initialization | Successful |
 | Game Execution | Successful |
-| Full Game Completion | Successful |
-| Observed Performance | 60 FPS |
+| Full Game Completion | Successful using JIT64 |
+| JIT64 Performance | 60 FPS |
+| StaticRecomp Execution | Successfully launched |
+| StaticRecomp Performance | Significantly slower than JIT64 |
 
 ### Performance Notes
 
-The game successfully ran from start to finish on the hardware configuration documented above, with 60 FPS observed during developer testing.
+The 60 FPS result was achieved using ModernGekko's JIT64 CPU core with the following environment variable:
 
-This is an observed result from a specific test configuration, not a universal performance guarantee. Actual performance may vary depending on hardware, runtime configuration, graphics settings and future changes.
+```bash
+MODERNGEKKO_STATICRECOMP=0
+```
 
-SR-ZGS uses DolRecomp-generated code with ModernGekko, a Dolphin-derived runtime. The reported performance therefore represents the complete hybrid recompilation setup, not an independently implemented native runtime.
+This is an observed result from a specific hardware and software configuration, not a universal performance guarantee.
+
+SR-ZGS also supports testing ModernGekko's StaticRecomp CPU execution path:
+
+```bash
+MODERNGEKKO_STATICRECOMP=1
+```
+
+StaticRecomp successfully launches the game but currently exhibits significantly lower performance on the reference hardware. An exact FPS measurement has not yet been recorded.
+
+Both execution modes use the same ModernGekko-based runtime integration. The difference is the CPU execution core selected by ModernGekko.
+
+Improving StaticRecomp execution performance is an ongoing development objective.
+
+### CPU Execution Mode Comparison
+
+Both CPU execution modes were tested using the same hardware and graphics configuration.
+
+| Environment Variable | Selected CPU Core | Game Launch | Full Game Completion | Observed Performance |
+|---|---|---|---|---|
+| `MODERNGEKKO_STATICRECOMP=0` | JIT64 | Successful | Successful | 60 FPS |
+| `MODERNGEKKO_STATICRECOMP=1` | StaticRecomp | Successful | Not verified | Significantly slower |
+
+### Comparison Notes
+
+**JIT64 Mode (`MODERNGEKKO_STATICRECOMP=0`)**
+- Successfully launched and completed the game from start to finish.
+- 60 FPS observed during developer testing.
+- Currently serves as the reference performance configuration.
+
+**StaticRecomp Mode (`MODERNGEKKO_STATICRECOMP=1`)**
+- Successfully launched the game.
+- Performance was significantly lower than JIT64.
+- Full game completion has not yet been verified in this mode.
+- Exact FPS measurements have not yet been recorded.
+
+These results will serve as a baseline for future StaticRecomp performance optimization.
 
 ---
 
@@ -160,12 +202,15 @@ Source: Dolphin runtime configuration
 
 | Setting | Recorded Value |
 |---|---|
-| CPU Core | `1` |
+| CPU Core (Dolphin configuration) | `1` (raw configuration value) |
 | Graphics Backend | Vulkan |
 | Fullscreen | `False` |
 | DSP Backend | Pulse |
 | DSP Thread | `False` |
 | Background Input | `False` |
+
+The effective CPU execution mode is selected by
+`MODERNGEKKO_STATICRECOMP` in the ModernGekko runtime.
 
 Machine-specific identifiers and analytics IDs are intentionally omitted because they are not needed to reproduce the graphics or performance configuration.
 
