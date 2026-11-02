@@ -1,13 +1,34 @@
-![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Banner.png)
+<p align="center">
+  <img src="docs/SR-ZGS%20Banner.png" alt="Sonic Riders: Zero Gravity Source" width="750">
+</p>
 
-# Sonic Riders: Zero Gravity — Static Recompilation
+<h1 align="center">
+  Sonic Riders: Zero Gravity — Static Recompilation
+</h1>
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-[![Preservation Project](https://img.shields.io/badge/Focus-Game%20Preservation-pink)](#)
-[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-green)](#)
-[![Engine](https://img.shields.io/badge/Recompiler-DolRecomp-orange)](#)
-[![Chassis](https://img.shields.io/badge/Chassis-ModernGekko-purple)](#)
-
+<p align="center">
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Focus-Game%20Preservation-pink" alt="Preservation Project">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-green" alt="Platform">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Recompiler-DolRecomp-orange" alt="Engine">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Chassis-ModernGekko-purple" alt="Chassis">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Status-Experimental-red" alt="Experimental">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/Type-Static%20Recompilation-blueviolet" alt="Static Recompilation">
+  </a>
+</p>
 
 A modern static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii), with the long-term goal of delivering a high-performance native PC experience on Linux and Windows, with Android support as a future target.
 
@@ -39,7 +60,9 @@ The 60 FPS result is an observation from a developer test, not a universal perfo
 
 ---
 
-![Sonic Riders: Zero Gravity Source](docs/SR-ZGS%20Logo.png)
+<p align="left">
+  <img src="docs/SR-ZGS%20Logo.png" alt="SR-ZGS Logo" width="420">
+</p>
 
 ## 🐧 Architecture
 
@@ -236,9 +259,11 @@ Potential projects and concepts include:
 
 One of the concepts envisioned for this ecosystem is:
 
-**SR-ZGS × NTH — FORGOTTEN DISTRICT**
+***SR-ZGS × NTH — FORGOTTEN DISTRICT***
 
-![SR-ZGSxNTH](docs/SR-ZGSxNTH.png)
+<p align="left">
+  <img src="docs/SR-ZGSxNTH.png" alt="SR-ZGS x NTH - Forgotten District" width="650">
+</p>
 
 <sub>This is a planned expansion concept and part of the project's long-term vision. Its implementation depends on future development of the required modding and expansion systems.</sub>
 
