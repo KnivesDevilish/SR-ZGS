@@ -23,10 +23,13 @@
     <img src="https://img.shields.io/badge/Chassis-ModernGekko-purple" alt="Chassis">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/badge/Status-Experimental-red" alt="Experimental">
+    <img src="https://img.shields.io/badge/Status-Experimental-B00020" alt="Experimental">
   </a>
   <a href="#">
     <img src="https://img.shields.io/badge/Type-Static%20Recompilation-blueviolet" alt="Static Recompilation">
+  </a>
+  <a href="https://github.com/KnivesDevilish/SR-ZGS/stargazers">
+  <img src="https://img.shields.io/github/stars/KnivesDevilish/SR-ZGS?style=flat&logo=github&color=yellow" alt="GitHub Stars">
   </a>
 </p>
 
