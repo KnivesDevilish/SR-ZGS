@@ -73,10 +73,6 @@ These results are specific to the tested hardware and configuration and should n
 
 ---
 
-<p align="left">
-  <img src="docs/SR-ZGS%20Logo.png" alt="SR-ZGS Logo" width="420">
-</p>
-
 ## 🐧 Architecture
 
 SR-ZGS currently consists of three main components:
