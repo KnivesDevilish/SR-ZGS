@@ -29,16 +29,18 @@ endif()
 if(RUNNER)
   set(_runner "${RUNNER}")
 else()
-  # Dolphin's CMake picks the output directory: <build>/Binaries on Linux,
-  # <source>/Binary/x64 on Windows.
+  # ModernGekko defines the runner in its top-level CMakeLists, so it lands
+  # directly in <build> (e.g. build/chassis/moderngekko-run). Older layouts used
+  # <build>/Binaries on Linux or <source>/Binary/x64 on Windows; keep those as
+  # fallbacks. Same search order as tools/preflight.sh.
   find_program(_runner NAMES moderngekko-run
-    HINTS "${CHASSIS_BUILD_DIR}/Binaries" "${CHASSIS_SRC_DIR}/Binary/x64"
+    HINTS "${CHASSIS_BUILD_DIR}" "${CHASSIS_BUILD_DIR}/Binaries" "${CHASSIS_SRC_DIR}/Binary/x64"
     PATH_SUFFIXES Release Debug
     NO_DEFAULT_PATH)
 endif()
 if(NOT _runner OR NOT EXISTS "${_runner}")
   message(FATAL_ERROR
-    "moderngekko-run not found under ${CHASSIS_BUILD_DIR}/Binaries.\n"
+    "moderngekko-run not found under ${CHASSIS_BUILD_DIR} (or its Binaries/ subfolder).\n"
     "Build it with: tools/build_tools.sh --chassis   (or pass -DSRZGS_RUNNER=<path>)")
 endif()
 get_filename_component(_runner_dir "${_runner}" DIRECTORY)

@@ -40,7 +40,8 @@ if [[ "${1:-}" == "--chassis" ]]; then
         ${CHASSIS_CMAKE_ARGS:-} \
         -DMODERNGEKKO_FRONTEND_NAME="Sonic Riders: Zero Gravity Source" \
         -DMODERNGEKKO_LAUNCHER_OUTPUT_NAME="SR-ZGS" \
-        -DMODERNGEKKO_REQUIRED_DISC_ID="RS9E8P"
+        -DMODERNGEKKO_REQUIRED_DISC_ID="RS9E8P" \
+        -DMODERNGEKKO_DEFAULT_WINDOW_TITLE="Sonic Riders: Zero Gravity Source"
 
   cmake --build "$ROOT/build/chassis" \
         --target moderngekko-run moderngekko-launcher -j"$JOBS"
