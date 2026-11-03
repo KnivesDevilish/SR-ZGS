@@ -339,7 +339,7 @@ Potential projects and concepts include:
 - Extended gameplay features.
 
 <p align="left">
-  <img src="docs/SR-ZGS Mods.png" alt="SR-ZGS x Custom Story" width="650">
+  <img src="docs/SR-ZGS Mods.png" alt="SR-ZGS x Custom Story" width="520">
 </p>
 
 <sub>This is a planned expansion concept and part of the project's long-term vision. Its implementation depends on future development of the required modding and expansion systems.</sub>
