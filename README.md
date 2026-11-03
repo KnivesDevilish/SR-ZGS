@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/SR-ZGS%20Banner.png" alt="Sonic Riders: Zero Gravity Source" width="750">
+  <img src="docs/SR-ZGS%20Artwork.png" alt="Sonic Riders: Zero Gravity Artwork" width="750">
 </p>
 
 <h1 align="center">
@@ -72,10 +72,6 @@ Improving the performance of the StaticRecomp execution path is an ongoing devel
 These results are specific to the tested hardware and configuration and should not be considered universal performance guarantees.
 
 ---
-
-<p align="left">
-  <img src="docs/SR-ZGS%20Logo.png" alt="SR-ZGS Logo" width="420">
-</p>
 
 ## 🐧 Architecture
 
@@ -215,7 +211,28 @@ The build configuration expects the extracted game root to contain both `sys/` a
 > This repository does not provide or distribute any copyrighted game binaries or assets. You must extract the required game files from your own legally obtained copy, including `main.dol` and the required game data directories, to build and run SR-ZGS.
 
 ---
+
 ## 🚀 Building & Getting Started
+
+### Prerequisites
+
+SR-ZGS requires the following tools:
+
+- Git
+- CMake 3.22 or newer
+- Ninja
+- A C/C++ compiler
+- `pkg-config`
+
+Make sure these dependencies are installed in the environment where you intend to build the project.
+
+**Linux users:** You can build SR-ZGS directly on your distribution if the required dependencies are installed. Alternatively, you can use [Distrobox](https://distrobox.it/) to work inside a separate development environment.
+
+If you use Distrobox, enter your container before running the commands below. For example:
+
+```bash
+distrobox enter my-distrobox
+```
 
 ### 1. Clone the Repository
 
@@ -228,13 +245,11 @@ cd SR-ZGS
 
 ### 2. Build DolRecomp and ModernGekko
 
-Build DolRecomp and the ModernGekko runtime:
+Build the recompilation tools and the ModernGekko runtime:
 
 ```bash
 bash tools/build_tools.sh --chassis
 ```
-
-This builds the recompilation tool and the ModernGekko runtime required to execute the game.
 
 ### 3. Generate the Recompiled Game Code
 
@@ -248,54 +263,62 @@ The generated code will be placed inside `src/recompiled/`.
 
 ### 4. Configure and Build SR-ZGS
 
-Configure the Release preset:
+SR-ZGS provides two CMake presets. Choose the one that best fits your needs.
+
+**Quick preset:**
+
+Intended for development iterations. Uses `-O1` for generated game code.
+
+```bash
+cmake --preset quick
+cmake --build --preset quick
+```
+
+**Release preset:**
+
+Intended for optimized builds. Uses `-O2` for generated game code.
 
 ```bash
 cmake --preset release
-```
-
-Compile the project:
-
-```bash
 cmake --build --preset release
 ```
 
 ### 5. Launch SR-ZGS
 
-SR-ZGS supports two CPU execution modes through ModernGekko.
+SR-ZGS supports two CPU execution modes through the ModernGekko runtime. Both modes use the same runtime integration but execute the game's CPU code differently.
 
-#### Recommended: JIT64 Mode
+The following examples use the Quick preset. Replace `quick` with `release` to launch a Release build instead.
 
-For the current reference configuration, use JIT64 mode:
+#### JIT64 Mode
+
+To launch SR-ZGS using ModernGekko's JIT64 CPU core:
 
 ```bash
 MODERNGEKKO_STATICRECOMP=0 cmake --build --preset quick --target srzgs_run
 ```
 
-This selects ModernGekko's JIT64 CPU core and corresponds to the configuration in which 60 FPS was observed during developer testing.
+This is the execution mode used during developer testing in which the game was observed running at 60 FPS.
 
-#### Experimental: StaticRecomp Mode
+#### StaticRecomp Mode
 
-To test the StaticRecomp CPU execution path:
+To launch SR-ZGS using the StaticRecomp CPU execution path:
 
 ```bash
 MODERNGEKKO_STATICRECOMP=1 cmake --build --preset quick --target srzgs_run
 ```
 
-StaticRecomp is currently under performance investigation and may run significantly slower on some hardware.
+This execution mode is currently under performance investigation and may run significantly slower on some hardware.
 
 If `MODERNGEKKO_STATICRECOMP` is not specified, ModernGekko selects StaticRecomp by default.
 
-### Build Configuration
+### Build Configuration Notes
 
-The project provides two CMake presets:
-
-- **Quick:** Uses `-O1` for generated game code and is intended for development iterations.
+- **Quick:** Uses `-O1` for generated game code and is intended for faster development iterations.
 - **Release:** Uses `-O2` for generated game code and is intended for optimized builds.
+- Both presets support the JIT64 and StaticRecomp CPU execution modes.
+- The 60 FPS result mentioned above refers to developer testing with JIT64 mode. Performance may vary depending on hardware and configuration.
 
-Both presets use the same runtime integration and support the JIT64 and StaticRecomp execution modes.
-
-Build scripts and dependencies may change as the project evolves.
+Build scripts, dependencies, and runtime behavior may change as the project evolves.
 
 ---
 
@@ -315,12 +338,8 @@ Potential projects and concepts include:
 - Community-created expansions.
 - Extended gameplay features.
 
-One of the concepts envisioned for this ecosystem is:
-
-***SR-ZGS × NTH — FORGOTTEN DISTRICT***
-
 <p align="left">
-  <img src="docs/SR-ZGSxNTH.png" alt="SR-ZGS x NTH - Forgotten District" width="650">
+  <img src="docs/SR-ZGS Mods.png" alt="SR-ZGS x Custom Story" width="520">
 </p>
 
 <sub>This is a planned expansion concept and part of the project's long-term vision. Its implementation depends on future development of the required modding and expansion systems.</sub>
