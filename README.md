@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/SR-ZGS%20Banner.png" alt="Sonic Riders: Zero Gravity Source Banner" width="750">
+  <img src="docs/SR-ZGS%20Artwork.png" alt="Sonic Riders: Zero Gravity Artwork" width="750">
 </p>
 
 <h1 align="center">
