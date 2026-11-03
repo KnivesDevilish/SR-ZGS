@@ -63,7 +63,7 @@ else fail "no built module (g${GAME_ID}_recomp.*): cmake --build --preset quick"
 # --- 4. Runner + its Sys/ data -----------------------------------------------
 RUNNER="${SRZGS_RUNNER:-}"
 if [[ -z "$RUNNER" ]]; then
-  for d in "$ROOT/build/chassis/Binaries" "$ROOT/external/ModernGekko/Binary/x64"; do
+  for d in "$ROOT/build/chassis" "$ROOT/build/chassis/Binaries" "$ROOT/external/ModernGekko/Binary/x64"; do
     for n in moderngekko-run moderngekko-run.exe; do
       [[ -x "$d/$n" ]] && { RUNNER="$d/$n"; break 2; }
     done

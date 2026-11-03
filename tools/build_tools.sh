@@ -9,8 +9,8 @@
 # and the runtime that loads it always agree on the module ABI.
 # Extra chassis CMake flags can be passed through CHASSIS_CMAKE_ARGS, e.g.
 #   CHASSIS_CMAKE_ARGS="-DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON" tools/build_tools.sh --chassis
-# The runner lands in build/chassis/Binaries/ (Dolphin's CMake decides that),
-# with its Sys/ data folder copied next to it by a post-build step.
+# The runner's output location is determined by CMake.
+# Its Sys/ data folder must be copied next to the executable.
 # =============================================================================
 set -euo pipefail
 
@@ -37,12 +37,28 @@ if [[ "${1:-}" == "--chassis" ]]; then
   echo "Building the chassis with $JOBS jobs. This compiles Dolphin's core: expect a long build."
   cmake -S "$MG" -B "$ROOT/build/chassis" -G Ninja \
         -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DDOLRECOMP_ENABLE_LLVM=OFF \
-        ${CHASSIS_CMAKE_ARGS:-}
-  cmake --build "$ROOT/build/chassis" --target moderngekko-run -j"$JOBS"
+        ${CHASSIS_CMAKE_ARGS:-} \
+        -DMODERNGEKKO_FRONTEND_NAME="Sonic Riders: Zero Gravity Source" \
+        -DMODERNGEKKO_LAUNCHER_OUTPUT_NAME="SR-ZGS" \
+        -DMODERNGEKKO_REQUIRED_DISC_ID="RS9E8P"
 
-  RUNNER="$ROOT/build/chassis/Binaries/moderngekko-run"
-  [[ -x "$RUNNER" ]] || die "build finished but $RUNNER is missing"
-  [[ -d "$ROOT/build/chassis/Binaries/Sys" ]] || die "Sys/ was not copied next to the runner"
+  cmake --build "$ROOT/build/chassis" \
+        --target moderngekko-run moderngekko-launcher -j"$JOBS"
+
+  RUNNER="$(find "$ROOT/build/chassis" -type f \
+    -name "moderngekko-run" -perm /111 -print -quit)"
+
+  [[ -n "$RUNNER" ]] || die "build finished but moderngekko-run is missing"
+
+  RUNNER_DIR="$(dirname "$RUNNER")"
+  [[ -d "$RUNNER_DIR/Sys" ]] || die "Sys/ was not copied next to the runner"
+
+  LAUNCHER="$(find "$ROOT/build/chassis" -type f \
+    -name "SR-ZGS" -perm /111 -print -quit)"
+
+  [[ -n "$LAUNCHER" ]] || die "build finished but SR-ZGS launcher is missing"
+
   echo "Runner:    $RUNNER"
+  echo "Launcher:  $LAUNCHER"
   echo "Next:      cmake --preset quick && cmake --build --preset quick --target srzgs_preflight"
 fi

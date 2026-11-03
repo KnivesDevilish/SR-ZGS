@@ -18,11 +18,20 @@
 
 set(SRZGS_STAGE_DIR "${CMAKE_BINARY_DIR}/stage")
 
+set(SRZGS_CHASSIS_BUILD_DIR "${CMAKE_SOURCE_DIR}/build/chassis" CACHE PATH
+  "Build tree of the chassis made by tools/build_tools.sh --chassis")
+
 add_custom_target(srzgs_stage ALL
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SRZGS_STAGE_DIR}"
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
           "$<TARGET_FILE:${SRZGS_MODULE_TARGET}>" "${SRZGS_STAGE_DIR}"
-  COMMENT "Staging $<TARGET_FILE_NAME:${SRZGS_MODULE_TARGET}> -> ${SRZGS_STAGE_DIR}"
+
+  # Copy the module beside moderngekko-run for automatic module discovery.
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SRZGS_CHASSIS_BUILD_DIR}"
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+          "$<TARGET_FILE:${SRZGS_MODULE_TARGET}>" "${SRZGS_CHASSIS_BUILD_DIR}"
+
+  COMMENT "Staging $<TARGET_FILE_NAME:${SRZGS_MODULE_TARGET}>"
   VERBATIM)
 add_dependencies(srzgs_stage ${SRZGS_MODULE_TARGET})
 
@@ -41,8 +50,6 @@ set(SRZGS_RUN_ARGS "" CACHE STRING
   "Extra moderngekko-run arguments, ;-separated (e.g. \"-X11\" or \"--wayland;--mute\")")
 set(SRZGS_RUNNER "" CACHE FILEPATH
   "moderngekko-run override (default: located when the target runs)")
-set(SRZGS_CHASSIS_BUILD_DIR "${CMAKE_SOURCE_DIR}/build/chassis" CACHE PATH
-  "Build tree of the chassis made by tools/build_tools.sh --chassis")
 
 # Seed the config once. Never overwrite: the user's edits win.
 if(NOT EXISTS "${SRZGS_USER_DIR}/config.ini")
