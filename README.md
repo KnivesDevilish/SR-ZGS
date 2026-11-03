@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/SR-ZGS%20Wallpaper.png" alt="Sonic Riders: Zero Gravity Source" width="750">
+  <img src="docs/SR-ZGS%20Banner.png" alt="Sonic Riders: Zero Gravity Source Banner" width="750">
 </p>
 
 <h1 align="center">
@@ -338,12 +338,8 @@ Potential projects and concepts include:
 - Community-created expansions.
 - Extended gameplay features.
 
-One of the concepts envisioned for this ecosystem is:
-
-***SR-ZGS × NTH — FORGOTTEN DISTRICT***
-
 <p align="left">
-  <img src="docs/SR-ZGSxNTH.png" alt="SR-ZGS x NTH - Forgotten District" width="650">
+  <img src="docs/SR-ZGS Mods.png" alt="SR-ZGS x Custom Story" width="650">
 </p>
 
 <sub>This is a planned expansion concept and part of the project's long-term vision. Its implementation depends on future development of the required modding and expansion systems.</sub>
