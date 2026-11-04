@@ -8,7 +8,7 @@
 # DolRecomp is built from the revision ModernGekko pins, so the generated code
 # and the runtime that loads it always agree on the module ABI.
 # Extra chassis CMake flags can be passed through CHASSIS_CMAKE_ARGS, e.g.
-#   CHASSIS_CMAKE_ARGS="-DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON" tools/build_tools.sh --chassis
+#   CHASSIS_CMAKE_ARGS="-DMODERNGEKKO_USER_DIRECTORY_IN_DOCUMENTS=ON" tools/build_tools.sh --chassis
 # The runner's output location is determined by CMake.
 # Its Sys/ data folder must be copied next to the executable.
 # =============================================================================
@@ -44,7 +44,9 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_DEFAULT_WINDOW_TITLE="Sonic Riders: Zero Gravity Source" \
         -DMODERNGEKKO_USER_DIRECTORY_NAME="sr-zgs" \
         -DMODERNGEKKO_LAUNCHER_BANNER="$ROOT/docs/SR-ZGS Artwork.png" \
-        -DMODERNGEKKO_LAUNCHER_CONTROLLER_ART="$ROOT/docs/SR-ZGS Controller.png"
+        -DMODERNGEKKO_LAUNCHER_CONTROLLER_ART="$ROOT/docs/SR-ZGS Controller.png" \
+        -DMODERNGEKKO_LAUNCHER_KEYBOARD_ART="$ROOT/docs/SR-ZGS Keyboard.png" \
+        -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON
 
   cmake --build "$ROOT/build/chassis" \
         --target moderngekko-run moderngekko-launcher -j"$JOBS"
