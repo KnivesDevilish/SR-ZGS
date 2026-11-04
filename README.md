@@ -309,7 +309,25 @@ MODERNGEKKO_STATICRECOMP=1 cmake --build --preset quick --target srzgs_run
 
 This execution mode is currently under performance investigation and may run significantly slower on some hardware.
 
-If `MODERNGEKKO_STATICRECOMP` is not specified, ModernGekko selects StaticRecomp by default.
+#### Choosing the CPU Core
+
+The selected CPU core is saved in the runtime configuration file, `config.ini`, inside the SR-ZGS user directory (`~/.local/share/sr-zgs/config.ini` on Linux):
+
+```ini
+[Core]
+cpu_core=jit64
+```
+
+- `jit64` (default): ModernGekko's JIT64 CPU core, the validated full-speed mode.
+- `staticrecomp`: runs the recompiled game module. Experimental.
+
+The SR-ZGS launcher exposes the same option under **Settings → CPU core**.
+
+When the `MODERNGEKKO_STATICRECOMP` environment variable is set, it takes priority over `config.ini`, both for the launcher and for `srzgs_run`. This makes it possible to test a mode without changing the saved setting, as in the commands above. If neither specifies a core, JIT64 is used.
+
+At startup the runner reports the core it is using, for example `cpu core: JIT64 (from config.ini)`. It appears in the terminal, or in `Logs/ModernGekko.log` inside the user directory when the game is started from the launcher.
+
+For Netplay, every player must use the same CPU core.
 
 ### Build Configuration Notes
 
