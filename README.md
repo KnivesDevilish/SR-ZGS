@@ -335,21 +335,21 @@ SR-ZGS plays with a GameCube controller in port 1, which the Wii version of the 
 
 | GameCube | Gamepad | Keyboard |
 | --- | --- | --- |
-| A | Bottom face button (A / Cross) | A |
-| B | Right face button (B / Circle) | S |
-| X | Left face button (X / Square) | Q |
+| A | Bottom face button (A / Cross) | S |
+| B | Right face button (B / Circle) | D |
+| X | Left face button (X / Square) | A |
 | Y | Top face button (Y / Triangle) | W |
-| Z | Right shoulder (RB / R1) | E |
-| L | Left trigger | Left Shift |
-| R | Right trigger | D |
+| Z | Right trigger (RT / R2) | Q |
+| L | Left shoulder (LB / L1) | Left Shift |
+| R | Right shoulder (RB / R1) | E |
 | Start | Start | Enter |
 | Control stick | Left stick | Arrow keys |
 | C-stick | Right stick | — |
 | D-pad | D-pad | — |
 
-The keys follow the six face buttons of the SR-ZGS controller drawing: A, S, D for its lower row (A, B, C, where C is the R trigger) and Q, W, E for its upper row (X, Y, Z). **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed.
+The left trigger (LT / L2) is kept as the extra **C** button of the SR-ZGS controller drawing. GameCube has no C, so the game doesn't receive it; the profile stores it as `Extra/C`, which Dolphin ignores, so that mods can use it later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed.
 
-On Linux the keyboard is read through X11, which the launcher uses by default. The emulated Wii Remote stays connected with nothing bound (`Config/WiimoteNew.ini`), so keys don't also press Wii Remote buttons such as HOME. Starting without any gamepad connected the first time isn't supported by the launcher yet. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth); when the configured one is missing and exactly one other gamepad is connected, the launcher switches the profile to it and keeps the mapping.
+On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Starting without any gamepad connected the first time isn't supported by the launcher yet. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth); when the configured one is missing and exactly one other gamepad is connected, the launcher switches the profile to it and keeps the mapping.
 
 ### Build Configuration Notes
 
