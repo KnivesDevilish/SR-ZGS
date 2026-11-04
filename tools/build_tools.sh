@@ -46,6 +46,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_LAUNCHER_BANNER="$ROOT/docs/SR-ZGS Artwork.png" \
         -DMODERNGEKKO_LAUNCHER_CONTROLLER_ART="$ROOT/docs/SR-ZGS Controller.png" \
         -DMODERNGEKKO_LAUNCHER_KEYBOARD_ART="$ROOT/docs/SR-ZGS Keyboard.png" \
+        -DMODERNGEKKO_LOBBY_ART="$ROOT/docs/SR-ZGS Lobby.png" \
         -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON
 
   cmake --build "$ROOT/build/chassis" \
