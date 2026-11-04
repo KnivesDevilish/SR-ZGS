@@ -327,7 +327,7 @@ When the `MODERNGEKKO_STATICRECOMP` environment variable is set, it takes priori
 
 At startup the runner reports the core it is using, for example `cpu core: JIT64 (from config.ini)`. It appears in the terminal, or in `Logs/ModernGekko.log` inside the user directory when the game is started from the launcher.
 
-For Netplay, every player must use the same CPU core.
+In Netplay, every player uses the host's CPU core. JIT64 is recommended, especially when players are on different systems (Windows and Linux).
 
 #### Controls
 
