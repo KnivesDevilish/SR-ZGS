@@ -34,6 +34,13 @@ if [[ "${1:-}" == "--chassis" ]]; then
     || die "ModernGekko submodules are incomplete: git submodule update --init --recursive"
   "$ROOT/tools/check_chassis_deps.sh" || exit 1
 
+  # The launcher shows this version and compares it with the newest release
+  # published on GitHub: the one in project(SR_ZGS VERSION ...) of CMakeLists.txt.
+  SRZGS_VERSION="$(awk '/^project\(SR_ZGS/ {found=1} found && $1 == "VERSION" {print $2; exit}' \
+    "$ROOT/CMakeLists.txt")"
+  [[ "$SRZGS_VERSION" =~ ^[0-9]+(\.[0-9]+){0,3}$ ]] \
+    || die "can't read the version from project(SR_ZGS VERSION ...) in CMakeLists.txt"
+
   echo "Building the chassis with $JOBS jobs. This compiles Dolphin's core: expect a long build."
   cmake -S "$MG" -B "$ROOT/build/chassis" -G Ninja \
         -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DDOLRECOMP_ENABLE_LLVM=OFF \
@@ -51,6 +58,8 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_LAUNCHER_MUSIC="$ROOT/docs/SR-ZGS Launcher Track.mp3" \
         -DMODERNGEKKO_LOBBY_MUSIC="$ROOT/docs/SR-ZGS NetworkBattle Track.mp3" \
         -DMODERNGEKKO_LOBBY_BACKGROUND="$ROOT/docs/SR-ZGS Netplay Background.png" \
+        -DMODERNGEKKO_FRONTEND_VERSION="$SRZGS_VERSION" \
+        -DMODERNGEKKO_UPDATE_REPOSITORY="KnivesDevilish/SR-ZGS" \
         -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON
 
   cmake --build "$ROOT/build/chassis" \
@@ -70,6 +79,6 @@ if [[ "${1:-}" == "--chassis" ]]; then
   [[ -n "$LAUNCHER" ]] || die "build finished but SR-ZGS launcher is missing"
 
   echo "Runner:    $RUNNER"
-  echo "Launcher:  $LAUNCHER"
+  echo "Launcher:  $LAUNCHER (version $SRZGS_VERSION)"
   echo "Next:      cmake --preset quick && cmake --build --preset quick --target srzgs_preflight"
 fi
