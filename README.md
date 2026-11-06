@@ -35,7 +35,7 @@
 
 A modern static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii), with the long-term goal of delivering a high-performance native PC experience on Linux and Windows, with Android support as a future target.
 
-The project uses **DolRecomp** to generate native code from the original PowerPC game executable and **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and Wii hardware services.
+The project uses **DolRecomp** to generate native code from the original PowerPC game executable and a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and Wii hardware services. The fork also contains the SR-ZGS launcher and its Netplay lobby.
 
 SR-ZGS aims to provide a clean, modular architecture that separates recompiled game logic, modding facilities, and hardware-agnostic platform interfaces, progressively reducing its reliance on existing emulation technology.
 
@@ -55,6 +55,9 @@ Requires your own legally obtained copy of the game.
 - [x] Full game completion successfully tested using ModernGekko's JIT64 CPU core.
 - [x] 60 FPS observed during developer testing using JIT64.
 - [x] StaticRecomp execution path tested.
+- [x] SR-ZGS launcher with Netplay lobby, music, patch notes and update check (English, Spanish and Japanese).
+- [ ] In-game menu.
+- [ ] First public release (0.1.0).
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -92,6 +95,15 @@ ModernGekko is based on Dolphin technology and currently provides:
 - Controller and input handling.
 - Wii system-level functionality.
 
+SR-ZGS uses a modified fork of ModernGekko: [KnivesDevilish/ModernGekko](https://github.com/KnivesDevilish/ModernGekko), branch `knives/srzgs-launcher`, based on the original [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko) by Hyperway. The `external/ModernGekko/` submodule points to this fork. On top of the original runtime, the fork adds:
+
+- The SR-ZGS launcher (see [The SR-ZGS Launcher](#-the-sr-zgs-launcher)).
+- The Netplay lobby with invite codes (see [Netplay](#-netplay)).
+- GameCube controller profiles written for SR-ZGS, with a controller tester.
+- Small runtime adjustments, such as hiding the runtime's on-screen messages and skipping redundant checks of the game files at startup.
+
+Like the original, the fork is licensed under the GNU GPL v3.
+
 ### SR-ZGS integration
 
 The project's own code connects the generated module to ModernGekko.
@@ -117,8 +129,8 @@ The project does not yet provide its own independent renderer, audio backend or 
 - **Compiler:** C11-compatible C compiler and C++23-compatible C++ compiler (required by ModernGekko). The main SR-ZGS module uses C++20.
 - **Build System:** CMake 3.22+ and Ninja.
 - **Additional Tools:** Git and pkg-config.
-- **Recompilation Tools**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp), [ModernGekko](https://github.com/ExpansionPak/ModernGekko).
-  - Both components are integrated into the project's build workflow.
+- **Recompilation Tools**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp) and the SR-ZGS fork of [ModernGekko](https://github.com/KnivesDevilish/ModernGekko) (based on [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko)).
+  - Both come with the `external/ModernGekko/` submodule: DolRecomp is built from the revision ModernGekko pins, so nothing has to be downloaded separately.
 - **Game Assets**: A legally obtained NTSC-U copy of *Sonic Riders: Zero Gravity* (Wii, Game ID: `RS9E8P`), with its extracted game files.
 
 ---
@@ -146,9 +158,9 @@ The repository is organized as follows:
 ```text
 SR-ZGS/
 ├── database/
-├── docs/
+├── docs/                      # Launcher art, music, patch notes and test notes
 ├── external/
-│   └── ModernGekko/           # Dolphin-derived runtime submodule
+│   └── ModernGekko/           # SR-ZGS fork of the Dolphin-derived runtime (submodule)
 ├── game_assets/               # User-provided game files (not distributed)
 ├── mods/                      # Reserved for future project mod support
 ├── src/
@@ -210,6 +222,19 @@ The build configuration expects the extracted game root to contain both `sys/` a
 > [!NOTE]
 > This repository does not provide or distribute any copyrighted game binaries or assets. You must extract the required game files from your own legally obtained copy, including `main.dol` and the required game data directories, to build and run SR-ZGS.
 
+### Extracting with the Launcher
+
+The launcher's **Game Files** page can also extract the game. Select your ISO, WBFS or RVZ image and press **Extract Game**: the launcher checks that the disc is `RS9E8P` and extracts it once into the SR-ZGS user directory (`~/.local/share/sr-zgs/games/RS9E8P` on Linux), where it is reused every time you play.
+
+Building the recompiled code (step 3 below) reads `main.dol` from `game_assets/` by default. If you already extracted the game with the launcher, you can point the build at that copy instead of extracting it twice:
+
+```bash
+ASSETS_DIR="$HOME/.local/share/sr-zgs/games/RS9E8P" bash tools/dolrecomp/recompile.sh
+cmake --preset quick -DSRZGS_GAME_ROOT="$HOME/.local/share/sr-zgs/games/RS9E8P"
+```
+
+`bash tools/preflight.sh "$HOME/.local/share/sr-zgs/games/RS9E8P"` checks that a folder has the expected layout and the same `main.dol` as the recompiled code.
+
 ---
 
 ## 🚀 Building & Getting Started
@@ -225,6 +250,8 @@ SR-ZGS requires the following tools:
 - `pkg-config`
 
 Make sure these dependencies are installed in the environment where you intend to build the project.
+
+On Linux, `tools/build_tools.sh --chassis` checks the system libraries the runtime and the launcher need before it starts the long build, and prints the install command for Ubuntu/Debian and Fedora when something is missing. The launcher's music plays through PulseAudio (PipeWire's PulseAudio support works too).
 
 **Linux users:** You can build SR-ZGS directly on your distribution if the required dependencies are installed. Alternatively, you can use [Distrobox](https://distrobox.it/) to work inside a separate development environment.
 
@@ -284,6 +311,19 @@ cmake --build --preset release
 ```
 
 ### 5. Launch SR-ZGS
+
+#### Using the Launcher
+
+`tools/build_tools.sh --chassis` also builds the SR-ZGS launcher, and step 4 copies the recompiled module next to it, in `build/chassis/`. To play through the launcher:
+
+```bash
+cd build/chassis
+./SR-ZGS
+```
+
+The first time, open **Game Files** and extract your copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)), then press **PLAY**. See [The SR-ZGS Launcher](#-the-sr-zgs-launcher) for what each page does.
+
+The commands below start the game directly from the build, without the launcher, which is useful during development.
 
 SR-ZGS supports two CPU execution modes through the ModernGekko runtime. Both modes use the same runtime integration but execute the game's CPU code differently.
 
@@ -347,7 +387,15 @@ SR-ZGS plays with a GameCube controller in port 1, which the Wii version of the 
 | C-stick | Right stick | — |
 | D-pad | D-pad | — |
 
-The left trigger (LT / L2) is kept as the extra **C** button of the SR-ZGS controller drawing. GameCube has no C, so the game doesn't receive it; the profile stores it as `Extra/C`, which Dolphin ignores, so that mods can use it later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed.
+The SR-ZGS controller drawing also has three extra buttons that the GameCube controller doesn't:
+
+| SR-ZGS extra | Gamepad | Keyboard |
+| --- | --- | --- |
+| C | Left trigger (LT / L2) | — |
+| − (Select) | Back / Select | Backspace |
+| Menu | Guide / Home | M |
+
+The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the runtime ignores, so that SR-ZGS features and mods can use them later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
 
 On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Without any gamepad, the launcher writes the profile for the keyboard alone (**Controls** shows *Keyboard only*); a gamepad connected later is added to the same profile and the keys keep working. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth); when the configured one is missing and exactly one other gamepad is connected, the launcher switches the profile to it and keeps the mapping.
 
@@ -359,6 +407,40 @@ On Linux the keyboard is read through X11, which the launcher uses by default. T
 - The 60 FPS result mentioned above refers to developer testing with JIT64 mode. Performance may vary depending on hardware and configuration.
 
 Build scripts, dependencies, and runtime behavior may change as the project evolves.
+
+---
+
+## 🎮 The SR-ZGS Launcher
+
+The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`.
+
+- **PLAY:** starts the game alone or through Netplay; a solo game can also start from a savestate. Summary cards show the time played, the controller and the display settings, and the **PATCH NOTES** panel shows what changed in this version.
+- **Settings:** CPU core, graphics backend, internal resolution, aspect ratio (16:9, 4:3 or stretched), fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**.
+- **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
+- **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
+- **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
+
+The bottom of the sidebar holds the music volume and the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track.
+
+**Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser. No release has been published yet.
+
+The launcher keeps its settings in `config.ini` inside the SR-ZGS user directory (`~/.local/share/sr-zgs/` on Linux), together with the controller profile, saves and logs.
+
+---
+
+## 🌐 Netplay
+
+Netplay lets up to four players race together. On the launcher's **PLAY** page, one player presses **Host Netplay** and the others **Join Netplay**; everyone then waits in the Netplay lobby until the host starts the match. There are two ways to connect:
+
+- **Invite code** (default): the host gets an 8-character code (numbers and the letters a–f) to share with friends, who type it in **Join Netplay**. Nobody sees anybody else's IP address. Codes are handed out by the public server of the Dolphin project (`stun.dolphin-emu.org`); `invite_server` in the `[Netplay]` section of `config.ini` can name another one.
+- **Direct IP:** friends connect to the host's address and UDP port (2626 by default). It is meant for players on the same network or on [Tailscale](https://tailscale.com/).
+
+> [!WARNING]
+> Anyone who sees an invite code can join the room, and an IP address identifies your connection. Don't show either one on stream or post them publicly.
+
+Every player needs the same SR-ZGS release and the same game files. Everyone plays with the host's CPU core and the host's 16:9 or 4:3 choice; JIT64 is recommended, especially when players are on different systems. Savestates are available for solo play only.
+
+Netplay is part of the experimental build and has had limited testing so far.
 
 ---
 
@@ -407,7 +489,10 @@ Constructive feedback is always welcome. <3
 Not yet. Native project-specific mod loading is a future development goal. The `mods/` directory is reserved for future use and does not currently represent a fully implemented SR-ZGS mod loader.
 
 ### Does SR-ZGS require Dolphin?
-SR-ZGS currently uses **ModernGekko**, a Dolphin-derived runtime, to provide graphics, audio, input and Wii system services. A more independent runtime is a long-term development goal.
+SR-ZGS currently uses a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide graphics, audio, input and Wii system services. You don't need to install Dolphin separately: the runtime is built from the `external/ModernGekko/` submodule. A more independent runtime is a long-term development goal.
+
+### Is there a downloadable release?
+Not yet. The first public version, 0.1.0, is still in development, so for now SR-ZGS is built from source as described above. Once a release is published, the launcher's **Check for updates** will point to it.
 
 ### Does the project run at 60 FPS?
 The game successfully ran from start to finish at 60 FPS during developer testing. This is an observed result from a specific test configuration, not a guarantee for every system.
@@ -422,7 +507,7 @@ Android is a long-term target for the project. However, there is currently no su
 Custom story campaigns, additional characters, tracks and other fan-created content are possibilities for future development. These features are not currently implemented.
 
 ### Are additional languages or voice localizations planned?
-Additional text and audio localization options may be explored in the future. No additional fan-dub integration is currently included in the working build.
+The launcher, its Netplay lobby and the patch notes are available in English, Spanish and Japanese. The game's own text and voices are those of your copy of the game. Additional text and audio localization options for the game may be explored in the future. No additional fan-dub integration is currently included in the working build.
 
 ### Do you plan to recompile other Sonic games?
 SR-ZGS is currently focused on Sonic Riders: Zero Gravity. The project does not currently have plans to expand its scope to other Sonic titles.
@@ -431,9 +516,25 @@ SR-ZGS is currently focused on Sonic Riders: Zero Gravity. The project does not 
 
 ## ❤️‍🔥 Credits & Acknowledgments
 
-- **DolRecomp** — Static recompilation framework.
-- **ModernGekko** — Runtime environment used by SR-ZGS.
-- **Dolphin Emulator contributors** — Foundation for much of the runtime technology.
-- **SR-ZGS contributors and testers** — Research, development and testing.
+**Created by** 奈依茲・悪魔的 (JP: Naizu Akumateki · EN: KnivesDevilish), with the SR-ZGS contributors and testers: research, development and testing. The launcher and Netplay lobby music are original tracks by KnivesDevilish.
 
-This project is an independent fan project and is not affiliated with or endorsed by SEGA.
+**Built on:**
+
+- **DolRecomp** — Static recompilation framework.
+- **ModernGekko** by Hyperway — Runtime for GameCube/Wii recomps. SR-ZGS uses a modified fork of it.
+- **RecompCore** — SpecialK / aharonahdoot.
+- **Recomp template** — Literally God / MrPoloGit, who also added macOS support.
+- **Dolphin** — The Dolphin Team and its contributors: the foundation for much of the runtime technology.
+- **Invite codes** — The Dolphin project's public server (`stun.dolphin-emu.org`).
+
+**Licenses:**
+
+| Component | License |
+| --- | --- |
+| SR-ZGS, ModernGekko | GNU GPL v3 |
+| Dolphin | GNU GPL v2 or later |
+| SDL 3 | zlib License |
+| Dear ImGui | MIT License |
+| Noto Sans CJK | SIL Open Font License 1.1 |
+
+This project is an independent fan project and is not affiliated with or endorsed by SEGA. Sonic Riders: Zero Gravity and its characters are trademarks of SEGA.
