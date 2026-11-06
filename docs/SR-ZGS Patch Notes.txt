@@ -1,0 +1,32 @@
+[en]
+# 0.1.0
+First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilation running on ModernGekko. Play with your own legally obtained copy of the game.
+
+- New launcher: PLAY, Settings, Controls, Game Files and Credits in one window
+- Netplay with invite codes, or a direct IP for the same network or Tailscale
+- Music in the launcher and the Netplay lobby, with its own volume
+- Moving backgrounds in the launcher and the Netplay lobby
+- Check for updates on the Credits page
+- Interface in English, Spanish and Japanese
+
+[es]
+# 0.1.0
+Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilación estática sobre ModernGekko. Juega con tu propia copia del juego obtenida legalmente.
+
+- Nuevo launcher: Jugar, Ajustes, Controles, Archivos del juego y Créditos en una sola ventana
+- Netplay con códigos de invitación, o con IP directa para la misma red o Tailscale
+- Música en el launcher y en el lobby de Netplay, con su propio volumen
+- Fondos en movimiento en el launcher y en el lobby de Netplay
+- Buscar actualizaciones desde la página de Créditos
+- Interfaz en inglés, español y japonés
+
+[ja]
+# 0.1.0
+SR-ZGSの最初の公開版です。Sonic Riders: Zero GravityをModernGekko上で静的再コンパイルして動かしています。正規に入手したご自身のゲームでプレイしてください。
+
+- 新しいランチャー：プレイ、設定、操作、ゲームファイル、クレジットを1つのウィンドウに
+- 招待コードでのネットプレイ、または同じネットワーク内やTailscaleでのIP直接接続
+- ランチャーとネットプレイのロビーに音楽（音量は個別に設定可能）
+- ランチャーとネットプレイのロビーに動く背景
+- クレジットページからアップデートを確認
+- 英語、スペイン語、日本語のインターフェース
