@@ -427,7 +427,9 @@ The bottom of the sidebar holds the music volume and the language menu: English,
 
 When the game is shown in 4:3 on a wider screen, the bars beside it can show a picture instead of black: Sonic, Knuckles & Tails; Jet, Wave & Storm; a green grid; or a blue grid. The grids slide like the launcher's floor. Choose one in **Settings → Display → 4:3 borders**: **Random** (the default) picks one each time the game opens, and **None** keeps the bars black. The borders are drawn only on your screen, in Netplay too.
 
-The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py` draws both grids from scratch and writes `borders.txt`; it also builds the two character borders from their full artworks, which are kept outside the repository.
+The character borders are always shown whole and undistorted, as large as the bar allows, whatever the window's size, the screen's shape or fullscreen; any space left in the bar shows a blurred copy of the picture. The grids fill the whole bar.
+
+The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py` draws both grids from scratch, makes the blurred copies and writes `borders.txt`; it also builds the two character borders from their full artworks, which are kept outside the repository.
 
 **Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser. No release has been published yet.
 

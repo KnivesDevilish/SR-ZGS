@@ -11,7 +11,11 @@ A 4:3 game on a 16:9 screen leaves a bar on each side, 240 x 1080 at
       which stay outside the repository: the left half shows the characters on
       the artwork's left; the right half the one on its right, under the
       artwork's logo, made smaller to fit and set on a dark header that hides
-      the part of the logo that would be cut off.
+      the part of the logo that would be cut off. A bar is seldom exactly
+      240 x 1080, so these are shown whole (fit = contain), as large as the bar
+      allows, and the rest of the bar shows their backdrop:
+  Sonic Backdrop.png, Jet Backdrop.png  240 x 540: the same halves, blurred
+      and darkened, made from Sonic.png and Jet.png.
   Green Grid.png  480 x 1312: two walls of a green grid seen in perspective,
       with a neon line along the game's side; the cells slide up. Drawn here.
   Blue Grid.png  1920 x 1080: a blue sky and a green grid floor; the floor
@@ -24,9 +28,10 @@ so the numbers written match the pictures exactly.
 
 Run from the repository root (needs Python 3, Pillow and NumPy):
     python3 tools/make_game_borders.py [--sonic ARTWORK] [--jet ARTWORK]
-The grids and borders.txt are always written; Sonic.png and Jet.png only from
-the artworks given (1195 x 896, the logo at the top right; the columns and
-boxes below are in their pixels).
+The grids, the backdrops and borders.txt are always written; Sonic.png and
+Jet.png only from the artworks given (1195 x 896, the logo at the top right;
+the columns and boxes below are in their pixels), otherwise the ones already
+in docs/borders are kept and the backdrops made from them.
 """
 
 import argparse
@@ -100,6 +105,35 @@ def make_artwork_border(key, path):
     border.paste(artwork_bar(artwork, left_centre), (0, 0))
     border.paste(with_logo(artwork_bar(artwork, right_centre), artwork, logo_box), (BAR_WIDTH, 0))
     return name, border
+
+
+# The backdrop: each half at half size, blurred on its own (so the halves
+# don't bleed into each other) and darkened, so the sharp picture in front
+# stands out from it.
+BACKDROP_BLUR = 10
+BACKDROP_LIGHT = 0.42
+
+
+def backdrop_name(name):
+    return name.replace(".png", " Backdrop.png")
+
+
+def make_backdrop(border):
+    half_width, half_height = BAR_WIDTH // 2, BAR_HEIGHT // 2
+    backdrop = Image.new("RGB", (half_width * 2, half_height))
+    for i in range(2):
+        half = border.crop((i * BAR_WIDTH, 0, (i + 1) * BAR_WIDTH, BAR_HEIGHT))
+        half = half.resize((half_width, half_height), Image.Resampling.LANCZOS)
+        # Blurred with its edges repeated around it, so they don't darken.
+        padded = Image.new("RGB", (half_width + 8 * BACKDROP_BLUR, half_height + 8 * BACKDROP_BLUR))
+        padded.paste(half.resize(padded.size, Image.Resampling.BILINEAR), (0, 0))
+        padded.paste(half, (4 * BACKDROP_BLUR, 4 * BACKDROP_BLUR))
+        padded = padded.filter(ImageFilter.GaussianBlur(BACKDROP_BLUR))
+        half = padded.crop((4 * BACKDROP_BLUR, 4 * BACKDROP_BLUR,
+                            4 * BACKDROP_BLUR + half_width, 4 * BACKDROP_BLUR + half_height))
+        half = Image.eval(half, lambda v: round(v * BACKDROP_LIGHT))
+        backdrop.paste(half, (i * half_width, 0))
+    return backdrop
 
 
 # ------------------------------------------------------------------ grids
@@ -328,9 +362,15 @@ def borders_text(grids):
                       f"left_motion = {entry['left_motion']}",
                       f"right_motion = {entry['right_motion']}"]
         else:
-            # The halves of a 480 x 1080 picture.
+            # The halves of a 480 x 1080 picture, shown whole, and the halves
+            # of its 240 x 540 backdrop.
+            backdrop = backdrop_name(picture)
+            half_width, half_height = BAR_WIDTH // 2, BAR_HEIGHT // 2
             lines += [f"left = {picture} 0 0 {BAR_WIDTH} {BAR_HEIGHT}",
-                      f"right = {picture} {BAR_WIDTH} 0 {BAR_WIDTH * 2} {BAR_HEIGHT}"]
+                      f"right = {picture} {BAR_WIDTH} 0 {BAR_WIDTH * 2} {BAR_HEIGHT}",
+                      "fit = contain",
+                      f"left_backdrop = {backdrop} 0 0 {half_width} {half_height}",
+                      f"right_backdrop = {backdrop} {half_width} 0 {half_width * 2} {half_height}"]
     return "\n".join(lines) + "\n"
 
 
@@ -343,10 +383,18 @@ def main():
 
     for key in ("sonic", "jet"):
         path = getattr(arguments, key)
+        name = ARTWORKS[key][0]
         if path:
             name, picture = make_artwork_border(key, path)
             picture.save(OUTPUT / name, optimize=True)
             print(f"{OUTPUT / name}: {picture.width} x {picture.height}")
+        elif (OUTPUT / name).exists():
+            picture = Image.open(OUTPUT / name).convert("RGB")
+        else:
+            sys.exit(f"{OUTPUT / name} is missing: give its artwork with --{key}")
+        backdrop = make_backdrop(picture)
+        backdrop.save(OUTPUT / backdrop_name(name), optimize=True)
+        print(f"{OUTPUT / backdrop_name(name)}: {backdrop.width} x {backdrop.height}")
     grids = {}
     for border_id, make in (("green-grid", make_green_grid), ("blue-grid", make_blue_grid)):
         picture, grids[border_id] = make()

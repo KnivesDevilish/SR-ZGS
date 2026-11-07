@@ -9,6 +9,9 @@ name.es = Sonic, Knuckles y Tails
 name.ja = ソニック、ナックルズ、テイルス
 left = Sonic.png 0 0 240 1080
 right = Sonic.png 240 0 480 1080
+fit = contain
+left_backdrop = Sonic Backdrop.png 0 0 120 540
+right_backdrop = Sonic Backdrop.png 120 0 240 540
 
 [jet]
 name = Jet, Wave & Storm
@@ -16,6 +19,9 @@ name.es = Jet, Wave y Storm
 name.ja = ジェット、ウェーブ、ストーム
 left = Jet.png 0 0 240 1080
 right = Jet.png 240 0 480 1080
+fit = contain
+left_backdrop = Jet Backdrop.png 0 0 120 540
+right_backdrop = Jet Backdrop.png 120 0 240 540
 
 [green-grid]
 name = Green grid
