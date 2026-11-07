@@ -61,6 +61,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_LAUNCHER_PATCH_NOTES="$ROOT/docs/SR-ZGS Patch Notes.txt" \
         -DMODERNGEKKO_GAME_BORDERS="$ROOT/docs/borders" \
         -DMODERNGEKKO_COMPLETE_SAVE="$ROOT/docs/complete-save" \
+        -DMODERNGEKKO_SCREENSHOT_NAME="SR-ZGS" \
         -DMODERNGEKKO_FRONTEND_VERSION="$SRZGS_VERSION" \
         -DMODERNGEKKO_UPDATE_REPOSITORY="KnivesDevilish/SR-ZGS" \
         -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON \

@@ -9,7 +9,7 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - 4:3 borders: Sonic, Jet or a moving grid beside the game, or a random one each time
 - In-game menu with M or the Guide button: the game pauses, and you can continue, see the controls, take a screenshot, go back to the launcher or quit
 - Visual effects (bloom, chromatic aberration, vivid colors, sharpen, outline, FXAA and CRT) and the game's volume, in Settings or in the in-game menu's Quick settings, where they apply at once
-- Screenshots with F9 or from the in-game menu, at up to 5120x2880 whatever the game's resolution
+- Screenshots with F9 or from the in-game menu, at up to 5120x2880 whatever the game's resolution, and a Screenshots page in the launcher to see them
 - Window size in Settings: automatic (fits your screen) or a fixed size
 - Complete save in Game Files: the whole game at 100%, with your own save kept to bring back
 - Check for updates on the Credits page
@@ -26,7 +26,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Bordes en 4:3: Sonic, Jet o un grid en movimiento a los lados del juego, o uno al azar cada vez
 - Menú dentro del juego con M o el botón Guide: el juego se pausa y puedes continuar, ver los controles, hacer una captura, volver al launcher o salir
 - Efectos visuales (bloom, aberración cromática, colores vivos, nitidez, contorno, FXAA y CRT) y volumen del juego, en Ajustes o en los Ajustes rápidos del menú del juego, donde se aplican al momento
-- Capturas de pantalla con F9 o desde el menú del juego, hasta 5120x2880 sin importar la resolución del juego
+- Capturas de pantalla con F9 o desde el menú del juego, hasta 5120x2880 sin importar la resolución del juego, y una página Capturas en el launcher para verlas
 - Tamaño de la ventana en Ajustes: automático (se ajusta a tu pantalla) o un tamaño fijo
 - Partida completa en Archivos del juego: el juego al 100 %, guardando tu partida para recuperarla
 - Buscar actualizaciones desde la página de Créditos
@@ -43,7 +43,7 @@ SR-ZGSの最初の公開版です。Sonic Riders: Zero GravityをModernGekko上�
 - 4:3の壁紙：ゲームの左右にソニック、ジェット、または動くグリッド（毎回ランダムも可能）
 - ゲーム内メニュー（MキーまたはGuideボタン）：一時停止して、続ける、操作を見る、スクリーンショット、ランチャーに戻る、ゲームを終了を選べます
 - 映像エフェクト（ブルーム、色収差、鮮やかな色、シャープ、輪郭線、FXAA、CRT）とゲームの音量：設定またはゲーム内メニューのクイック設定で変更でき、すぐに反映されます
-- F9キーまたはゲーム内メニューでスクリーンショット：ゲームの解像度に関係なく最大5120x2880で撮影
+- F9キーまたはゲーム内メニューでスクリーンショット：ゲームの解像度に関係なく最大5120x2880で撮影（ランチャーのスクリーンショットページで閲覧）
 - 設定でウィンドウサイズを選択：自動（画面に合わせる）または固定サイズ
 - ゲームファイルで完全セーブデータ：ゲームを100%クリアしたデータ（自分のセーブデータは保存され、元に戻せます）
 - クレジットページからアップデートを確認

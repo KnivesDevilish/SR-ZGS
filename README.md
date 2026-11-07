@@ -424,7 +424,7 @@ The launcher is the program players open to play SR-ZGS. It is part of the Moder
 - **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
 - **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
 
-The bottom of the sidebar holds the music volume and the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track.
+The bottom of the sidebar holds the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track; its volume is in **Settings → Audio**, next to the game's.
 
 ### 4:3 borders
 
@@ -461,7 +461,9 @@ The last two ask first, since progress the game hasn't saved is lost. In Netplay
 
 An effect only sees the finished picture, not what is in it, so **Outline** draws its lines around everything on screen with a clear edge (characters, the track, the menus), not around the characters alone. Soft shading and most textures get no line.
 
-**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files in `ScreenShots/RS9E8P/` inside the user directory (`~/.local/share/sr-zgs/ScreenShots/RS9E8P/` on Linux). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
+**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-ZGS_0001.png`, `SR-ZGS_0002.png` and so on, in `ScreenShots/RS9E8P/` inside the user directory (`~/.local/share/sr-zgs/ScreenShots/RS9E8P/` on Linux). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
+
+The launcher's **Screenshots** page shows them, newest first, without opening any other program: choose one to see it large, go to the next or previous one with the arrow keys or the buttons, and delete one you don't want. **Open folder** opens the folder they are in.
 
 SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot, as above), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game).
 
