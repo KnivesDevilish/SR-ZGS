@@ -56,8 +56,8 @@ Requires your own legally obtained copy of the game.
 - [x] 60 FPS observed during developer testing using JIT64.
 - [x] StaticRecomp execution path tested.
 - [x] SR-ZGS launcher with Netplay lobby, music, patch notes and update check (English, Spanish and Japanese).
-- [ ] In-game menu.
-- [ ] First public release (0.1.0).
+- [x] In-game menu with quick settings, the controls, screenshots and visual effects.
+- [x] First public release (0.1.0) for Linux, and for Windows as an experimental build.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -101,6 +101,7 @@ SR-ZGS uses a modified fork of ModernGekko: [KnivesDevilish/ModernGekko](https:/
 - The Netplay lobby with invite codes (see [Netplay](#-netplay)).
 - GameCube controller profiles written for SR-ZGS, with a controller tester.
 - Pictures in the bars beside a 4:3 game, chosen in the launcher (see [4:3 borders](#43-borders)).
+- The in-game menu, visual effects and high-resolution screenshots (see [In-game menu](#in-game-menu)).
 - Small runtime adjustments, such as hiding the runtime's on-screen messages and skipping redundant checks of the game files at startup.
 
 Like the original, the fork is licensed under the GNU GPL v3.
@@ -170,7 +171,9 @@ SR-ZGS/
 │   └── platform/              # Runtime staging and launch integration
 ├── tools/
 │   ├── dolrecomp/
-│   └── build_tools.sh
+│   ├── build_tools.sh
+│   └── package_release.sh     # Packs a release build (see Making a Release)
+├── .github/workflows/         # release.yml: Linux and Windows release builds
 ├── CMakeLists.txt
 ├── CMakePresets.json
 └── LICENSE
@@ -183,12 +186,34 @@ SR-ZGS/
 SR-ZGS is currently in an experimental development stage.
 
 - **Linux:** Current development and testing platform. Tested on Bazzite Linux with Wayland.
-- **Windows:** Intended desktop target. Compatibility testing is still needed.
+- **Windows:** 0.1.0 includes a Windows build, made by GitHub Actions. It is **experimental**: it hasn't been tested on Windows yet, so reports are very welcome.
 - **Android:** Long-term development target. No working Android build is currently provided.
 
 For detailed hardware specifications, graphics settings, CPU execution modes and performance results, see [TESTING.md](docs/TESTING.md).
 
 This is an observed test result, not a universal performance guarantee. Actual performance may vary depending on hardware, runtime configuration and future changes.
+
+---
+
+## 📦 Downloading a Release
+
+Ready-to-play builds are on the [Releases](https://github.com/KnivesDevilish/SR-ZGS/releases) page. They contain the launcher and the runtime, never the game: you still need your own copy of the game as an ISO, WBFS or RVZ image (see [Required Game Copy](#required-game-copy)).
+
+**Linux** (`SR-ZGS-<version>-linux-x86_64.tar.gz`):
+
+```bash
+tar -xzf SR-ZGS-0.1.0-linux-x86_64.tar.gz
+cd SR-ZGS-0.1.0-linux-x86_64
+./SR-ZGS
+```
+
+It is built on Ubuntu 24.04, so it needs a distribution at least that recent (glibc 2.39 or newer), a graphics driver with Vulkan, and PulseAudio or PipeWire for the sound.
+
+**Windows** (`SR-ZGS-<version>-windows-x64.zip`, experimental): extract the whole zip to a folder of its own and open `SR-ZGS.exe`. It needs 64-bit Windows 10 or 11. The programs aren't signed, so Windows SmartScreen may warn the first time: choose **More info → Run anyway**.
+
+In both, keep the folder's files together (the launcher starts `moderngekko-run` beside it). The first time, open **Game Files**, choose your disc image and press **Extract Game**; then press **PLAY**. Settings, saves, screenshots and logs go to the SR-ZGS user directory: `~/.local/share/sr-zgs` on Linux, `%LOCALAPPDATA%\sr-zgs` on Windows. Each package has a `.sha256` file to check the download.
+
+The downloads play with the JIT64 CPU core. StaticRecomp needs the recompiled game module, which is made from your own copy of the game's code and therefore isn't distributed: build SR-ZGS from source to try it (see [Building & Getting Started](#-building--getting-started)).
 
 ---
 
@@ -225,7 +250,7 @@ The build configuration expects the extracted game root to contain both `sys/` a
 
 ### Extracting with the Launcher
 
-The launcher's **Game Files** page can also extract the game. Select your ISO, WBFS or RVZ image and press **Extract Game**: the launcher checks that the disc is `RS9E8P` and extracts it once into the SR-ZGS user directory (`~/.local/share/sr-zgs/games/RS9E8P` on Linux), where it is reused every time you play.
+The launcher's **Game Files** page can also extract the game. Select your ISO, WBFS or RVZ image and press **Extract Game**: the launcher checks that the disc is `RS9E8P` and extracts it once into the SR-ZGS user directory (`~/.local/share/sr-zgs/games/RS9E8P` on Linux, `%LOCALAPPDATA%\sr-zgs\games\RS9E8P` on Windows), where it is reused every time you play.
 
 **Complete save:** the **Game Files** page can also install a save with the whole game completed at 100%, everything unlocked. Play once first, until the game makes its own save; then press **Install complete save**. Your save is copied first to `SaveBackups/RS9E8P/` in the user directory, and **Restore my save** brings it back. The complete save is in `docs/complete-save/`: only the game's save data (`0_Games.sav`), without the save's `banner.bin`, which holds the game's own icon and banner; your game's save keeps the one it made.
 
@@ -362,7 +387,7 @@ cpu_core=jit64
 ```
 
 - `jit64` (default): ModernGekko's JIT64 CPU core, the validated full-speed mode.
-- `staticrecomp`: runs the recompiled game module. Experimental.
+- `staticrecomp`: runs the recompiled game module. Experimental. Without the module (as in the release downloads), the runner plays with JIT64 instead and says so in its log.
 
 The SR-ZGS launcher exposes the same option under **Settings → CPU core**.
 
@@ -402,6 +427,17 @@ The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Sele
 
 On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Without any gamepad, the launcher writes the profile for the keyboard alone (**Controls** shows *Keyboard only*); a gamepad connected later is added to the same profile and the keys keep working. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth); when the configured one is missing and exactly one other gamepad is connected, the launcher switches the profile to it and keeps the mapping.
 
+### Making a Release
+
+`.github/workflows/release.yml` builds the Linux and Windows packages on GitHub's machines with `tools/build_tools.sh --chassis` (without DolRecomp: `SRZGS_SKIP_DOLRECOMP=1`) and `tools/package_release.sh`. Run it from the repository's **Actions** tab (**Release → Run workflow**) to get both packages as the run's artifacts, or push a tag that matches `project(SR_ZGS VERSION ...)` in `CMakeLists.txt` to also get a draft release with them and the patch notes:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+`tools/package_release.sh` also packs a local build: after `tools/build_tools.sh --chassis` it writes `dist/SR-ZGS-<version>-linux-<arch>.tar.gz` and its `.sha256`. It never packs game files or the StaticRecomp module.
+
 ### Build Configuration Notes
 
 - **Quick:** Uses `-O1` for generated game code and is intended for faster development iterations.
@@ -425,7 +461,7 @@ The launcher is the program players open to play SR-ZGS. It is part of the Moder
 - **Mods & expansions:** lists the mod packages installed, shows the folder they go in (`Mods` in the SR-ZGS user directory) with a button to open it, and presents the planned custom expansions (see [Future Ecosystem & Expansion Plans](#-future-ecosystem--expansion-plans)). SR-ZGS has no mods of its own yet.
 - **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
 
-**With a gamepad.** The launcher works with a gamepad as well as with the mouse and keyboard: the D-pad or the left stick moves, **A** chooses and **B** goes back to the sidebar; **LB** and **RB** change the page, the right stick scrolls, and **right** goes from the sidebar into the page. While a gamepad is in use, the bottom right corner shows its buttons as the controller prints them (Xbox, PlayStation or Nintendo). On the **Controls** page the controller is being tested, so its buttons only light up the drawing: hold **B** (or press Escape) to stop testing and move through the page; **Test buttons** starts the test again. The Netplay lobby works with a gamepad too.
+**With a gamepad.** The launcher works with a gamepad as well as with the mouse and keyboard: the D-pad or the left stick moves, **A** chooses and **B** goes back to the sidebar; **LB** and **RB** change the page, the right stick scrolls, and **right** goes from the sidebar into the page. While a gamepad is in use, the bottom right corner shows its buttons as the controller prints them (Xbox, PlayStation or Nintendo). Choosing **Controls** in the sidebar starts testing the controller, so its buttons only light up the drawing: hold **B** (or press Escape) to stop testing and move through the page. **LB** and **RB** pass through **Controls** without testing; press the top face button there (**Y**, the triangle on PlayStation) or **Test buttons** to start the test. The Netplay lobby works with a gamepad too.
 
 The bottom of the sidebar holds the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track; its volume is in **Settings → Audio**, next to the game's.
 
@@ -468,11 +504,11 @@ An effect only sees the finished picture, not what is in it, so **Outline** draw
 
 The launcher's **Screenshots** page shows them, newest first, without opening any other program: choose one to see it large, go to the next or previous one with the arrow keys or the buttons, and delete one you don't want. **Open folder** opens the folder they are in.
 
-SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot, as above), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game).
+SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot, as above), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game; on Windows, where Ctrl+Esc opens the Start menu, use **Alt+F4** or the window's close button).
 
-**Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser. No release has been published yet.
+**Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser.
 
-The launcher keeps its settings in `config.ini` inside the SR-ZGS user directory (`~/.local/share/sr-zgs/` on Linux), together with the controller profile, saves and logs.
+The launcher keeps its settings in `config.ini` inside the SR-ZGS user directory (`~/.local/share/sr-zgs/` on Linux, `%LOCALAPPDATA%\sr-zgs\` on Windows), together with the controller profile, saves and logs.
 
 ---
 
@@ -540,7 +576,7 @@ Not yet. Native project-specific mod loading is a future development goal. The `
 SR-ZGS currently uses a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide graphics, audio, input and Wii system services. You don't need to install Dolphin separately: the runtime is built from the `external/ModernGekko/` submodule. A more independent runtime is a long-term development goal.
 
 ### Is there a downloadable release?
-Not yet. The first public version, 0.1.0, is still in development, so for now SR-ZGS is built from source as described above. Once a release is published, the launcher's **Check for updates** will point to it.
+Yes. From 0.1.0 on, the [Releases](https://github.com/KnivesDevilish/SR-ZGS/releases) page has a Linux build and an experimental Windows build (see [Downloading a Release](#-downloading-a-release)), and the launcher's **Check for updates** points to the newest one. You can also build SR-ZGS from source as described above.
 
 ### Does the project run at 60 FPS?
 The game successfully ran from start to finish at 60 FPS during developer testing. This is an observed result from a specific test configuration, not a guarantee for every system.

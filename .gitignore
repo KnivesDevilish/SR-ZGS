@@ -2,6 +2,8 @@
 build/
 bin/
 out/
+# Paquetes de una versión (tools/package_release.sh)
+dist/
 game_assets/
 
 # Archivos objeto y binarios generados

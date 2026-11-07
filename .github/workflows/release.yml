@@ -1,0 +1,162 @@
+name: Release
+
+# Builds SR-ZGS for Linux and Windows on GitHub's machines and packs each with
+# tools/package_release.sh (no game files: players extract their own copy).
+#
+# - Pushing a version tag (git tag v0.1.0 && git push origin v0.1.0) builds
+#   both and puts them in a DRAFT release, with the patch notes, to check and
+#   publish by hand on the Releases page.
+# - "Run workflow" on the Actions tab only builds them: the packages are the
+#   run's artifacts, to download and try before tagging.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# A second run of the same tag or branch replaces the one in flight.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux
+            os: ubuntu-24.04
+          - name: Windows
+            os: windows-2022
+    steps:
+      # Dolphin's files sit deep under external/ModernGekko/vendor/dolphin.
+      - name: Allow long paths
+        if: runner.os == 'Windows'
+        run: git config --system core.longpaths true
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      # The fork's Dolphin and its own submodules (SDL, SFML...).
+      - name: Initialize nested submodules
+        run: git submodule update --init --recursive --force
+
+      # A tag must be the version the launcher shows (project(SR_ZGS VERSION)).
+      - name: Check the version
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: |
+          version="$(awk '/^project\(SR_ZGS/ {found=1} found && $1 == "VERSION" {print $2; exit}' CMakeLists.txt)"
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::The tag is $GITHUB_REF_NAME but CMakeLists.txt says VERSION $version"
+            exit 1
+          fi
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential g++-14 cmake ninja-build pkg-config python3 git \
+            libx11-dev libxi-dev libxrandr-dev libwayland-dev wayland-protocols libxkbcommon-dev \
+            libasound2-dev libpulse-dev libgl1-mesa-dev libudev-dev libevdev-dev
+
+      - name: Install Windows dependencies
+        if: runner.os == 'Windows'
+        run: choco install ninja --no-progress -y
+
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+        with:
+          arch: x64
+
+      # Git Bash's own link.exe would hide the Visual C++ linker.
+      - name: Hide Git's link.exe
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: Remove-Item -Force "C:\Program Files\Git\usr\bin\link.exe" -ErrorAction SilentlyContinue
+
+      # Dolphin is most of the build: compiled objects are kept between runs.
+      - name: Cache compiled objects
+        uses: hendrikmuhs/ccache-action@v1
+        with:
+          key: release-${{ matrix.os }}
+          variant: sccache
+          max-size: 2G
+
+      - name: Build the launcher and the runner
+        shell: bash
+        env:
+          SRZGS_SKIP_DOLRECOMP: '1'
+          CC: ${{ runner.os == 'Windows' && 'cl' || 'gcc-14' }}
+          CXX: ${{ runner.os == 'Windows' && 'cl' || 'g++-14' }}
+          CHASSIS_CMAKE_ARGS: -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+        run: bash tools/build_tools.sh --chassis
+
+      - name: Pack the release
+        shell: bash
+        run: bash tools/package_release.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SR-ZGS-${{ matrix.name }}
+          path: |
+            dist/*.tar.gz
+            dist/*.zip
+            dist/*.sha256
+          if-no-files-found: error
+
+  release:
+    name: Draft release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      # The release text: the patch notes in English and Spanish.
+      - name: Write the release notes
+        shell: bash
+        run: |
+          notes="docs/SR-ZGS Patch Notes.txt"
+          {
+            echo "Requires your own legally obtained copy of Sonic Riders: Zero Gravity (Wii, NTSC-U, RS9E8P). No game files are included."
+            echo
+            echo "**Linux:** extract the .tar.gz and run \`./SR-ZGS\`. **Windows (experimental):** extract the .zip and open \`SR-ZGS.exe\`."
+            echo
+            awk '/^\[en\]/ {found=1; next} /^\[/ {found=0} found' "$notes" | sed 's/^# /### /'
+            echo
+            echo "---"
+            echo
+            echo "Necesitas tu propia copia legal de Sonic Riders: Zero Gravity (Wii, NTSC-U, RS9E8P). No incluye archivos del juego."
+            echo
+            echo "**Linux:** extrae el .tar.gz y ejecuta \`./SR-ZGS\`. **Windows (experimental):** extrae el .zip y abre \`SR-ZGS.exe\`."
+            echo
+            awk '/^\[es\]/ {found=1; next} /^\[/ {found=0} found' "$notes" | sed 's/^# /### /'
+          } > release-notes.md
+          cat release-notes.md
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          name: SR-ZGS ${{ github.ref_name }}
+          body_path: release-notes.md
+          files: |
+            dist/*.tar.gz
+            dist/*.zip
+            dist/*.sha256
+          fail_on_unmatched_files: true

@@ -9,6 +9,10 @@
 # and the runtime that loads it always agree on the module ABI.
 # Extra chassis CMake flags can be passed through CHASSIS_CMAKE_ARGS, e.g.
 #   CHASSIS_CMAKE_ARGS="-DMODERNGEKKO_USER_DIRECTORY_IN_DOCUMENTS=ON" tools/build_tools.sh --chassis
+# SRZGS_SKIP_DOLRECOMP=1 leaves DolRecomp out, for a release build (only the
+# launcher and the runner go into it; tools/package_release.sh packs them).
+# On Windows it runs in Git Bash, inside a Visual Studio developer
+# environment (as .github/workflows/release.yml does).
 # The runner's output location is determined by CMake.
 # Its Sys/ data folder must be copied next to the executable.
 # =============================================================================
@@ -21,18 +25,37 @@ JOBS="${JOBS:-$(nproc 2>/dev/null || echo 4)}"
 
 die() { echo "error: $*" >&2; exit 1; }
 
+# Windows (Git Bash): paths as D:/... so CMake and the compiler read them too,
+# the executables end in .exe (found by name alone), and the dependency check
+# is Linux's.
+EXE=""
+EXECUTABLE=(-perm /111)
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*)
+    EXE=".exe"
+    EXECUTABLE=()
+    ROOT="$(cygpath -m "$ROOT")"
+    MG="$ROOT/external/ModernGekko"
+    DR_SRC="$MG/vendor/dolphin/DolRecomp"
+    ;;
+esac
+
 [[ -f "$DR_SRC/CMakeLists.txt" ]] || die "missing $DR_SRC
   git submodule update --init --recursive      # then retry"
 
-cmake -S "$DR_SRC" -B "$ROOT/build/dolrecomp" -G Ninja \
-      -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DDOLRECOMP_ENABLE_LLVM=OFF
-cmake --build "$ROOT/build/dolrecomp" --target dolrecomp -j"$JOBS"
-echo "DolRecomp: $ROOT/build/dolrecomp/dolrecomp"
+if [[ "${SRZGS_SKIP_DOLRECOMP:-0}" != "1" ]]; then
+  cmake -S "$DR_SRC" -B "$ROOT/build/dolrecomp" -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DDOLRECOMP_ENABLE_LLVM=OFF
+  cmake --build "$ROOT/build/dolrecomp" --target dolrecomp -j"$JOBS"
+  echo "DolRecomp: $ROOT/build/dolrecomp/dolrecomp"
+fi
 
 if [[ "${1:-}" == "--chassis" ]]; then
   [[ -f "$MG/vendor/dolphin/Externals/SDL/SDL/CMakeLists.txt" ]] \
     || die "ModernGekko submodules are incomplete: git submodule update --init --recursive"
-  "$ROOT/tools/check_chassis_deps.sh" || exit 1
+  if [[ "$(uname -s)" == "Linux" ]]; then
+    "$ROOT/tools/check_chassis_deps.sh" || exit 1
+  fi
 
   # The launcher shows this version and compares it with the newest release
   # published on GitHub: the one in project(SR_ZGS VERSION ...) of CMakeLists.txt.
@@ -72,7 +95,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         --target moderngekko-run moderngekko-launcher -j"$JOBS"
 
   RUNNER="$(find "$ROOT/build/chassis" -type f \
-    -name "moderngekko-run" -perm /111 -print -quit)"
+    -name "moderngekko-run$EXE" "${EXECUTABLE[@]}" -print -quit)"
 
   [[ -n "$RUNNER" ]] || die "build finished but moderngekko-run is missing"
 
@@ -80,7 +103,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
   [[ -d "$RUNNER_DIR/Sys" ]] || die "Sys/ was not copied next to the runner"
 
   LAUNCHER="$(find "$ROOT/build/chassis" -type f \
-    -name "SR-ZGS" -perm /111 -print -quit)"
+    -name "SR-ZGS$EXE" "${EXECUTABLE[@]}" -print -quit)"
 
   [[ -n "$LAUNCHER" ]] || die "build finished but SR-ZGS launcher is missing"
 

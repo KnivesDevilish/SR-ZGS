@@ -4,6 +4,7 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 
 - New launcher: PLAY, Settings, Controls, Game Files, Mods & expansions, Screenshots and Credits in one 960x540 window
 - Netplay with invite codes, or a direct IP for the same network or Tailscale
+- Controls ready without setting anything up: your gamepad and your keyboard play as a GameCube controller, with a tester that lights up each button you press
 - Music in the launcher and the Netplay lobby, with its own volume
 - Moving backgrounds in the launcher and the Netplay lobby
 - 4:3 borders: Sonic, Jet or a moving grid beside the game, or a random one each time
@@ -15,6 +16,7 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Check for updates on the Credits page
 - The launcher works with a gamepad: D-pad to move, A to choose, B to go back, LB and RB to change the page
 - Interface in English, Spanish and Japanese
+- Builds for Linux and, still experimental, for Windows
 
 [es]
 # 0.1.0
@@ -22,6 +24,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 
 - Nuevo launcher: Jugar, Ajustes, Controles, Archivos del juego, Mods y expansiones, Capturas y Créditos en una sola ventana de 960x540
 - Netplay con códigos de invitación, o con IP directa para la misma red o Tailscale
+- Controles listos sin configurar nada: tu mando y tu teclado juegan como un mando de GameCube, con un probador que ilumina cada botón que pulsas
 - Música en el launcher y en el lobby de Netplay, con su propio volumen
 - Fondos en movimiento en el launcher y en el lobby de Netplay
 - Bordes en 4:3: Sonic, Jet o un grid en movimiento a los lados del juego, o uno al azar cada vez
@@ -33,6 +36,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Buscar actualizaciones desde la página de Créditos
 - El launcher se puede usar con mando: la cruceta mueve, A elige, B vuelve, LB y RB cambian de página
 - Interfaz en inglés, español y japonés
+- Builds para Linux y, todavía experimental, para Windows
 
 [ja]
 # 0.1.0
@@ -40,6 +44,7 @@ SR-ZGSの最初の公開版です。Sonic Riders: Zero GravityをModernGekko上�
 
 - 新しいランチャー：プレイ、設定、操作、ゲームファイル、MODと拡張、スクリーンショット、クレジットを960x540の1つのウィンドウに
 - 招待コードでのネットプレイ、または同じネットワーク内やTailscaleでのIP直接接続
+- 操作は設定不要：ゲームパッドとキーボードがゲームキューブコントローラーとして使え、押したボタンが光るテスター付き
 - ランチャーとネットプレイのロビーに音楽（音量は個別に設定可能）
 - ランチャーとネットプレイのロビーに動く背景
 - 4:3の壁紙：ゲームの左右にソニック、ジェット、または動くグリッド（毎回ランダムも可能）
@@ -51,3 +56,4 @@ SR-ZGSの最初の公開版です。Sonic Riders: Zero GravityをModernGekko上�
 - クレジットページからアップデートを確認
 - ランチャーをゲームパッドで操作可能：十字キーで移動、Aで決定、Bで戻る、LBとRBでページ切り替え
 - 英語、スペイン語、日本語のインターフェース
+- Linux版と、まだ試験的なWindows版
