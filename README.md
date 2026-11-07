@@ -396,7 +396,7 @@ The SR-ZGS controller drawing also has three extra buttons that the GameCube con
 | − (Select) | Back / Select | Backspace |
 | Menu | Guide / Home | M |
 
-The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the runtime ignores, so that SR-ZGS features and mods can use them later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
+The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the game's controller ignores. **Menu** opens the [in-game menu](#in-game-menu); C and − are kept for SR-ZGS features and mods later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
 
 On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Without any gamepad, the launcher writes the profile for the keyboard alone (**Controls** shows *Keyboard only*); a gamepad connected later is added to the same profile and the keys keep working. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth); when the configured one is missing and exactly one other gamepad is connected, the launcher switches the profile to it and keeps the mapping.
 
@@ -415,7 +415,7 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 
 The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`.
 
-- **PLAY:** starts the game alone or through Netplay; a solo game can also start from a savestate. Summary cards show the time played, the controller and the display settings, and the **PATCH NOTES** panel shows what changed in this version.
+- **PLAY:** starts the game alone or through Netplay. Summary cards show the time played, the controller and the display settings, and the **PATCH NOTES** panel shows what changed in this version.
 - **Settings:** CPU core, graphics backend, internal resolution, aspect ratio (16:9, 4:3 or stretched), 4:3 borders, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**.
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
 - **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
@@ -430,6 +430,18 @@ When the game is shown in 4:3 on a wider screen, the bars beside it can show a p
 The character borders are always shown whole and undistorted, as large as the bar allows, whatever the window's size, the screen's shape or fullscreen; any space left in the bar shows a blurred copy of the picture. The grids fill the whole bar.
 
 The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py` draws both grids from scratch, makes the blurred copies and writes `borders.txt`; it also builds the two character borders from their full artworks, which are kept outside the repository.
+
+### In-game menu
+
+While playing, press **M** on the keyboard or **Guide / Home** on the gamepad (the **Menu** button of the SR-ZGS controller) to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); M or Guide again closes it.
+
+- **Continue** goes back to the game.
+- **Back to the launcher** closes the game and shows the launcher again.
+- **Quit game** closes the game and the launcher.
+
+The last two ask first, since progress the game hasn't saved is lost. In Netplay the match keeps going behind the menu, the game gets no input from you while it is open, and **Back to the lobby** ends the match for every player.
+
+SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot in the `ScreenShots` folder of the user directory), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game).
 
 **Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser. No release has been published yet.
 
@@ -447,7 +459,7 @@ Netplay lets up to four players race together. On the launcher's **PLAY** page, 
 > [!WARNING]
 > Anyone who sees an invite code can join the room, and an IP address identifies your connection. Don't show either one on stream or post them publicly.
 
-Every player needs the same SR-ZGS release and the same game files. Everyone plays with the host's CPU core and the host's 16:9 or 4:3 choice; JIT64 is recommended, especially when players are on different systems. Savestates are available for solo play only.
+Every player needs the same SR-ZGS release and the same game files. Everyone plays with the host's CPU core and the host's 16:9 or 4:3 choice; JIT64 is recommended, especially when players are on different systems.
 
 Netplay is part of the experimental build and has had limited testing so far.
 

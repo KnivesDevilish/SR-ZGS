@@ -62,7 +62,8 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_GAME_BORDERS="$ROOT/docs/borders" \
         -DMODERNGEKKO_FRONTEND_VERSION="$SRZGS_VERSION" \
         -DMODERNGEKKO_UPDATE_REPOSITORY="KnivesDevilish/SR-ZGS" \
-        -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON
+        -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON \
+        -DMODERNGEKKO_SAVESTATES=OFF
 
   cmake --build "$ROOT/build/chassis" \
         --target moderngekko-run moderngekko-launcher -j"$JOBS"
