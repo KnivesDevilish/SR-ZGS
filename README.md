@@ -425,6 +425,8 @@ The launcher is the program players open to play SR-ZGS. It is part of the Moder
 - **Mods & expansions:** lists the mod packages installed, shows the folder they go in (`Mods` in the SR-ZGS user directory) with a button to open it, and presents the planned custom expansions (see [Future Ecosystem & Expansion Plans](#-future-ecosystem--expansion-plans)). SR-ZGS has no mods of its own yet.
 - **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
 
+**With a gamepad.** The launcher works with a gamepad as well as with the mouse and keyboard: the D-pad or the left stick moves, **A** chooses and **B** goes back to the sidebar; **LB** and **RB** change the page, the right stick scrolls, and **right** goes from the sidebar into the page. While a gamepad is in use, the bottom right corner shows its buttons as the controller prints them (Xbox, PlayStation or Nintendo). On the **Controls** page the controller is being tested, so its buttons only light up the drawing: hold **B** (or press Escape) to stop testing and move through the page; **Test buttons** starts the test again. The Netplay lobby works with a gamepad too.
+
 The bottom of the sidebar holds the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track; its volume is in **Settings → Audio**, next to the game's.
 
 ### 4:3 borders
@@ -437,7 +439,7 @@ The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py`
 
 ### In-game menu
 
-While playing, press **M** on the keyboard or **Guide / Home** on the gamepad (the **Menu** button of the SR-ZGS controller) to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); M or Guide again closes it.
+While playing, press **M** on the keyboard or **Guide / Home** on the gamepad (the **Menu** button of the SR-ZGS controller) to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); M or Guide again closes it. The line at the bottom of the menu shows those buttons as your controller prints them (Xbox's A and B, PlayStation's cross and circle, a Nintendo pad's B and A), or as keyboard keys if the keyboard was the last thing you pressed; if you remap A or B in your controller profile, it shows the new ones.
 
 - **Continue** goes back to the game.
 - **Quick settings** change the visual effect, the internal resolution, the game's volume and, when the game is in 4:3, the border. Choose a row and press left or right (A goes round the choices): the change shows at once, even with the game paused, and the launcher keeps it for next time.
