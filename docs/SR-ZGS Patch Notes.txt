@@ -8,6 +8,7 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Moving backgrounds in the launcher and the Netplay lobby
 - 4:3 borders: Sonic, Jet or a moving grid beside the game, or a random one each time
 - In-game menu with M or the Guide button: the game pauses, and you can continue, go back to the launcher or quit
+- Visual effects (bloom, chromatic aberration, vivid colors, sharpen, FXAA and CRT) and the game's volume, in Settings or in the in-game menu's Quick settings, where they apply at once
 - Check for updates on the Credits page
 - Interface in English, Spanish and Japanese
 
@@ -21,6 +22,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Fondos en movimiento en el launcher y en el lobby de Netplay
 - Bordes en 4:3: Sonic, Jet o un grid en movimiento a los lados del juego, o uno al azar cada vez
 - Menú dentro del juego con M o el botón Guide: el juego se pausa y puedes continuar, volver al launcher o salir
+- Efectos visuales (bloom, aberración cromática, colores vivos, nitidez, FXAA y CRT) y volumen del juego, en Ajustes o en los Ajustes rápidos del menú del juego, donde se aplican al momento
 - Buscar actualizaciones desde la página de Créditos
 - Interfaz en inglés, español y japonés
 
@@ -34,5 +36,6 @@ SR-ZGSの最初の公開版です。Sonic Riders: Zero GravityをModernGekko上�
 - ランチャーとネットプレイのロビーに動く背景
 - 4:3の壁紙：ゲームの左右にソニック、ジェット、または動くグリッド（毎回ランダムも可能）
 - ゲーム内メニュー（MキーまたはGuideボタン）：一時停止して、続ける、ランチャーに戻る、ゲームを終了を選べます
+- 映像エフェクト（ブルーム、色収差、鮮やかな色、シャープ、FXAA、CRT）とゲームの音量：設定またはゲーム内メニューのクイック設定で変更でき、すぐに反映されます
 - クレジットページからアップデートを確認
 - 英語、スペイン語、日本語のインターフェース

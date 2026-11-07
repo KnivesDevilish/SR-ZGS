@@ -416,7 +416,7 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`.
 
 - **PLAY:** starts the game alone or through Netplay. Summary cards show the time played, the controller and the display settings, and the **PATCH NOTES** panel shows what changed in this version.
-- **Settings:** CPU core, graphics backend, internal resolution, aspect ratio (16:9, 4:3 or stretched), 4:3 borders, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**.
+- **Settings:** CPU core, graphics backend, internal resolution, visual effect, game volume, aspect ratio (16:9, 4:3 or stretched), 4:3 borders, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution, the game volume and the 4:3 border can also be changed while playing, in the [in-game menu](#in-game-menu).
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
 - **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
 - **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
@@ -436,10 +436,23 @@ The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py`
 While playing, press **M** on the keyboard or **Guide / Home** on the gamepad (the **Menu** button of the SR-ZGS controller) to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); M or Guide again closes it.
 
 - **Continue** goes back to the game.
+- **Quick settings** change the visual effect, the internal resolution, the game's volume and, when the game is in 4:3, the border. Choose a row and press left or right (A goes round the choices): the change shows at once, even with the game paused, and the launcher keeps it for next time.
 - **Back to the launcher** closes the game and shows the launcher again.
 - **Quit game** closes the game and the launcher.
 
 The last two ask first, since progress the game hasn't saved is lost. In Netplay the match keeps going behind the menu, the game gets no input from you while it is open, and **Back to the lobby** ends the match for every player.
+
+**Visual effects** are drawn over the game's picture, in one pass, so they run on integrated graphics such as a laptop's:
+
+| Effect | What it does |
+| --- | --- |
+| Bloom | Lights and bright highlights glow softly |
+| Chromatic aberration | Red and blue drift apart toward the edges, as through a camera lens |
+| Bloom + chromatic aberration | Both together |
+| Vivid colors | Richer colors and a little more contrast |
+| Sharpen | Details and edges stand out more |
+| Smooth edges (FXAA) | Softens jagged edges |
+| CRT | Scanlines and darker corners, like an old TV |
 
 SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot in the `ScreenShots` folder of the user directory), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game).
 
