@@ -227,6 +227,8 @@ The build configuration expects the extracted game root to contain both `sys/` a
 
 The launcher's **Game Files** page can also extract the game. Select your ISO, WBFS or RVZ image and press **Extract Game**: the launcher checks that the disc is `RS9E8P` and extracts it once into the SR-ZGS user directory (`~/.local/share/sr-zgs/games/RS9E8P` on Linux), where it is reused every time you play.
 
+**Complete save:** the **Game Files** page can also install a save with the whole game completed at 100%, everything unlocked. Play once first, until the game makes its own save; then press **Install complete save**. Your save is copied first to `SaveBackups/RS9E8P/` in the user directory, and **Restore my save** brings it back. The complete save is in `docs/complete-save/`: only the game's save data (`0_Games.sav`), without the save's `banner.bin`, which holds the game's own icon and banner; your game's save keeps the one it made.
+
 Building the recompiled code (step 3 below) reads `main.dol` from `game_assets/` by default. If you already extracted the game with the launcher, you can point the build at that copy instead of extracting it twice:
 
 ```bash
