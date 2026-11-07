@@ -415,13 +415,14 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 
 ## 🎮 The SR-ZGS Launcher
 
-The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`.
+The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`. Its window is 960x540 (larger on a screen with a display scale above 100%), and most pages show their panels in two columns so they fit without scrolling.
 
-- **PLAY:** starts the game alone or through Netplay. Summary cards show the time played, the controller and the display settings, and the **PATCH NOTES** panel shows what changed in this version.
+- **PLAY:** starts the game alone or through Netplay. Summary cards show the time played, the controller, the display settings and the installed mods, and the **PATCH NOTES** panel shows what changed in this version.
 - **Settings:** CPU core, graphics backend, internal resolution, screenshot resolution, visual effect, game volume, aspect ratio (16:9, 4:3 or stretched), 4:3 borders, window size, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution, the game volume and the 4:3 border can also be changed while playing, in the [in-game menu](#in-game-menu).
 - **Window size** (Settings → Display) is the game window's size when it isn't fullscreen. **Automatic**, the default, fits it to your screen: a 16:9 window about 85% of the primary monitor, in its middle. 960x540 to 2560x1440 are fixed sizes; one that doesn't fit your screen becomes the automatic one. How sharp the game looks is the internal resolution, not the window size: a small window with a high internal resolution looks very sharp.
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
 - **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
+- **Mods & expansions:** lists the mod packages installed, shows the folder they go in (`Mods` in the SR-ZGS user directory) with a button to open it, and presents the planned custom expansions (see [Future Ecosystem & Expansion Plans](#-future-ecosystem--expansion-plans)). SR-ZGS has no mods of its own yet.
 - **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
 
 The bottom of the sidebar holds the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track; its volume is in **Settings → Audio**, next to the game's.
@@ -531,7 +532,7 @@ Whether you're interested in contributing code, testing the project or sharing t
 Constructive feedback is always welcome. <3
 
 ### Does SR-ZGS currently support mods?
-Not yet. Native project-specific mod loading is a future development goal. The `mods/` directory is reserved for future use and does not currently represent a fully implemented SR-ZGS mod loader.
+Not yet. Native project-specific mod loading is a future development goal. The `mods/` directory is reserved for future use and does not currently represent a fully implemented SR-ZGS mod loader. ModernGekko itself can load experimental code mod packages (`.mgm`) from the `Mods` folder of the SR-ZGS user directory; the launcher's **Mods & expansions** page lists them and opens that folder.
 
 ### Does SR-ZGS require Dolphin?
 SR-ZGS currently uses a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide graphics, audio, input and Wii system services. You don't need to install Dolphin separately: the runtime is built from the `external/ModernGekko/` submodule. A more independent runtime is a long-term development goal.

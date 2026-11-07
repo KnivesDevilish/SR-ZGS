@@ -53,6 +53,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_LAUNCHER_BANNER="$ROOT/docs/SR-ZGS Artwork.png" \
         -DMODERNGEKKO_LAUNCHER_CONTROLLER_ART="$ROOT/docs/SR-ZGS Controller.png" \
         -DMODERNGEKKO_LAUNCHER_KEYBOARD_ART="$ROOT/docs/SR-ZGS Keyboard.png" \
+        -DMODERNGEKKO_LAUNCHER_MODS_ART="$ROOT/docs/SR-ZGS Mods.png" \
         -DMODERNGEKKO_LOBBY_ART="$ROOT/docs/SR-ZGS Lobby.png" \
         -DMODERNGEKKO_LAUNCHER_BACKGROUND="$ROOT/docs/SR-ZGS Background.png" \
         -DMODERNGEKKO_LAUNCHER_MUSIC="$ROOT/docs/SR-ZGS Launcher Track.mp3" \
