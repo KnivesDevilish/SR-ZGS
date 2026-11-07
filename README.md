@@ -448,7 +448,6 @@ The last two ask first, since progress the game hasn't saved is lost. In Netplay
 | --- | --- |
 | Bloom | Lights and bright highlights glow softly |
 | Chromatic aberration | Red and blue drift apart toward the edges, as through a camera lens |
-| Bloom + chromatic aberration | Both together |
 | Vivid colors | Richer colors and a little more contrast |
 | Sharpen | Details and edges stand out more |
 | Smooth edges (FXAA) | Softens jagged edges |
