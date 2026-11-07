@@ -437,6 +437,8 @@ While playing, press **M** on the keyboard or **Guide / Home** on the gamepad (t
 
 - **Continue** goes back to the game.
 - **Quick settings** change the visual effect, the internal resolution, the game's volume and, when the game is in 4:3, the border. Choose a row and press left or right (A goes round the choices): the change shows at once, even with the game paused, and the launcher keeps it for next time.
+- **See controls** shows what each button of the GameCube controller is on your gamepad and on the keyboard, as your controller profile has them.
+- **Take screenshot** takes a screenshot at high resolution (see below); the menu stays open.
 - **Back to the launcher** closes the game and shows the launcher again.
 - **Quit game** closes the game and the launcher.
 
@@ -450,10 +452,15 @@ The last two ask first, since progress the game hasn't saved is lost. In Netplay
 | Chromatic aberration | Red and blue drift apart toward the edges, as through a camera lens |
 | Vivid colors | Richer colors and a little more contrast |
 | Sharpen | Details and edges stand out more |
+| Outline | Dark lines along the edges, like a cartoon |
 | Smooth edges (FXAA) | Softens jagged edges |
 | CRT | Scanlines and darker corners, like an old TV |
 
-SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot in the `ScreenShots` folder of the user directory), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game).
+An effect only sees the finished picture, not what is in it, so **Outline** draws its lines around everything on screen with a clear edge (characters, the track, the menus), not around the characters alone. Soft shading and most textures get no line.
+
+**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files in `ScreenShots/RS9E8P/` inside the user directory (`~/.local/share/sr-zgs/ScreenShots/RS9E8P/` on Linux). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
+
+SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot, as above), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game).
 
 **Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser. No release has been published yet.
 
