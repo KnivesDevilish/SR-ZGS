@@ -6,6 +6,7 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Netplay with invite codes, or a direct IP for the same network or Tailscale
 - Music in the launcher and the Netplay lobby, with its own volume
 - Moving backgrounds in the launcher and the Netplay lobby
+- 4:3 borders: Sonic, Jet or a moving grid beside the game, or a random one each time
 - Check for updates on the Credits page
 - Interface in English, Spanish and Japanese
 
@@ -17,6 +18,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Netplay con códigos de invitación, o con IP directa para la misma red o Tailscale
 - Música en el launcher y en el lobby de Netplay, con su propio volumen
 - Fondos en movimiento en el launcher y en el lobby de Netplay
+- Bordes en 4:3: Sonic, Jet o un grid en movimiento a los lados del juego, o uno al azar cada vez
 - Buscar actualizaciones desde la página de Créditos
 - Interfaz en inglés, español y japonés
 
@@ -28,5 +30,6 @@ SR-ZGSの最初の公開版です。Sonic Riders: Zero GravityをModernGekko上�
 - 招待コードでのネットプレイ、または同じネットワーク内やTailscaleでのIP直接接続
 - ランチャーとネットプレイのロビーに音楽（音量は個別に設定可能）
 - ランチャーとネットプレイのロビーに動く背景
+- 4:3の壁紙：ゲームの左右にソニック、ジェット、または動くグリッド（毎回ランダムも可能）
 - クレジットページからアップデートを確認
 - 英語、スペイン語、日本語のインターフェース

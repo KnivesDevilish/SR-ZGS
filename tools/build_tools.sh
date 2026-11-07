@@ -59,6 +59,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_LOBBY_MUSIC="$ROOT/docs/SR-ZGS NetworkBattle Track.mp3" \
         -DMODERNGEKKO_LOBBY_BACKGROUND="$ROOT/docs/SR-ZGS Netplay Background.png" \
         -DMODERNGEKKO_LAUNCHER_PATCH_NOTES="$ROOT/docs/SR-ZGS Patch Notes.txt" \
+        -DMODERNGEKKO_GAME_BORDERS="$ROOT/docs/borders" \
         -DMODERNGEKKO_FRONTEND_VERSION="$SRZGS_VERSION" \
         -DMODERNGEKKO_UPDATE_REPOSITORY="KnivesDevilish/SR-ZGS" \
         -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON

@@ -100,6 +100,7 @@ SR-ZGS uses a modified fork of ModernGekko: [KnivesDevilish/ModernGekko](https:/
 - The SR-ZGS launcher (see [The SR-ZGS Launcher](#-the-sr-zgs-launcher)).
 - The Netplay lobby with invite codes (see [Netplay](#-netplay)).
 - GameCube controller profiles written for SR-ZGS, with a controller tester.
+- Pictures in the bars beside a 4:3 game, chosen in the launcher (see [4:3 borders](#43-borders)).
 - Small runtime adjustments, such as hiding the runtime's on-screen messages and skipping redundant checks of the game files at startup.
 
 Like the original, the fork is licensed under the GNU GPL v3.
@@ -158,7 +159,7 @@ The repository is organized as follows:
 ```text
 SR-ZGS/
 ├── database/
-├── docs/                      # Launcher art, music, patch notes and test notes
+├── docs/                      # Launcher art, music, patch notes, 4:3 borders and test notes
 ├── external/
 │   └── ModernGekko/           # SR-ZGS fork of the Dolphin-derived runtime (submodule)
 ├── game_assets/               # User-provided game files (not distributed)
@@ -415,12 +416,18 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`.
 
 - **PLAY:** starts the game alone or through Netplay; a solo game can also start from a savestate. Summary cards show the time played, the controller and the display settings, and the **PATCH NOTES** panel shows what changed in this version.
-- **Settings:** CPU core, graphics backend, internal resolution, aspect ratio (16:9, 4:3 or stretched), fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**.
+- **Settings:** CPU core, graphics backend, internal resolution, aspect ratio (16:9, 4:3 or stretched), 4:3 borders, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**.
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
 - **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
 - **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
 
 The bottom of the sidebar holds the music volume and the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track.
+
+### 4:3 borders
+
+When the game is shown in 4:3 on a wider screen, the bars beside it can show a picture instead of black: Sonic, Knuckles & Tails; Jet, Wave & Storm; a green grid; or a blue grid. The grids slide like the launcher's floor. Choose one in **Settings → Display → 4:3 borders**: **Random** (the default) picks one each time the game opens, and **None** keeps the bars black. The borders are drawn only on your screen, in Netplay too.
+
+The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py` draws both grids from scratch and writes `borders.txt`; it also builds the two character borders from their full artworks, which are kept outside the repository.
 
 **Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser. No release has been published yet.
 
