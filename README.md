@@ -58,6 +58,7 @@ Requires your own legally obtained copy of the game.
 - [x] SR-ZGS launcher with Netplay lobby, music, patch notes and update check (English, Spanish and Japanese).
 - [x] In-game menu with quick settings, the controls, screenshots and visual effects.
 - [x] First public release (0.1.0) for Linux, and for Windows as an experimental build.
+- [x] 0.1.1: fixes from the first reports (Windows window and icon, Direct3D, menu button); Steam Deck controls under testing.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -186,7 +187,8 @@ SR-ZGS/
 SR-ZGS is currently in an experimental development stage.
 
 - **Linux:** Current development and testing platform. Tested on Bazzite Linux with Wayland.
-- **Windows:** 0.1.0 includes a Windows build, made by GitHub Actions. It is **experimental**: it hasn't been tested on Windows yet, so reports are very welcome.
+- **Windows:** Each release includes a Windows build, made by GitHub Actions. The first reports say it runs well; it is still marked **experimental** until it gets more testing, so reports are very welcome. If Vulkan doesn't start on your PC, choose **Direct3D 11** in **Settings**.
+- **Steam Deck:** Add SR-ZGS (`SR-ZGS` from the Linux download) as a non-Steam game. The Steam button never reaches the game, so open the in-game menu with **⧉** (View).
 - **Android:** Long-term development target. No working Android build is currently provided.
 
 For detailed hardware specifications, graphics settings, CPU execution modes and performance results, see [TESTING.md](docs/TESTING.md).
@@ -202,8 +204,8 @@ Ready-to-play builds are on the [Releases](https://github.com/KnivesDevilish/SR-
 **Linux** (`SR-ZGS-<version>-linux-x86_64.tar.gz`):
 
 ```bash
-tar -xzf SR-ZGS-0.1.0-linux-x86_64.tar.gz
-cd SR-ZGS-0.1.0-linux-x86_64
+tar -xzf SR-ZGS-0.1.1-linux-x86_64.tar.gz
+cd SR-ZGS-0.1.1-linux-x86_64
 ./SR-ZGS
 ```
 
@@ -420,10 +422,10 @@ The SR-ZGS controller drawing also has three extra buttons that the GameCube con
 | SR-ZGS extra | Gamepad | Keyboard |
 | --- | --- | --- |
 | C | Left trigger (LT / L2) | — |
-| − (Select) | Back / Select | Backspace |
+| − (Select) | Back / Select (View, Share, −, ⧉) | Backspace |
 | Menu | Guide / Home | M |
 
-The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the game's controller ignores. **Menu** opens the [in-game menu](#in-game-menu); C and − are kept for SR-ZGS features and mods later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
+The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the game's controller ignores. **Menu** and **−** open the [in-game menu](#in-game-menu) (− too because Steam, the Xbox Game Bar and the Steam Deck often take the Guide button before the game sees it); C is kept for SR-ZGS features and mods later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
 
 On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Without any gamepad, the launcher writes the profile for the keyboard alone (**Controls** shows *Keyboard only*); a gamepad connected later is added to the same profile and the keys keep working. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth); when the configured one is missing and exactly one other gamepad is connected, the launcher switches the profile to it and keeps the mapping.
 
@@ -432,8 +434,8 @@ On Linux the keyboard is read through X11, which the launcher uses by default. T
 `.github/workflows/release.yml` builds the Linux and Windows packages on GitHub's machines with `tools/build_tools.sh --chassis` (without DolRecomp: `SRZGS_SKIP_DOLRECOMP=1`) and `tools/package_release.sh`. Run it from the repository's **Actions** tab (**Release → Run workflow**) to get both packages as the run's artifacts, or push a tag that matches `project(SR_ZGS VERSION ...)` in `CMakeLists.txt` to also get a draft release with them and the patch notes:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.1.1
+git push origin v0.1.1
 ```
 
 `tools/package_release.sh` also packs a local build: after `tools/build_tools.sh --chassis` it writes `dist/SR-ZGS-<version>-linux-<arch>.tar.gz` and its `.sha256`. It never packs game files or the StaticRecomp module.
@@ -454,7 +456,7 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`. Its window is 960x540 (larger on a screen with a display scale above 100%), and most pages show their panels in two columns so they fit without scrolling.
 
 - **PLAY:** starts the game alone or through Netplay. Summary cards show the time played, the controller, the display settings and the installed mods, and the **PATCH NOTES** panel shows what changed in this version.
-- **Settings:** CPU core, graphics backend, internal resolution, screenshot resolution, visual effect, game volume, aspect ratio (16:9, 4:3 or stretched), 4:3 borders, window size, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution, the game volume and the 4:3 border can also be changed while playing, in the [in-game menu](#in-game-menu).
+- **Settings:** CPU core, graphics backend (Vulkan or OpenGL; on Windows also Direct3D 11 and 12, and the launcher suggests another one if the chosen backend can't start), internal resolution, screenshot resolution, visual effect, game volume, aspect ratio (16:9, 4:3, stretched, or an experimental ultrawide view for 21:9 screens, where the race is shown wider and menus and the HUD may look stretched), 4:3 borders, window size, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution, the game volume and the 4:3 border can also be changed while playing, in the [in-game menu](#in-game-menu).
 - **Window size** (Settings → Display) is the game window's size when it isn't fullscreen. **Automatic**, the default, fits it to your screen: a 16:9 window about 85% of the primary monitor, in its middle. 960x540 to 2560x1440 are fixed sizes; one that doesn't fit your screen becomes the automatic one. How sharp the game looks is the internal resolution, not the window size: a small window with a high internal resolution looks very sharp.
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
 - **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
@@ -475,7 +477,7 @@ The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py`
 
 ### In-game menu
 
-While playing, press **M** on the keyboard or **Guide / Home** on the gamepad (the **Menu** button of the SR-ZGS controller) to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); M or Guide again closes it. The line at the bottom of the menu shows those buttons as your controller prints them (Xbox's A and B, PlayStation's cross and circle, a Nintendo pad's B and A), or as keyboard keys if the keyboard was the last thing you pressed; if you remap A or B in your controller profile, it shows the new ones.
+While playing, press **M** on the keyboard, or **Guide / Home** or **Select** (View, Share, −, ⧉) on the gamepad (the **Menu** and **−** buttons of the SR-ZGS controller), to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); the same button again closes it. The line at the bottom of the menu shows those buttons as your controller prints them (Xbox's A and B, PlayStation's cross and circle, a Nintendo pad's B and A), or as keyboard keys if the keyboard was the last thing you pressed; if you remap A or B in your controller profile, it shows the new ones.
 
 - **Continue** goes back to the game.
 - **Quick settings** change the visual effect, the internal resolution, the game's volume and, when the game is in 4:3, the border. Choose a row and press left or right (A goes round the choices): the change shows at once, even with the game paused, and the launcher keeps it for next time.

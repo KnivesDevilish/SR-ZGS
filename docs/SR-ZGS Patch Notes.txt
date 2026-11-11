@@ -1,4 +1,15 @@
 [en]
+# 0.1.1
+Fixes from the first reports. Thank you for them!
+
+- Windows: the game window no longer has a File/View bar or a white border, in a window or in fullscreen
+- SR-ZGS has its own icon: on Windows on the programs, their windows and the taskbar, and on the launcher's window on Linux
+- Windows: Direct3D 11 and Direct3D 12 in Settings, for graphics cards or drivers without Vulkan
+- If the graphics backend can't start, the launcher says so and suggests choosing another one
+- The in-game menu also opens with Select (View on Xbox and Steam Deck, Share on PlayStation, − on Nintendo), for when Steam or the Xbox Game Bar takes the Guide button
+- Steam Deck (Game Mode): the game reads the controller even when it isn't told it has the focus, and its log lists the controllers it sees
+- New experimental Ultrawide aspect ratio for 21:9 screens: the race is shown wider instead of stretched
+
 # 0.1.0
 First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilation running on ModernGekko. Play with your own legally obtained copy of the game.
 
@@ -19,6 +30,17 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Builds for Linux and, still experimental, for Windows
 
 [es]
+# 0.1.1
+Arreglos de los primeros reportes. ¡Gracias por ellos!
+
+- Windows: la ventana del juego ya no tiene la barra File/View ni el borde blanco, en ventana ni en pantalla completa
+- SR-ZGS tiene su propio icono: en Windows en los programas, sus ventanas y la barra de tareas, y en la ventana del launcher en Linux
+- Windows: Direct3D 11 y Direct3D 12 en Ajustes, para tarjetas gráficas o drivers sin Vulkan
+- Si el motor gráfico no puede iniciarse, el launcher lo dice y sugiere elegir otro
+- El menú del juego también se abre con Select (View en Xbox y Steam Deck, Share en PlayStation, − en Nintendo), para cuando Steam o la Xbox Game Bar se quedan con el botón Guide
+- Steam Deck (modo juego): el juego lee el mando aunque no le digan que tiene el foco, y su registro anota los mandos que ve
+- Nueva relación de aspecto Ultrapanorámica experimental para pantallas 21:9: la carrera se ve más ancha en vez de estirada
+
 # 0.1.0
 Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilación estática sobre ModernGekko. Juega con tu propia copia del juego obtenida legalmente.
 
@@ -39,6 +61,17 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Builds para Linux y, todavía experimental, para Windows
 
 [ja]
+# 0.1.1
+最初の報告をもとにした修正です。報告ありがとうございます！
+
+- Windows：ゲームのウィンドウにFile/Viewのバーと白い枠が出なくなりました（ウィンドウ表示でもフルスクリーンでも）
+- SR-ZGS専用のアイコン：Windowsではプログラム、ウィンドウ、タスクバーに、Linuxではランチャーのウィンドウに表示されます
+- Windows：設定にDirect3D 11とDirect3D 12を追加（Vulkanに対応していないグラフィックカードやドライバー向け）
+- グラフィックバックエンドを開始できないとき、ランチャーがそれを伝えて別のものを選ぶよう案内します
+- ゲーム内メニューはSelect（XboxとSteam DeckのView、PlayStationのShare、Nintendoの−）でも開けます。SteamやXbox Game BarがGuideボタンを使ってしまう場合に便利です
+- Steam Deck（ゲームモード）：フォーカスが伝わらなくてもコントローラーを読み取り、認識したコントローラーをログに記録します
+- 21:9画面向けの試験的なウルトラワイド表示を追加：レースを引き伸ばさずに広く表示します
+
 # 0.1.0
 SR-ZGSの最初の公開版です。Sonic Riders: Zero GravityをModernGekko上で静的再コンパイルして動かしています。正規に入手したご自身のゲームでプレイしてください。
 

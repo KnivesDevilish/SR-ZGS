@@ -3,7 +3,7 @@ name: Release
 # Builds SR-ZGS for Linux and Windows on GitHub's machines and packs each with
 # tools/package_release.sh (no game files: players extract their own copy).
 #
-# - Pushing a version tag (git tag v0.1.0 && git push origin v0.1.0) builds
+# - Pushing a version tag (git tag v0.1.1 && git push origin v0.1.1) builds
 #   both and puts them in a DRAFT release, with the patch notes, to check and
 #   publish by hand on the Releases page.
 # - "Run workflow" on the Actions tab only builds them: the packages are the
@@ -128,7 +128,8 @@ jobs:
           path: dist
           merge-multiple: true
 
-      # The release text: the patch notes in English and Spanish.
+      # The release text: the newest version's patch notes, in English and
+      # Spanish.
       - name: Write the release notes
         shell: bash
         run: |
@@ -138,7 +139,7 @@ jobs:
             echo
             echo "**Linux:** extract the .tar.gz and run \`./SR-ZGS\`. **Windows (experimental):** extract the .zip and open \`SR-ZGS.exe\`."
             echo
-            awk '/^\[en\]/ {found=1; next} /^\[/ {found=0} found' "$notes" | sed 's/^# /### /'
+            awk '/^\[en\]/ {found=1; next} /^\[/ {found=0} found && /^# / {heading++} found && heading == 1' "$notes" | sed 's/^# /### /'
             echo
             echo "---"
             echo
@@ -146,7 +147,7 @@ jobs:
             echo
             echo "**Linux:** extrae el .tar.gz y ejecuta \`./SR-ZGS\`. **Windows (experimental):** extrae el .zip y abre \`SR-ZGS.exe\`."
             echo
-            awk '/^\[es\]/ {found=1; next} /^\[/ {found=0} found' "$notes" | sed 's/^# /### /'
+            awk '/^\[es\]/ {found=1; next} /^\[/ {found=0} found && /^# / {heading++} found && heading == 1' "$notes" | sed 's/^# /### /'
           } > release-notes.md
           cat release-notes.md
 
