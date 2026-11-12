@@ -1,0 +1,33 @@
+# The game selection screen that PLAY opens when the launcher plays more than
+# one game (ModernGekko's tools/launcher_game_select.hpp). Sizes and places
+# are pixels of the art's canvas; each picture is cut to what it shows and
+# placed with its top left corner at x y.
+
+# The whole art, and the game shown in each half (by disc ID).
+canvas 1920 1333
+left GXEE8P
+right RS9E8P
+
+# Where the left half's picture ends and the right half's starts.
+halves 930 938
+
+# The divider's teeth: the left ones' tip and valley, the right ones' valley
+# and tip, and how far apart two teeth are.
+teeth 815 866 950 1000 80
+
+# The frame's black band along the bottom (its top and bottom), and where the
+# button hints end, before the frame's cut corner.
+band 1294 1333 1835
+
+# The pictures: name, file, x, y.
+picture frame frame.png 0 0
+picture left-background left-background.png 0 0
+picture left-character left-character.png 0 104
+picture left-logo left-logo.png 65 974
+picture right-background right-background.png 938 0
+picture right-character right-character.png 938 0
+picture right-logo right-logo.png 1089 944
+
+# The title along the divider and the button hints (Japanese takes the
+# launcher's own Japanese font).
+font Teko-Bold.ttf
