@@ -58,7 +58,8 @@ Requires your own legally obtained copy of the game.
 - [x] SR-ZGS launcher with Netplay lobby, music, patch notes and update check (English, Spanish and Japanese).
 - [x] In-game menu with quick settings, the controls, screenshots and visual effects.
 - [x] First public release (0.1.0) for Linux, and for Windows as an experimental build.
-- [x] 0.1.1: fixes from the first reports (Windows window and icon, Direct3D, menu button); Steam Deck controls under testing.
+- [x] 0.1.1: fixes from the first reports (Windows window and icon, Direct3D, menu button).
+- [x] 0.1.2: Steam Deck controls, a gamepad that stands in for a missing one, and Netplay help (firewall, logs, same-house play).
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -188,7 +189,7 @@ SR-ZGS is currently in an experimental development stage.
 
 - **Linux:** Current development and testing platform. Tested on Bazzite Linux with Wayland.
 - **Windows:** Each release includes a Windows build, made by GitHub Actions. The first reports say it runs well; it is still marked **experimental** until it gets more testing, so reports are very welcome. If Vulkan doesn't start on your PC, choose **Direct3D 11** in **Settings**.
-- **Steam Deck:** Add SR-ZGS (`SR-ZGS` from the Linux download) as a non-Steam game. The Steam button never reaches the game, so open the in-game menu with **⧉** (View).
+- **Steam Deck:** Add SR-ZGS (`SR-ZGS` from the Linux download) as a non-Steam game. The Steam button never reaches the game, so open the in-game menu with **⧉** (View). Since 0.1.2 the game reads the Deck's own controls when it doesn't find the controller the launcher chose: Steam shows them to the launcher and to the game under different names.
 - **Android:** Long-term development target. No working Android build is currently provided.
 
 For detailed hardware specifications, graphics settings, CPU execution modes and performance results, see [TESTING.md](docs/TESTING.md).
@@ -204,8 +205,8 @@ Ready-to-play builds are on the [Releases](https://github.com/KnivesDevilish/SR-
 **Linux** (`SR-ZGS-<version>-linux-x86_64.tar.gz`):
 
 ```bash
-tar -xzf SR-ZGS-0.1.1-linux-x86_64.tar.gz
-cd SR-ZGS-0.1.1-linux-x86_64
+tar -xzf SR-ZGS-0.1.2-linux-x86_64.tar.gz
+cd SR-ZGS-0.1.2-linux-x86_64
 ./SR-ZGS
 ```
 
@@ -427,15 +428,15 @@ The SR-ZGS controller drawing also has three extra buttons that the GameCube con
 
 The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the game's controller ignores. **Menu** and **−** open the [in-game menu](#in-game-menu) (− too because Steam, the Xbox Game Bar and the Steam Deck often take the Guide button before the game sees it); C is kept for SR-ZGS features and mods later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
 
-On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Without any gamepad, the launcher writes the profile for the keyboard alone (**Controls** shows *Keyboard only*); a gamepad connected later is added to the same profile and the keys keep working. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth); when the configured one is missing and exactly one other gamepad is connected, the launcher switches the profile to it and keeps the mapping.
+On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Without any gamepad, the launcher writes the profile for the keyboard alone (**Controls** shows *Keyboard only*); a gamepad connected later is added to the same profile and the keys keep working. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth, or Steam's virtual gamepad on a Steam Deck); when the configured one is missing and another gamepad is connected, the launcher switches the profile to the first one and keeps the mapping. The game does the same on its own: when the profile's gamepad isn't connected (or the profile is for the keyboard alone), it reads the first connected gamepad that no other player uses, as it starts and whenever a gamepad is plugged in or out, and notes it in `Logs/ModernGekko.log`; the profile itself stays as it was.
 
 ### Making a Release
 
 `.github/workflows/release.yml` builds the Linux and Windows packages on GitHub's machines with `tools/build_tools.sh --chassis` (without DolRecomp: `SRZGS_SKIP_DOLRECOMP=1`) and `tools/package_release.sh`. Run it from the repository's **Actions** tab (**Release → Run workflow**) to get both packages as the run's artifacts, or push a tag that matches `project(SR_ZGS VERSION ...)` in `CMakeLists.txt` to also get a draft release with them and the patch notes:
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.1.2
+git push origin v0.1.2
 ```
 
 `tools/package_release.sh` also packs a local build: after `tools/build_tools.sh --chassis` it writes `dist/SR-ZGS-<version>-linux-<arch>.tar.gz` and its `.sha256`. It never packs game files or the StaticRecomp module.
@@ -527,6 +528,23 @@ Netplay lets up to four players race together. On the launcher's **PLAY** page, 
 Every player needs the same SR-ZGS release and the same game files. Everyone plays with the host's CPU core and the host's 16:9 or 4:3 choice; JIT64 is recommended, especially when players are on different systems.
 
 Netplay is part of the experimental build and has had limited testing so far.
+
+### If your friends can't connect
+
+- **Same release:** everyone needs the same SR-ZGS version (the launcher's **Credits** page and the patch notes show it). Linux and Windows players can play together.
+- **In the same house:** use **Direct IP** with the address the host's lobby shows under **At home** (the first one, when there are several). Invite codes go out to the internet and back, which many routers don't allow between two computers behind them.
+- **The host's firewall** has to let the game in:
+  - **Windows:** the first time someone hosts, Windows asks whether to allow `moderngekko-run`: tick **Private** and **Public** networks and choose **Allow**. If the question was closed or missed, press **Allow the game in the Windows firewall** in **Host Netplay**; Windows asks for permission once. By hand: **Windows Security → Firewall & network protection → Allow an app through firewall → Change settings**, tick **Private** and **Public** for `moderngekko-run` (or add `moderngekko-run.exe` from the SR-ZGS folder with **Allow another app...**).
+  - **Linux:** when the system has a firewall (firewalld on Fedora, Bazzite and others; ufw on Ubuntu, Linux Mint and others), open the UDP port, 2626 by default. Run it on the system itself, not inside a Distrobox or Toolbx container:
+
+    ```bash
+    # firewalld (Fedora, Bazzite...)
+    sudo firewall-cmd --permanent --add-port=2626/udp && sudo firewall-cmd --reload
+    # ufw (Ubuntu, Linux Mint...)
+    sudo ufw allow 2626/udp
+    ```
+- **From different houses:** invite codes need both internet connections to allow them; mobile data and some internet providers (with CGNAT) don't. If codes keep failing, everyone can join the same [Tailscale](https://tailscale.com/) network and connect with **Direct IP** to the host's **Internet (Tailscale)** address.
+- **Reports:** after a failed attempt, `Logs/ModernGekko.log` in the user directory says why: whether the invite server answered, how long the connection was tried and the host's addresses (a public address is left out). Attach the log of the host and of the player who couldn't join.
 
 ---
 

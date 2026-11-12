@@ -1,4 +1,16 @@
 [en]
+# 0.1.2
+Controller and Netplay fixes.
+
+- Steam Deck: the game reads the Deck's own controls when it doesn't find the controller the launcher chose (Steam shows them to each under a different name)
+- When the profile's controller isn't connected, the game plays with the first one that is, and switches back when yours returns; the launcher does the same with two or more controllers
+- A profile made with only the keyboard also takes the controller you connect later, in the game too
+- Netplay: the host's lobby shows first the At home address your friends at home can reach
+- Netplay on Windows: Host Netplay can let the game through the Windows firewall, which often blocks friends from connecting
+- Netplay on Linux: Host Netplay says when a firewall may need the UDP port opened, and the README shows how
+- Clearer Netplay errors: in the same house, Direct IP with the At home address works where invite codes often fail
+- The log (Logs/ModernGekko.log) now says the SR-ZGS version and, after Netplay fails, why: attach it to your reports
+
 # 0.1.1
 Fixes from the first reports. Thank you for them!
 
@@ -30,6 +42,18 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Builds for Linux and, still experimental, for Windows
 
 [es]
+# 0.1.2
+Arreglos de mandos y de Netplay.
+
+- Steam Deck: el juego lee los controles de la propia Deck cuando no encuentra el mando que eligió el launcher (Steam se lo muestra a cada uno con otro nombre)
+- Si el mando del perfil no está conectado, el juego usa el primero que sí lo esté, y vuelve al tuyo cuando lo conectas; el launcher hace lo mismo con dos o más mandos
+- Un perfil hecho solo con el teclado también toma el mando que conectes después, también dentro del juego
+- Netplay: la sala del anfitrión muestra primero la dirección En casa que tus amigos de casa pueden alcanzar
+- Netplay en Windows: Crear Netplay puede dejar pasar el juego por el firewall de Windows, que a menudo impide conectarse a tus amigos
+- Netplay en Linux: Crear Netplay avisa cuando un firewall puede necesitar el puerto UDP abierto, y el README explica cómo
+- Errores de Netplay más claros: en la misma casa, IP directa con la dirección En casa funciona donde los códigos de invitación suelen fallar
+- El registro (Logs/ModernGekko.log) ahora dice la versión de SR-ZGS y, si Netplay falla, por qué: adjúntalo a tus reportes
+
 # 0.1.1
 Arreglos de los primeros reportes. ¡Gracias por ellos!
 
@@ -61,6 +85,18 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Builds para Linux y, todavía experimental, para Windows
 
 [ja]
+# 0.1.2
+コントローラーとネットプレイの修正です。
+
+- Steam Deck：ランチャーが選んだコントローラーが見つからないとき、ゲームはDeck本体の操作を読み取ります（Steamがそれぞれに別の名前で見せるため）
+- プロファイルのコントローラーが接続されていないときは、接続されている最初のコントローラーで遊べます。元のコントローラーをつなぐと戻ります。ランチャーもコントローラーが2台以上のとき同じようにします
+- キーボードだけで作ったプロファイルも、あとからつないだコントローラーを使います（ゲーム内でも）
+- ネットプレイ：ホストのロビーは、家の友達が接続できる「自宅」のアドレスを最初に表示します
+- Windowsのネットプレイ：「ネットプレイを作成」から、友達の接続を妨げることが多いWindowsのファイアウォールでゲームを許可できます
+- Linuxのネットプレイ：ファイアウォールでUDPポートを開く必要がありそうなときは「ネットプレイを作成」が知らせます。方法はREADMEにあります
+- わかりやすくなったネットプレイのエラー：同じ家の中では、招待コードがよく失敗する場面でも「自宅」のアドレスでのIP直接接続なら接続できます
+- ログ（Logs/ModernGekko.log）にSR-ZGSのバージョンと、ネットプレイが失敗したときの理由が記録されます。報告に添付してください
+
 # 0.1.1
 最初の報告をもとにした修正です。報告ありがとうございます！
 
