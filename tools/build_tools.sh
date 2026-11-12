@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # =============================================================================
-# SR:ZGS - build the external tools from the pinned ModernGekko submodule.
+# Sonic Riders: Source (SR-Source) - build the external tools from the pinned
+# ModernGekko submodule.
 #
 #   tools/build_tools.sh            DolRecomp only (fast; all recompile.sh needs)
 #   tools/build_tools.sh --chassis  also the ModernGekko runner (heavy: builds Dolphin)
@@ -58,40 +59,45 @@ if [[ "${1:-}" == "--chassis" ]]; then
   fi
 
   # The launcher shows this version and compares it with the newest release
-  # published on GitHub: the one in project(SR_ZGS VERSION ...) of CMakeLists.txt.
-  SRZGS_VERSION="$(awk '/^project\(SR_ZGS/ {found=1} found && $1 == "VERSION" {print $2; exit}' \
+  # published on GitHub: the one in project(SR_SOURCE VERSION ...) of CMakeLists.txt.
+  SRZGS_VERSION="$(awk '/^project\(SR_SOURCE/ {found=1} found && $1 == "VERSION" {print $2; exit}' \
     "$ROOT/CMakeLists.txt")"
   [[ "$SRZGS_VERSION" =~ ^[0-9]+(\.[0-9]+){0,3}$ ]] \
-    || die "can't read the version from project(SR_ZGS VERSION ...) in CMakeLists.txt"
+    || die "can't read the version from project(SR_SOURCE VERSION ...) in CMakeLists.txt"
 
+  # The Netplay lobby has no portrait beside it: MODERNGEKKO_LOBBY_ART is
+  # passed empty so a build folder made before forgets the one it had.
   echo "Building the chassis with $JOBS jobs. This compiles Dolphin's core: expect a long build."
   cmake -S "$MG" -B "$ROOT/build/chassis" -G Ninja \
         -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DDOLRECOMP_ENABLE_LLVM=OFF \
         ${CHASSIS_CMAKE_ARGS:-} \
-        -DMODERNGEKKO_FRONTEND_NAME="Sonic Riders: Zero Gravity Source" \
-        -DMODERNGEKKO_LAUNCHER_OUTPUT_NAME="SR-ZGS" \
+        -DMODERNGEKKO_FRONTEND_NAME="Sonic Riders: Source" \
+        -DMODERNGEKKO_LAUNCHER_TITLE="Riders Terminal" \
+        -DMODERNGEKKO_PUBLISHER="KnivesDevilish" \
+        -DMODERNGEKKO_LAUNCHER_OUTPUT_NAME="SR-Source" \
         -DMODERNGEKKO_REQUIRED_DISC_ID="RS9E8P" \
-        -DMODERNGEKKO_GAMES="RS9E8P=Sonic Riders: Zero Gravity Source;GXEE8P=Sonic Riders: Source" \
-        -DMODERNGEKKO_DEFAULT_WINDOW_TITLE="Sonic Riders: Zero Gravity Source" \
-        -DMODERNGEKKO_USER_DIRECTORY_NAME="sr-zgs" \
-        -DMODERNGEKKO_LAUNCHER_BANNER="$ROOT/docs/SR-ZGS Artwork.png" \
-        -DMODERNGEKKO_LAUNCHER_CONTROLLER_ART="$ROOT/docs/SR-ZGS Controller.png" \
-        -DMODERNGEKKO_LAUNCHER_KEYBOARD_ART="$ROOT/docs/SR-ZGS Keyboard.png" \
-        -DMODERNGEKKO_LAUNCHER_MODS_ART="$ROOT/docs/SR-ZGS Mods.png" \
-        -DMODERNGEKKO_LOBBY_ART="$ROOT/docs/SR-ZGS Lobby.png" \
-        -DMODERNGEKKO_LAUNCHER_BACKGROUND="$ROOT/docs/SR-ZGS Background.png" \
-        -DMODERNGEKKO_LAUNCHER_MUSIC="$ROOT/docs/SR-ZGS Launcher Track.mp3" \
-        -DMODERNGEKKO_LOBBY_MUSIC="$ROOT/docs/SR-ZGS NetworkBattle Track.mp3" \
-        -DMODERNGEKKO_LOBBY_BACKGROUND="$ROOT/docs/SR-ZGS Netplay Background.png" \
-        -DMODERNGEKKO_APP_ICON="$ROOT/docs/SR-ZGS Icon.png" \
-        -DMODERNGEKKO_APP_ICON_ICO="$ROOT/docs/SR-ZGS Icon.ico" \
-        -DMODERNGEKKO_LAUNCHER_PATCH_NOTES="$ROOT/docs/SR-ZGS Patch Notes.txt" \
+        -DMODERNGEKKO_GAMES="RS9E8P=Sonic Riders: Zero Gravity;GXEE8P=Sonic Riders" \
+        -DMODERNGEKKO_DEFAULT_WINDOW_TITLE="Sonic Riders: Source" \
+        -DMODERNGEKKO_USER_DIRECTORY_NAME="sr-source" \
+        -DMODERNGEKKO_PREVIOUS_USER_DIRECTORY_NAMES="sr-zgs" \
+        -DMODERNGEKKO_LAUNCHER_BANNER="$ROOT/docs/SR-Source Artwork.png" \
+        -DMODERNGEKKO_LAUNCHER_CONTROLLER_ART="$ROOT/docs/SR-Source Controller.png" \
+        -DMODERNGEKKO_LAUNCHER_KEYBOARD_ART="$ROOT/docs/SR-Source Keyboard.png" \
+        -DMODERNGEKKO_LAUNCHER_MODS_ART="$ROOT/docs/SR-Source Mods.png" \
+        -DMODERNGEKKO_LOBBY_ART="" \
+        -DMODERNGEKKO_LAUNCHER_BACKGROUND="$ROOT/docs/SR-Source Background.png" \
+        -DMODERNGEKKO_LAUNCHER_MUSIC="$ROOT/docs/SR-Source Launcher Track.mp3" \
+        -DMODERNGEKKO_LOBBY_MUSIC="$ROOT/docs/SR-Source NetworkBattle Track.mp3" \
+        -DMODERNGEKKO_LOBBY_BACKGROUND="$ROOT/docs/SR-Source Netplay Background.png" \
+        -DMODERNGEKKO_APP_ICON="$ROOT/docs/SR-Source Icon.png" \
+        -DMODERNGEKKO_APP_ICON_ICO="$ROOT/docs/SR-Source Icon.ico" \
+        -DMODERNGEKKO_LAUNCHER_PATCH_NOTES="$ROOT/docs/SR-Source Patch Notes.txt" \
         -DMODERNGEKKO_GAME_BORDERS="$ROOT/docs/borders" \
         -DMODERNGEKKO_COMPLETE_SAVE="$ROOT/docs/complete-save" \
         -DMODERNGEKKO_GAME_SELECT="$ROOT/docs/game-select" \
-        -DMODERNGEKKO_SCREENSHOT_NAME="SR-ZGS" \
+        -DMODERNGEKKO_SCREENSHOT_NAME="SR-Source" \
         -DMODERNGEKKO_FRONTEND_VERSION="$SRZGS_VERSION" \
-        -DMODERNGEKKO_UPDATE_REPOSITORY="KnivesDevilish/SR-ZGS" \
+        -DMODERNGEKKO_UPDATE_REPOSITORY="KnivesDevilish/SR-Source" \
         -DMODERNGEKKO_GAMECUBE_CONTROLLERS=ON \
         -DMODERNGEKKO_SAVESTATES=OFF \
         -DMODERNGEKKO_WINDOW_MENU=OFF
@@ -108,9 +114,9 @@ if [[ "${1:-}" == "--chassis" ]]; then
   [[ -d "$RUNNER_DIR/Sys" ]] || die "Sys/ was not copied next to the runner"
 
   LAUNCHER="$(find "$ROOT/build/chassis" -type f \
-    -name "SR-ZGS$EXE" "${EXECUTABLE[@]}" -print -quit)"
+    -name "SR-Source$EXE" "${EXECUTABLE[@]}" -print -quit)"
 
-  [[ -n "$LAUNCHER" ]] || die "build finished but SR-ZGS launcher is missing"
+  [[ -n "$LAUNCHER" ]] || die "build finished but SR-Source launcher is missing"
 
   echo "Runner:    $RUNNER"
   echo "Launcher:  $LAUNCHER (version $SRZGS_VERSION)"

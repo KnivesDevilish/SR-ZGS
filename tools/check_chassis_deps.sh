@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# SR:ZGS - check the system packages the ModernGekko chassis needs BEFORE a
+# SR-Source - check the system packages the ModernGekko chassis needs BEFORE a
 # build that takes the better part of an hour. Derived from the chassis CMake:
 #   * X11 input (xi >= 1.5) is a hard requirement once X11 is found.
 #   * wayland-client enables the Wayland path, which then hard-requires

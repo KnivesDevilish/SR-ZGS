@@ -39,11 +39,11 @@ add_dependencies(srzgs_stage ${SRZGS_MODULE_TARGET})
 # Outside the repo so `rm -rf build` never deletes saves, and separate from any
 # other ModernGekko-based game on the machine.
 if(WIN32)
-  set(_srzgs_default_user "$ENV{LOCALAPPDATA}/SR-ZGS")
+  set(_srzgs_default_user "$ENV{LOCALAPPDATA}/sr-source")
 elseif(NOT "$ENV{XDG_DATA_HOME}" STREQUAL "")
-  set(_srzgs_default_user "$ENV{XDG_DATA_HOME}/sr-zgs")
+  set(_srzgs_default_user "$ENV{XDG_DATA_HOME}/sr-source")
 else()
-  set(_srzgs_default_user "$ENV{HOME}/.local/share/sr-zgs")
+  set(_srzgs_default_user "$ENV{HOME}/.local/share/sr-source")
 endif()
 set(SRZGS_USER_DIR "${_srzgs_default_user}" CACHE PATH "Runtime user directory")
 set(SRZGS_RUN_ARGS "" CACHE STRING

@@ -1,5 +1,5 @@
 # =============================================================================
-# src/core - SR:ZGS' own code that runs inside the game module.
+# src/core - SR-Source's own code that runs inside the game module.
 #
 # Phase 1 scope is deliberately tiny. Memory, CPU state, scheduling and the OS
 # services all live in the ModernGekko chassis; what belongs HERE is the

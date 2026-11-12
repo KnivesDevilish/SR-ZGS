@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# SR:ZGS - check everything the runner needs BEFORE launching, so a first boot
+# SR-Source - check everything the runner needs BEFORE launching, so a first boot
 # fails with a clear sentence instead of a runtime error.
 #
 #   tools/preflight.sh [game_root] [module.so]

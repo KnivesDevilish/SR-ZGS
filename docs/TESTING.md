@@ -1,6 +1,6 @@
-# SR-ZGS — Testing Documentation
+# SR-Source — Testing Documentation
 
-This document records the hardware, software, build environment, dependency revisions, graphics configuration and testing results used during SR-ZGS development.
+This document records the hardware, software, build environment, dependency revisions, graphics configuration and testing results used during SR-Source development.
 
 Its purpose is to provide a reference configuration for future compatibility testing and performance comparisons. Values that have not been independently recorded are identified as such rather than estimated.
 
@@ -42,7 +42,7 @@ Its purpose is to provide a reference configuration for future compatibility tes
 
 ## 2. Build Environment
 
-SR-ZGS is compiled inside a Distrobox container named `my-distrobox`. The game is run and tested on the Bazzite host system.
+SR-Source is compiled inside a Distrobox container named `my-distrobox`. The game is run and tested on the Bazzite host system.
 
 The container provides the development toolchain separately from the host operating system.
 
@@ -90,7 +90,7 @@ The following Git revisions were present in the tested development environment w
 
 DolRecomp is included as a nested Git submodule inside the Dolphin dependency bundled with ModernGekko.
 
-The SR-ZGS build script compiles DolRecomp directly from:
+The SR-Source build script compiles DolRecomp directly from:
 
 ```text
 external/ModernGekko/vendor/dolphin/DolRecomp/
@@ -125,7 +125,7 @@ MODERNGEKKO_STATICRECOMP=0
 
 This is an observed result from a specific hardware and software configuration, not a universal performance guarantee.
 
-SR-ZGS also supports testing ModernGekko's StaticRecomp CPU execution path:
+SR-Source also supports testing ModernGekko's StaticRecomp CPU execution path:
 
 ```bash
 MODERNGEKKO_STATICRECOMP=1
@@ -172,12 +172,12 @@ The following settings were copied from the configuration files provided for the
 | Setting | Value |
 |---|---|
 | Host Display Resolution | 1920 × 1080 |
-| SR-ZGS Configured Resolution | 640 × 528 |
+| SR-Source Configured Resolution | 640 × 528 |
 | Graphics Backend | Vulkan |
 | Fullscreen | Disabled |
 | V-Sync | Disabled |
 
-The host display resolution and the configured SR-ZGS resolution are separate values. The 640 × 528 value comes from the application's video configuration and should not be interpreted as the host monitor resolution.
+The host display resolution and the configured SR-Source resolution are separate values. The 640 × 528 value comes from the application's video configuration and should not be interpreted as the host monitor resolution.
 
 ### Graphics Settings
 
@@ -252,7 +252,7 @@ Each new test should record the exact dependency revisions used so that performa
 
 ---
 
-**Project:** Sonic Riders: Zero Gravity — Static Recompilation (SR-ZGS)  
+**Project:** Sonic Riders: Source (SR-Source, formerly SR-Source)  
 **Primary Development Platform:** Bazzite Linux  
 **Build Environment:** Distrobox (`my-distrobox`)  
 **Current Runtime:** ModernGekko (Dolphin-derived)

@@ -1,6 +1,6 @@
 name: Release
 
-# Builds SR-ZGS for Linux and Windows on GitHub's machines and packs each with
+# Builds Sonic Riders: Source (SR-Source) for Linux and Windows on GitHub's machines and packs each with
 # tools/package_release.sh (no game files: players extract their own copy).
 #
 # - Pushing a version tag (git tag v0.1.1 && git push origin v0.1.1) builds
@@ -49,12 +49,12 @@ jobs:
       - name: Initialize nested submodules
         run: git submodule update --init --recursive --force
 
-      # A tag must be the version the launcher shows (project(SR_ZGS VERSION)).
+      # A tag must be the version the launcher shows (project(SR_SOURCE VERSION)).
       - name: Check the version
         if: startsWith(github.ref, 'refs/tags/v')
         shell: bash
         run: |
-          version="$(awk '/^project\(SR_ZGS/ {found=1} found && $1 == "VERSION" {print $2; exit}' CMakeLists.txt)"
+          version="$(awk '/^project\(SR_SOURCE/ {found=1} found && $1 == "VERSION" {print $2; exit}' CMakeLists.txt)"
           if [ "v$version" != "$GITHUB_REF_NAME" ]; then
             echo "::error::The tag is $GITHUB_REF_NAME but CMakeLists.txt says VERSION $version"
             exit 1
@@ -106,7 +106,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: SR-ZGS-${{ matrix.name }}
+          name: SR-Source-${{ matrix.name }}
           path: |
             dist/*.tar.gz
             dist/*.zip
@@ -133,19 +133,19 @@ jobs:
       - name: Write the release notes
         shell: bash
         run: |
-          notes="docs/SR-ZGS Patch Notes.txt"
+          notes="docs/SR-Source Patch Notes.txt"
           {
-            echo "Requires your own legally obtained copy of Sonic Riders: Zero Gravity (Wii, NTSC-U, RS9E8P). No game files are included."
+            echo "Plays Sonic Riders (GameCube, NTSC-U, GXEE8P) and Sonic Riders: Zero Gravity (Wii, NTSC-U, RS9E8P) from your own legally obtained copies. No game files are included."
             echo
-            echo "**Linux:** extract the .tar.gz and run \`./SR-ZGS\`. **Windows (experimental):** extract the .zip and open \`SR-ZGS.exe\`."
+            echo "**Linux:** extract the .tar.gz and run \`./SR-Source\`. **Windows (experimental):** extract the .zip and open \`SR-Source.exe\`."
             echo
             awk '/^\[en\]/ {found=1; next} /^\[/ {found=0} found && /^# / {heading++} found && heading == 1' "$notes" | sed 's/^# /### /'
             echo
             echo "---"
             echo
-            echo "Necesitas tu propia copia legal de Sonic Riders: Zero Gravity (Wii, NTSC-U, RS9E8P). No incluye archivos del juego."
+            echo "Juega Sonic Riders (GameCube, NTSC-U, GXEE8P) y Sonic Riders: Zero Gravity (Wii, NTSC-U, RS9E8P) con tus propias copias legales. No incluye archivos de los juegos."
             echo
-            echo "**Linux:** extrae el .tar.gz y ejecuta \`./SR-ZGS\`. **Windows (experimental):** extrae el .zip y abre \`SR-ZGS.exe\`."
+            echo "**Linux:** extrae el .tar.gz y ejecuta \`./SR-Source\`. **Windows (experimental):** extrae el .zip y abre \`SR-Source.exe\`."
             echo
             awk '/^\[es\]/ {found=1; next} /^\[/ {found=0} found && /^# / {heading++} found && heading == 1' "$notes" | sed 's/^# /### /'
           } > release-notes.md
@@ -154,7 +154,7 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           draft: true
-          name: SR-ZGS ${{ github.ref_name }}
+          name: "Sonic Riders: Source ${{ github.ref_name }}"
           body_path: release-notes.md
           files: |
             dist/*.tar.gz

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# SR:ZGS - recompile main.dol with DolRecomp and stage the result for CMake.
+# SR-Source - recompile main.dol with DolRecomp and stage the result for CMake.
 #
 #   game_assets/sys/main.dol --DolRecomp--> src/recompiled/<GAME_ID>/
 #       generated.h  generated_smc.txt  main.dol  chunks/*.c  <manifest>.c

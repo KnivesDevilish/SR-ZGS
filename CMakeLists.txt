@@ -1,5 +1,5 @@
 # =============================================================================
-# Sonic Riders: Zero Gravity Source (SR:ZGS) - primary build, Phase 1
+# Sonic Riders: Source (SR-Source) - primary build, Phase 1
 #
 # What this builds: ONE native game module, g<GAME_ID>_recomp.{so,dll}, made of
 #   src/recompiled/  DolRecomp output (generated, never edited, not in git)
@@ -14,9 +14,9 @@
 # =============================================================================
 cmake_minimum_required(VERSION 3.22)
 
-project(SR_ZGS
+project(SR_SOURCE
   VERSION 0.1.4
-  DESCRIPTION "Sonic Riders: Zero Gravity Source"
+  DESCRIPTION "Sonic Riders: Source"
   LANGUAGES C CXX)
 
 set(CMAKE_C_STANDARD 11)

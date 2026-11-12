@@ -32,7 +32,7 @@ picture right-logo right-logo.png 1089 944
 # launcher's own Japanese font).
 font Teko-Bold.ttf
 
-# The sounds, played over the launcher's music at its volume: made for SR-ZGS
+# The sounds, played over the launcher's music at its volume: made for SR-Source
 # (synthesized, no game audio), WAV, 16-bit.
 sound open open.wav
 sound move move.wav
@@ -42,7 +42,7 @@ sound back back.wav
 
 # The intros: after a few seconds on a game, its half plays parts of a video
 # from the player's own copy of that game (games/<disc ID>; nothing of the
-# games comes with SR-ZGS), cut and faded as SR-ZGS's preview clips: the
+# games comes with SR-Source), cut and faded as SR-Source's preview clips: the
 # video, its picture's shape, and the frames of each part, counted from 0, in
 # order.
 # Zero Gravity's video is inside Image3.cvm.

@@ -1,10 +1,15 @@
 <p align="center">
-  <img src="docs/SR-ZGS%20Artwork.png" alt="Sonic Riders: Zero Gravity Artwork" width="750">
+  <img src="docs/SR-Source%20Artwork.png" alt="Sonic Riders: Source Artwork" width="750">
 </p>
 
 <h1 align="center">
-  Sonic Riders: Zero Gravity — Static Recompilation
+  Sonic Riders: Source
 </h1>
+
+<p align="center">
+  <b>One source. Two riding experiences.</b><br>
+  Static recompilation of <i>Sonic Riders</i> (GameCube) and <i>Sonic Riders: Zero Gravity</i> (Wii). Formerly SR-ZGS.
+</p>
 
 <p align="center">
   <a href="LICENSE">
@@ -28,18 +33,18 @@
   <a href="#">
     <img src="https://img.shields.io/badge/Type-Static%20Recompilation-blueviolet" alt="Static Recompilation">
   </a>
-  <a href="https://github.com/KnivesDevilish/SR-ZGS/stargazers">
-  <img src="https://img.shields.io/github/stars/KnivesDevilish/SR-ZGS?style=flat&logo=github&color=yellow" alt="GitHub Stars">
+  <a href="https://github.com/KnivesDevilish/SR-Source/stargazers">
+  <img src="https://img.shields.io/github/stars/KnivesDevilish/SR-Source?style=flat&logo=github&color=yellow" alt="GitHub Stars">
   </a>
 </p>
 
 A modern static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii), with the long-term goal of delivering a high-performance native PC experience on Linux and Windows, with Android support as a future target.
 
-The project uses **DolRecomp** to generate native code from the original PowerPC game executable and a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and Wii hardware services. The fork also contains the SR-ZGS launcher and its Netplay lobby.
+The project uses **DolRecomp** to generate native code from the original PowerPC game executable and a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and Wii hardware services. The fork also contains the SR-Source launcher and its Netplay lobby.
 
-SR-ZGS aims to provide a clean, modular architecture that separates recompiled game logic, modding facilities, and hardware-agnostic platform interfaces, progressively reducing its reliance on existing emulation technology.
+SR-Source aims to provide a clean, modular architecture that separates recompiled game logic, modding facilities, and hardware-agnostic platform interfaces, progressively reducing its reliance on existing emulation technology.
 
-**Current Status:** SR-ZGS is an experimental hybrid static recompilation project. It still relies on ModernGekko for graphics, audio, input and system-level functionality. A fully independent native runtime is a long-term development goal.
+**Current Status:** SR-Source is an experimental hybrid static recompilation project. It still relies on ModernGekko for graphics, audio, input and system-level functionality. A fully independent native runtime is a long-term development goal.
 
 Requires your own legally obtained copy of the game.
 
@@ -55,7 +60,7 @@ Requires your own legally obtained copy of the game.
 - [x] Full game completion successfully tested using ModernGekko's JIT64 CPU core.
 - [x] 60 FPS observed during developer testing using JIT64.
 - [x] StaticRecomp execution path tested.
-- [x] SR-ZGS launcher with Netplay lobby, music, patch notes and update check (English, Spanish and Japanese).
+- [x] SR-Source launcher with Netplay lobby, music, patch notes and update check (English, Spanish and Japanese).
 - [x] In-game menu with quick settings, the controls, screenshots and visual effects.
 - [x] First public release (0.1.0) for Linux, and for Windows as an experimental build.
 - [x] 0.1.1: fixes from the first reports (Windows window and icon, Direct3D, menu button).
@@ -82,7 +87,7 @@ These results are specific to the tested hardware and configuration and should n
 
 ## 🐧 Architecture
 
-SR-ZGS currently consists of three main components:
+SR-Source currently consists of three main components:
 
 ### DolRecomp
 
@@ -99,18 +104,18 @@ ModernGekko is based on Dolphin technology and currently provides:
 - Controller and input handling.
 - Wii system-level functionality.
 
-SR-ZGS uses a modified fork of ModernGekko: [KnivesDevilish/ModernGekko](https://github.com/KnivesDevilish/ModernGekko), branch `knives/srzgs-launcher`, based on the original [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko) by Hyperway. The `external/ModernGekko/` submodule points to this fork. On top of the original runtime, the fork adds:
+SR-Source uses a modified fork of ModernGekko: [KnivesDevilish/ModernGekko](https://github.com/KnivesDevilish/ModernGekko), branch `knives/srzgs-launcher`, based on the original [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko) by Hyperway. The `external/ModernGekko/` submodule points to this fork. On top of the original runtime, the fork adds:
 
-- The SR-ZGS launcher (see [The SR-ZGS Launcher](#-the-sr-zgs-launcher)).
+- The SR-Source launcher (see [The SR-Source Launcher](#-the-sr-source-launcher)).
 - The Netplay lobby with invite codes (see [Netplay](#-netplay)).
-- GameCube controller profiles written for SR-ZGS, with a controller tester.
+- GameCube controller profiles written for SR-Source, with a controller tester.
 - Pictures in the bars beside a 4:3 game, chosen in the launcher (see [4:3 borders](#43-borders)).
 - The in-game menu, visual effects and high-resolution screenshots (see [In-game menu](#in-game-menu)).
 - Small runtime adjustments, such as hiding the runtime's on-screen messages and skipping redundant checks of the game files at startup.
 
 Like the original, the fork is licensed under the GNU GPL v3.
 
-### SR-ZGS integration
+### SR-Source integration
 
 The project's own code connects the generated module to ModernGekko.
 
@@ -132,10 +137,10 @@ The project does not yet provide its own independent renderer, audio backend or 
 
 ### Requirements
 
-- **Compiler:** C11-compatible C compiler and C++23-compatible C++ compiler (required by ModernGekko). The main SR-ZGS module uses C++20.
+- **Compiler:** C11-compatible C compiler and C++23-compatible C++ compiler (required by ModernGekko). The main SR-Source module uses C++20.
 - **Build System:** CMake 3.22+ and Ninja.
 - **Additional Tools:** Git and pkg-config.
-- **Recompilation Tools**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp) and the SR-ZGS fork of [ModernGekko](https://github.com/KnivesDevilish/ModernGekko) (based on [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko)).
+- **Recompilation Tools**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp) and the SR-Source fork of [ModernGekko](https://github.com/KnivesDevilish/ModernGekko) (based on [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko)).
   - Both come with the `external/ModernGekko/` submodule: DolRecomp is built from the revision ModernGekko pins, so nothing has to be downloaded separately.
 - **Game Assets**: A legally obtained NTSC-U copy of *Sonic Riders: Zero Gravity* (Wii, Game ID: `RS9E8P`), with its extracted game files.
 
@@ -143,7 +148,7 @@ The project does not yet provide its own independent renderer, audio backend or 
 
 ## 📝 Key Goals & Features
 
-The long-term objective is to make SR-ZGS progressively more independent from its current runtime.
+The long-term objective is to make SR-Source progressively more independent from its current runtime.
 
 Potential development areas include:
 
@@ -162,11 +167,11 @@ These are development goals, not features currently promised or available.
 The repository is organized as follows:
 
 ```text
-SR-ZGS/
+SR-Source/
 ├── database/
 ├── docs/                      # Launcher art, music, patch notes, 4:3 borders and test notes
 ├── external/
-│   └── ModernGekko/           # SR-ZGS fork of the Dolphin-derived runtime (submodule)
+│   └── ModernGekko/           # SR-Source fork of the Dolphin-derived runtime (submodule)
 ├── game_assets/               # User-provided game files (not distributed)
 ├── mods/                      # Reserved for future project mod support
 ├── src/
@@ -187,11 +192,11 @@ SR-ZGS/
 
 ## 💻 Platform Status
 
-SR-ZGS is currently in an experimental development stage.
+SR-Source is currently in an experimental development stage.
 
 - **Linux:** Current development and testing platform. Tested on Bazzite Linux with Wayland.
 - **Windows:** Each release includes a Windows build, made by GitHub Actions. The first reports say it runs well; it is still marked **experimental** until it gets more testing, so reports are very welcome. If Vulkan doesn't start on your PC, choose **Direct3D 11** in **Settings**.
-- **Steam Deck:** Add SR-ZGS (`SR-ZGS` from the Linux download) as a non-Steam game. The Steam button never reaches the game, so open the in-game menu with **⧉** (View). Since 0.1.2 the game reads the Deck's own controls when it doesn't find the controller the launcher chose: Steam shows them to the launcher and to the game under different names.
+- **Steam Deck:** Add SR-Source (`SR-Source` from the Linux download) as a non-Steam game. The Steam button never reaches the game, so open the in-game menu with **⧉** (View). Since 0.1.2 the game reads the Deck's own controls when it doesn't find the controller the launcher chose: Steam shows them to the launcher and to the game under different names.
 - **Android:** Long-term development target. No working Android build is currently provided.
 
 For detailed hardware specifications, graphics settings, CPU execution modes and performance results, see [TESTING.md](docs/TESTING.md).
@@ -202,29 +207,29 @@ This is an observed test result, not a universal performance guarantee. Actual p
 
 ## 📦 Downloading a Release
 
-Ready-to-play builds are on the [Releases](https://github.com/KnivesDevilish/SR-ZGS/releases) page. They contain the launcher and the runtime, never the game: you still need your own copy of the game as an ISO, WBFS or RVZ image (see [Required Game Copy](#required-game-copy)).
+Ready-to-play builds are on the [Releases](https://github.com/KnivesDevilish/SR-Source/releases) page. They contain the launcher and the runtime, never the game: you still need your own copy of the game as an ISO, WBFS or RVZ image (see [Required Game Copy](#required-game-copy)).
 
-**Linux** (`SR-ZGS-<version>-linux-x86_64.tar.gz`):
+**Linux** (`SR-Source-<version>-linux-x86_64.tar.gz`):
 
 ```bash
-tar -xzf SR-ZGS-0.1.2-linux-x86_64.tar.gz
-cd SR-ZGS-0.1.2-linux-x86_64
-./SR-ZGS
+tar -xzf SR-Source-0.1.2-linux-x86_64.tar.gz
+cd SR-Source-0.1.2-linux-x86_64
+./SR-Source
 ```
 
 It is built on Ubuntu 24.04, so it needs a distribution at least that recent (glibc 2.39 or newer), a graphics driver with Vulkan, and PulseAudio or PipeWire for the sound.
 
-**Windows** (`SR-ZGS-<version>-windows-x64.zip`, experimental): extract the whole zip to a folder of its own and open `SR-ZGS.exe`. It needs 64-bit Windows 10 or 11. The programs aren't signed, so Windows SmartScreen may warn the first time: choose **More info → Run anyway**.
+**Windows** (`SR-Source-<version>-windows-x64.zip`, experimental): extract the whole zip to a folder of its own and open `SR-Source.exe`. It needs 64-bit Windows 10 or 11. The programs aren't signed, so Windows SmartScreen may warn the first time: choose **More info → Run anyway**.
 
-In both, keep the folder's files together (the launcher starts `moderngekko-run` beside it). The first time, open **Game Files**, choose your disc image and press **Extract Game**; then press **PLAY**. Settings, saves, screenshots and logs go to the SR-ZGS user directory: `~/.local/share/sr-zgs` on Linux, `%LOCALAPPDATA%\sr-zgs` on Windows. Each package has a `.sha256` file to check the download.
+In both, keep the folder's files together (the launcher starts `moderngekko-run` beside it). The first time, open **Game Files**, choose your disc image and press **Extract Game**; then press **PLAY**. Settings, saves, screenshots and logs go to the SR-Source user directory: `~/.local/share/sr-source` on Linux, `%LOCALAPPDATA%\sr-source` on Windows. Each package has a `.sha256` file to check the download.
 
-The downloads play with the JIT64 CPU core. StaticRecomp needs the recompiled game module, which is made from your own copy of the game's code and therefore isn't distributed: build SR-ZGS from source to try it (see [Building & Getting Started](#-building--getting-started)).
+The downloads play with the JIT64 CPU core. StaticRecomp needs the recompiled game module, which is made from your own copy of the game's code and therefore isn't distributed: build SR-Source from source to try it (see [Building & Getting Started](#-building--getting-started)).
 
 ---
 
 ## 🚧 Game Asset Setup
 
-SR-ZGS does not distribute copyrighted game executables or assets. You must provide your own legally obtained copy of **Sonic Riders: Zero Gravity** for Nintendo Wii.
+SR-Source does not distribute copyrighted game executables or assets. You must provide your own legally obtained copy of **Sonic Riders: Zero Gravity** for Nintendo Wii.
 
 ### Required Game Copy
 
@@ -251,22 +256,22 @@ game_assets/
 The build configuration expects the extracted game root to contain both `sys/` and `files/`.
 
 > [!NOTE]
-> This repository does not provide or distribute any copyrighted game binaries or assets. You must extract the required game files from your own legally obtained copy, including `main.dol` and the required game data directories, to build and run SR-ZGS.
+> This repository does not provide or distribute any copyrighted game binaries or assets. You must extract the required game files from your own legally obtained copy, including `main.dol` and the required game data directories, to build and run SR-Source.
 
 ### Extracting with the Launcher
 
-The launcher's **Game Files** page can also extract the game. Select your ISO, WBFS or RVZ image and press **Extract Game**: the launcher checks that the disc is `RS9E8P` and extracts it once into the SR-ZGS user directory (`~/.local/share/sr-zgs/games/RS9E8P` on Linux, `%LOCALAPPDATA%\sr-zgs\games\RS9E8P` on Windows), where it is reused every time you play.
+The launcher's **Game Files** page can also extract the game. Select your ISO, WBFS or RVZ image and press **Extract Game**: the launcher checks that the disc is `RS9E8P` and extracts it once into the SR-Source user directory (`~/.local/share/sr-source/games/RS9E8P` on Linux, `%LOCALAPPDATA%\sr-source\games\RS9E8P` on Windows), where it is reused every time you play.
 
 **Complete save:** the **Game Files** page can also install a save with the whole game completed at 100%, everything unlocked. Play once first, until the game makes its own save; then press **Install complete save**. Your save is copied first to `SaveBackups/RS9E8P/` in the user directory, and **Restore my save** brings it back. The complete save is in `docs/complete-save/`: only the game's save data (`0_Games.sav`), without the save's `banner.bin`, which holds the game's own icon and banner; your game's save keeps the one it made.
 
 Building the recompiled code (step 3 below) reads `main.dol` from `game_assets/` by default. If you already extracted the game with the launcher, you can point the build at that copy instead of extracting it twice:
 
 ```bash
-ASSETS_DIR="$HOME/.local/share/sr-zgs/games/RS9E8P" bash tools/dolrecomp/recompile.sh
-cmake --preset quick -DSRZGS_GAME_ROOT="$HOME/.local/share/sr-zgs/games/RS9E8P"
+ASSETS_DIR="$HOME/.local/share/sr-source/games/RS9E8P" bash tools/dolrecomp/recompile.sh
+cmake --preset quick -DSRZGS_GAME_ROOT="$HOME/.local/share/sr-source/games/RS9E8P"
 ```
 
-`bash tools/preflight.sh "$HOME/.local/share/sr-zgs/games/RS9E8P"` checks that a folder has the expected layout and the same `main.dol` as the recompiled code.
+`bash tools/preflight.sh "$HOME/.local/share/sr-source/games/RS9E8P"` checks that a folder has the expected layout and the same `main.dol` as the recompiled code.
 
 ---
 
@@ -274,7 +279,7 @@ cmake --preset quick -DSRZGS_GAME_ROOT="$HOME/.local/share/sr-zgs/games/RS9E8P"
 
 ### Prerequisites
 
-SR-ZGS requires the following tools:
+SR-Source requires the following tools:
 
 - Git
 - CMake 3.22 or newer
@@ -286,7 +291,7 @@ Make sure these dependencies are installed in the environment where you intend t
 
 On Linux, `tools/build_tools.sh --chassis` checks the system libraries the runtime and the launcher need before it starts the long build, and prints the install command for Ubuntu/Debian and Fedora when something is missing. The launcher's music plays through PulseAudio (PipeWire's PulseAudio support works too).
 
-**Linux users:** You can build SR-ZGS directly on your distribution if the required dependencies are installed. Alternatively, you can use [Distrobox](https://distrobox.it/) to work inside a separate development environment.
+**Linux users:** You can build SR-Source directly on your distribution if the required dependencies are installed. Alternatively, you can use [Distrobox](https://distrobox.it/) to work inside a separate development environment.
 
 If you use Distrobox, enter your container before running the commands below. For example:
 
@@ -296,11 +301,11 @@ distrobox enter my-distrobox
 
 ### 1. Clone the Repository
 
-Clone SR-ZGS with all its required submodules:
+Clone SR-Source with all its required submodules:
 
 ```bash
-git clone --recursive https://github.com/KnivesDevilish/SR-ZGS.git
-cd SR-ZGS
+git clone --recursive https://github.com/KnivesDevilish/SR-Source.git
+cd SR-Source
 ```
 
 ### 2. Build DolRecomp and ModernGekko
@@ -321,9 +326,9 @@ bash tools/dolrecomp/recompile.sh
 
 The generated code will be placed inside `src/recompiled/`.
 
-### 4. Configure and Build SR-ZGS
+### 4. Configure and Build SR-Source
 
-SR-ZGS provides two CMake presets. Choose the one that best fits your needs.
+SR-Source provides two CMake presets. Choose the one that best fits your needs.
 
 **Quick preset:**
 
@@ -343,28 +348,28 @@ cmake --preset release
 cmake --build --preset release
 ```
 
-### 5. Launch SR-ZGS
+### 5. Launch SR-Source
 
 #### Using the Launcher
 
-`tools/build_tools.sh --chassis` also builds the SR-ZGS launcher, and step 4 copies the recompiled module next to it, in `build/chassis/`. To play through the launcher:
+`tools/build_tools.sh --chassis` also builds the SR-Source launcher, and step 4 copies the recompiled module next to it, in `build/chassis/`. To play through the launcher:
 
 ```bash
 cd build/chassis
-./SR-ZGS
+./SR-Source
 ```
 
-The first time, open **Game Files** and extract your copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)), then press **PLAY**. See [The SR-ZGS Launcher](#-the-sr-zgs-launcher) for what each page does.
+The first time, open **Game Files** and extract your copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)), then press **PLAY**. See [The SR-Source Launcher](#-the-sr-source-launcher) for what each page does.
 
 The commands below start the game directly from the build, without the launcher, which is useful during development.
 
-SR-ZGS supports two CPU execution modes through the ModernGekko runtime. Both modes use the same runtime integration but execute the game's CPU code differently.
+SR-Source supports two CPU execution modes through the ModernGekko runtime. Both modes use the same runtime integration but execute the game's CPU code differently.
 
 The following examples use the Quick preset. Replace `quick` with `release` to launch a Release build instead.
 
 #### JIT64 Mode
 
-To launch SR-ZGS using ModernGekko's JIT64 CPU core:
+To launch SR-Source using ModernGekko's JIT64 CPU core:
 
 ```bash
 MODERNGEKKO_STATICRECOMP=0 cmake --build --preset quick --target srzgs_run
@@ -374,7 +379,7 @@ This is the execution mode used during developer testing in which the game was o
 
 #### StaticRecomp Mode
 
-To launch SR-ZGS using the StaticRecomp CPU execution path:
+To launch SR-Source using the StaticRecomp CPU execution path:
 
 ```bash
 MODERNGEKKO_STATICRECOMP=1 cmake --build --preset quick --target srzgs_run
@@ -384,7 +389,7 @@ This execution mode is currently under performance investigation and may run sig
 
 #### Choosing the CPU Core
 
-The selected CPU core is saved in the runtime configuration file, `config.ini`, inside the SR-ZGS user directory (`~/.local/share/sr-zgs/config.ini` on Linux):
+The selected CPU core is saved in the runtime configuration file, `config.ini`, inside the SR-Source user directory (`~/.local/share/sr-source/config.ini` on Linux):
 
 ```ini
 [Core]
@@ -394,7 +399,7 @@ cpu_core=jit64
 - `jit64` (default): ModernGekko's JIT64 CPU core, the validated full-speed mode.
 - `staticrecomp`: runs the recompiled game module. Experimental. Without the module (as in the release downloads), the runner plays with JIT64 instead and says so in its log.
 
-The SR-ZGS launcher exposes the same option under **Settings → CPU core**.
+The SR-Source launcher exposes the same option under **Settings → CPU core**.
 
 When the `MODERNGEKKO_STATICRECOMP` environment variable is set, it takes priority over `config.ini`, both for the launcher and for `srzgs_run`. This makes it possible to test a mode without changing the saved setting, as in the commands above. If neither specifies a core, JIT64 is used.
 
@@ -404,7 +409,7 @@ In Netplay, every player uses the host's CPU core. JIT64 is recommended, especia
 
 #### Controls
 
-SR-ZGS plays with a GameCube controller in port 1, which the Wii version of the game supports alongside the Wii Remote. The launcher writes its mapping to `Config/GCPadNew.ini` in the user directory the first time a gamepad is available, and **Controls → Replace with generated GameCube profile** writes it again. The first controller also answers to the keyboard:
+SR-Source plays with a GameCube controller in port 1, which the Wii version of the game supports alongside the Wii Remote. The launcher writes its mapping to `Config/GCPadNew.ini` in the user directory the first time a gamepad is available, and **Controls → Replace with generated GameCube profile** writes it again. The first controller also answers to the keyboard:
 
 | GameCube | Gamepad | Keyboard |
 | --- | --- | --- |
@@ -420,28 +425,28 @@ SR-ZGS plays with a GameCube controller in port 1, which the Wii version of the 
 | C-stick | Right stick | — |
 | D-pad | D-pad | — |
 
-The SR-ZGS controller drawing also has three extra buttons that the GameCube controller doesn't:
+The SR-Source controller drawing also has three extra buttons that the GameCube controller doesn't:
 
-| SR-ZGS extra | Gamepad | Keyboard |
+| SR-Source extra | Gamepad | Keyboard |
 | --- | --- | --- |
 | C | Left trigger (LT / L2) | — |
 | − (Select) | Back / Select (View, Share, −, ⧉) | Backspace |
 | Menu | Guide / Home | M |
 
-The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the game's controller ignores. **Menu** and **−** open the [in-game menu](#in-game-menu) (− too because Steam, the Xbox Game Bar and the Steam Deck often take the Guide button before the game sees it); C is kept for SR-ZGS features and mods later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
+The game doesn't receive them: the profile stores them as `Extra/C`, `Extra/Select` and `Extra/Menu`, which the game's controller ignores. **Menu** and **−** open the [in-game menu](#in-game-menu) (− too because Steam, the Xbox Game Bar and the Steam Deck often take the Guide button before the game sees it); C is kept for SR-Source features and mods later. **Controls → Button mapping** shows the drawing of the controller and of the keyboard and lights up whatever is pressed, extra buttons included.
 
 On Linux the keyboard is read through X11, which the launcher uses by default. The first GameCube controller stays connected when the gamepad is unplugged, so the keyboard keeps working on its own. The emulated Wii Remote is left disconnected (`Source = 0` in `Config/WiimoteNew.ini`, checked every time the game starts), so keys don't also press Wii Remote buttons such as HOME. Without any gamepad, the launcher writes the profile for the keyboard alone (**Controls** shows *Keyboard only*); a gamepad connected later is added to the same profile and the keys keep working. A gamepad can report a different name depending on how it is connected (for example over USB and over Bluetooth, or Steam's virtual gamepad on a Steam Deck); when the configured one is missing and another gamepad is connected, the launcher switches the profile to the first one and keeps the mapping. The game does the same on its own: when the profile's gamepad isn't connected (or the profile is for the keyboard alone), it reads the first connected gamepad that no other player uses, as it starts and whenever a gamepad is plugged in or out, and notes it in `Logs/ModernGekko.log`; the profile itself stays as it was.
 
 ### Making a Release
 
-`.github/workflows/release.yml` builds the Linux and Windows packages on GitHub's machines with `tools/build_tools.sh --chassis` (without DolRecomp: `SRZGS_SKIP_DOLRECOMP=1`) and `tools/package_release.sh`. Run it from the repository's **Actions** tab (**Release → Run workflow**) to get both packages as the run's artifacts, or push a tag that matches `project(SR_ZGS VERSION ...)` in `CMakeLists.txt` to also get a draft release with them and the patch notes:
+`.github/workflows/release.yml` builds the Linux and Windows packages on GitHub's machines with `tools/build_tools.sh --chassis` (without DolRecomp: `SRZGS_SKIP_DOLRECOMP=1`) and `tools/package_release.sh`. Run it from the repository's **Actions** tab (**Release → Run workflow**) to get both packages as the run's artifacts, or push a tag that matches `project(SR_SOURCE VERSION ...)` in `CMakeLists.txt` to also get a draft release with them and the patch notes:
 
 ```bash
 git tag v0.1.2
 git push origin v0.1.2
 ```
 
-`tools/package_release.sh` also packs a local build: after `tools/build_tools.sh --chassis` it writes `dist/SR-ZGS-<version>-linux-<arch>.tar.gz` and its `.sha256`. It never packs game files or the StaticRecomp module.
+`tools/package_release.sh` also packs a local build: after `tools/build_tools.sh --chassis` it writes `dist/SR-Source-<version>-linux-<arch>.tar.gz` and its `.sha256`. It never packs game files or the StaticRecomp module.
 
 ### Build Configuration Notes
 
@@ -454,17 +459,17 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 
 ---
 
-## 🎮 The SR-ZGS Launcher
+## 🎮 The SR-Source Launcher
 
-The launcher is the program players open to play SR-ZGS. It is part of the ModernGekko fork and is built as `build/chassis/SR-ZGS`. Its window is 1280x720, or as big as fits a smaller screen (larger on a screen with a display scale above 100%), and most pages show their panels in two columns so they fit without scrolling.
+The launcher is the program players open to play SR-Source. It is part of the ModernGekko fork and is built as `build/chassis/SR-Source`. Its window is 1280x720, or as big as fits a smaller screen (larger on a screen with a display scale above 100%), and most pages show their panels in two columns so they fit without scrolling.
 
 - **PLAY:** starts the game alone or through Netplay. Summary cards show the time played, the controller (with a drawing of an Xbox, PlayStation or Nintendo controller, any other gamepad, or the keyboard), the display settings and the installed mods, and the **PATCH NOTES** panel shows what changed in this version.
 - **Settings:** CPU core, graphics backend (Vulkan or OpenGL; on Windows also Direct3D 11 and 12, and the launcher suggests another one if the chosen backend can't start), internal resolution, screenshot resolution, visual effect, game volume, aspect ratio (16:9, 4:3, stretched, an experimental ultrawide view for 21:9 screens, or an experimental custom shape from 1:1 to 6:1, such as 16:10, 21:9 or 32:9, typed in or picked from the suggestions; in both experimental ones the race keeps its proportions, and menus and the HUD may look stretched), 4:3 borders, window size, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution, the game volume and the 4:3 border can also be changed while playing, in the [in-game menu](#in-game-menu).
 - **Window size** (Settings → Display) is the game window's size when it isn't fullscreen. **Automatic**, the default, fits it to your screen: a 16:9 window about 85% of the primary monitor, in its middle. 960x540 to 2560x1440 are fixed sizes; one that doesn't fit your screen becomes the automatic one. How sharp the game looks is the internal resolution, not the window size: a small window with a high internal resolution looks very sharp.
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
 - **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
-- **Mods & expansions:** lists the mod packages installed, shows the folder they go in (`Mods` in the SR-ZGS user directory) with a button to open it, and presents the planned custom expansions (see [Future Ecosystem & Expansion Plans](#-future-ecosystem--expansion-plans)). SR-ZGS has no mods of its own yet.
-- **Credits:** the people and projects SR-ZGS is built on, their licenses, and the version check.
+- **Mods & expansions:** lists the mod packages installed, shows the folder they go in (`Mods` in the SR-Source user directory) with a button to open it, and presents the planned custom expansions (see [Future Ecosystem & Expansion Plans](#-future-ecosystem--expansion-plans)). SR-Source has no mods of its own yet.
+- **Credits:** the people and projects SR-Source is built on, their licenses, and the version check.
 
 **With a gamepad.** The launcher works with a gamepad as well as with the mouse and keyboard: the D-pad or the left stick moves, **A** chooses and **B** goes back to the sidebar; **LB** and **RB** change the page, the right stick scrolls, and **right** goes from the sidebar into the page. While a gamepad is in use, the bottom right corner shows its buttons as the controller prints them (Xbox, PlayStation or Nintendo). With the keyboard, the arrow keys move, **Enter** (or Space) chooses, **Escape** goes back, **Q** and **E** change the page, and the corner shows those keys instead. The bottom left corner draws what the game reads: the controller, or the keyboard when no gamepad is connected. Choosing **Controls** in the sidebar starts testing the controller, so its buttons only light up the drawing: hold **B** (or press Escape) to stop testing and move through the page. **LB** and **RB** pass through **Controls** without testing; press the top face button there (**Y**, the triangle on PlayStation) or **Test buttons** to start the test. The Netplay lobby works with a gamepad too.
 
@@ -480,7 +485,7 @@ The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py`
 
 ### In-game menu
 
-While playing, press **M** on the keyboard, or **Guide / Home** or **Select** (View, Share, −, ⧉) on the gamepad (the **Menu** and **−** buttons of the SR-ZGS controller), to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); the same button again closes it. The line at the bottom of the menu shows those buttons as your controller prints them (Xbox's A and B, PlayStation's cross and circle, a Nintendo pad's B and A), or as keyboard keys if the keyboard was the last thing you pressed; if you remap A or B in your controller profile, it shows the new ones.
+While playing, press **M** on the keyboard, or **Guide / Home** or **Select** (View, Share, −, ⧉) on the gamepad (the **Menu** and **−** buttons of the SR-Source controller), to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); the same button again closes it. The line at the bottom of the menu shows those buttons as your controller prints them (Xbox's A and B, PlayStation's cross and circle, a Nintendo pad's B and A), or as keyboard keys if the keyboard was the last thing you pressed; if you remap A or B in your controller profile, it shows the new ones.
 
 - **Continue** goes back to the game.
 - **Quick settings** change the visual effect, the internal resolution, the game's volume and, when the game is in 4:3, the border. Choose a row and press left or right (A goes round the choices): the change shows at once, even with the game paused, and the launcher keeps it for next time.
@@ -505,15 +510,15 @@ The last two ask first, since progress the game hasn't saved is lost. In Netplay
 
 An effect only sees the finished picture, not what is in it, so **Outline** draws its lines around everything on screen with a clear edge (characters, the track, the menus), not around the characters alone. Soft shading and most textures get no line.
 
-**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-ZGS_0001.png`, `SR-ZGS_0002.png` and so on, in `ScreenShots/RS9E8P/` inside the user directory (`~/.local/share/sr-zgs/ScreenShots/RS9E8P/` on Linux). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
+**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-Source_0001.png`, `SR-Source_0002.png` and so on, in `ScreenShots/RS9E8P/` inside the user directory (`~/.local/share/sr-source/ScreenShots/RS9E8P/` on Linux). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
 
 The launcher's **Screenshots** page shows them, newest first, without opening any other program: choose one to see it large, go to the next or previous one with the arrow keys or the buttons, and delete one you don't want. **Open folder** opens the folder they are in.
 
-SR-ZGS has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot, as above), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game; on Windows, where Ctrl+Esc opens the Start menu, use **Alt+F4** or the window's close button).
+SR-Source has no savestates: the game window has no savestate keys and the launcher doesn't offer them, so the game is played through as on the console. The game window keeps **F9** (a screenshot, as above), **F10** (pause), **Alt+Enter** (fullscreen) and **Ctrl+Esc** (close the game; on Windows, where Ctrl+Esc opens the Start menu, use **Alt+F4** or the window's close button).
 
-**Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-ZGS/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser.
+**Updates:** the launcher compares its version with the newest release published on [GitHub](https://github.com/KnivesDevilish/SR-Source/releases), when it opens (this can be turned off on the **Credits** page) or when you press **Check for updates**. It never downloads or installs anything: when a newer version exists, it only opens the download page in your browser.
 
-The launcher keeps its settings in `config.ini` inside the SR-ZGS user directory (`~/.local/share/sr-zgs/` on Linux, `%LOCALAPPDATA%\sr-zgs\` on Windows), together with the controller profile, saves and logs.
+The launcher keeps its settings in `config.ini` inside the SR-Source user directory (`~/.local/share/sr-source/` on Linux, `%LOCALAPPDATA%\sr-source\` on Windows), together with the controller profile, saves and logs.
 
 ---
 
@@ -527,16 +532,16 @@ Netplay lets up to four players race together. On the launcher's **PLAY** page, 
 > [!WARNING]
 > Anyone who sees an invite code can join the room, and an IP address identifies your connection. Don't show either one on stream or post them publicly.
 
-Every player needs the same SR-ZGS release and the same game files. Everyone plays with the host's CPU core and the host's 16:9 or 4:3 choice; JIT64 is recommended, especially when players are on different systems.
+Every player needs the same SR-Source release and the same game files. Everyone plays with the host's CPU core and the host's 16:9 or 4:3 choice; JIT64 is recommended, especially when players are on different systems.
 
 Netplay is part of the experimental build and has had limited testing so far.
 
 ### If your friends can't connect
 
-- **Same release:** everyone needs the same SR-ZGS version (the launcher's **Credits** page and the patch notes show it). Linux and Windows players can play together.
+- **Same release:** everyone needs the same SR-Source version (the launcher's **Credits** page and the patch notes show it). Linux and Windows players can play together.
 - **In the same house:** use **Direct IP** with the address the host's lobby shows under **At home** (the first one, when there are several). Invite codes go out to the internet and back, which many routers don't allow between two computers behind them.
 - **The host's firewall** has to let the game in:
-  - **Windows:** the first time someone hosts, Windows asks whether to allow `moderngekko-run`: tick **Private** and **Public** networks and choose **Allow**. If the question was closed or missed, press **Allow the game in the Windows firewall** in **Host Netplay**; Windows asks for permission once. By hand: **Windows Security → Firewall & network protection → Allow an app through firewall → Change settings**, tick **Private** and **Public** for `moderngekko-run` (or add `moderngekko-run.exe` from the SR-ZGS folder with **Allow another app...**).
+  - **Windows:** the first time someone hosts, Windows asks whether to allow `moderngekko-run`: tick **Private** and **Public** networks and choose **Allow**. If the question was closed or missed, press **Allow the game in the Windows firewall** in **Host Netplay**; Windows asks for permission once. By hand: **Windows Security → Firewall & network protection → Allow an app through firewall → Change settings**, tick **Private** and **Public** for `moderngekko-run` (or add `moderngekko-run.exe` from the SR-Source folder with **Allow another app...**).
   - **Linux:** when the system has a firewall (firewalld on Fedora, Bazzite and others; ufw on Ubuntu, Linux Mint and others), open the UDP port, 2626 by default. Run it on the system itself, not inside a Distrobox or Toolbx container:
 
     ```bash
@@ -567,7 +572,7 @@ Potential projects and concepts include:
 - Extended gameplay features.
 
 <p align="left">
-  <img src="docs/SR-ZGS Mods.png" alt="SR-ZGS x Custom Story" width="520">
+  <img src="docs/SR-Source Mods.png" alt="SR-Source x Custom Story" width="520">
 </p>
 
 <sub>This is a planned expansion concept and part of the project's long-term vision. Its implementation depends on future development of the required modding and expansion systems.</sub>
@@ -576,7 +581,7 @@ Potential projects and concepts include:
 
 ## 🤝 Contributing & FAQ
 
-SR-ZGS is an experimental project, and contributions, technical feedback and testing reports are welcome.
+SR-Source is an experimental project, and contributions, technical feedback and testing reports are welcome.
 
 Areas where help would be valuable include:
 
@@ -591,20 +596,20 @@ Whether you're interested in contributing code, testing the project or sharing t
 
 Constructive feedback is always welcome. <3
 
-### Does SR-ZGS currently support mods?
-Not yet. Native project-specific mod loading is a future development goal. The `mods/` directory is reserved for future use and does not currently represent a fully implemented SR-ZGS mod loader. ModernGekko itself can load experimental code mod packages (`.mgm`) from the `Mods` folder of the SR-ZGS user directory; the launcher's **Mods & expansions** page lists them and opens that folder.
+### Does SR-Source currently support mods?
+Not yet. Native project-specific mod loading is a future development goal. The `mods/` directory is reserved for future use and does not currently represent a fully implemented SR-Source mod loader. ModernGekko itself can load experimental code mod packages (`.mgm`) from the `Mods` folder of the SR-Source user directory; the launcher's **Mods & expansions** page lists them and opens that folder.
 
-### Does SR-ZGS require Dolphin?
-SR-ZGS currently uses a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide graphics, audio, input and Wii system services. You don't need to install Dolphin separately: the runtime is built from the `external/ModernGekko/` submodule. A more independent runtime is a long-term development goal.
+### Does SR-Source require Dolphin?
+SR-Source currently uses a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide graphics, audio, input and Wii system services. You don't need to install Dolphin separately: the runtime is built from the `external/ModernGekko/` submodule. A more independent runtime is a long-term development goal.
 
 ### Is there a downloadable release?
-Yes. From 0.1.0 on, the [Releases](https://github.com/KnivesDevilish/SR-ZGS/releases) page has a Linux build and an experimental Windows build (see [Downloading a Release](#-downloading-a-release)), and the launcher's **Check for updates** points to the newest one. You can also build SR-ZGS from source as described above.
+Yes. From 0.1.0 on, the [Releases](https://github.com/KnivesDevilish/SR-Source/releases) page has a Linux build and an experimental Windows build (see [Downloading a Release](#-downloading-a-release)), and the launcher's **Check for updates** points to the newest one. You can also build SR-Source from source as described above.
 
 ### Does the project run at 60 FPS?
 The game successfully ran from start to finish at 60 FPS during developer testing. This is an observed result from a specific test configuration, not a guarantee for every system.
 
 ### Can I use files from the PS2 or GameCube versions?
-No. SR-ZGS specifically targets the NTSC-U Nintendo Wii release of Sonic Riders: Zero Gravity (`RS9E8P`). Other versions have different executable structures and are outside the current project scope.
+No. SR-Source specifically targets the NTSC-U Nintendo Wii release of Sonic Riders: Zero Gravity (`RS9E8P`). Other versions have different executable structures and are outside the current project scope.
 
 ### Will Android be supported?
 Android is a long-term target for the project. However, there is currently no supported Android build or verified mobile compatibility.
@@ -616,18 +621,18 @@ Custom story campaigns, additional characters, tracks and other fan-created cont
 The launcher, its Netplay lobby and the patch notes are available in English, Spanish and Japanese. The game's own text and voices are those of your copy of the game. Additional text and audio localization options for the game may be explored in the future. No additional fan-dub integration is currently included in the working build.
 
 ### Do you plan to recompile other Sonic games?
-SR-ZGS is currently focused on Sonic Riders: Zero Gravity. The project does not currently have plans to expand its scope to other Sonic titles.
+SR-Source is currently focused on Sonic Riders: Zero Gravity. The project does not currently have plans to expand its scope to other Sonic titles.
 
 ---
 
 ## ❤️‍🔥 Credits & Acknowledgments
 
-**Created by** 奈依茲・悪魔的 (JP: Naizu Akumateki · EN: KnivesDevilish), with the SR-ZGS contributors and testers: research, development and testing. The launcher and Netplay lobby music are original tracks by KnivesDevilish.
+**Created by** 奈依茲・悪魔的 (JP: Naizu Akumateki · EN: KnivesDevilish), with the SR-Source contributors and testers: research, development and testing. The launcher and Netplay lobby music are original tracks by KnivesDevilish.
 
 **Built on:**
 
 - **DolRecomp** — Static recompilation framework.
-- **ModernGekko** by Hyperway — Runtime for GameCube/Wii recomps. SR-ZGS uses a modified fork of it.
+- **ModernGekko** by Hyperway — Runtime for GameCube/Wii recomps. SR-Source uses a modified fork of it.
 - **RecompCore** — SpecialK / aharonahdoot.
 - **Recomp template** — Literally God / MrPoloGit, who also added macOS support.
 - **Dolphin** — The Dolphin Team and its contributors: the foundation for much of the runtime technology.
@@ -637,7 +642,7 @@ SR-ZGS is currently focused on Sonic Riders: Zero Gravity. The project does not 
 
 | Component | License |
 | --- | --- |
-| SR-ZGS, ModernGekko | GNU GPL v3 |
+| SR-Source, ModernGekko | GNU GPL v3 |
 | Dolphin | GNU GPL v2 or later |
 | SDL 3 | zlib License |
 | Dear ImGui | MIT License |

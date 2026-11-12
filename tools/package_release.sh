@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # =============================================================================
-# SR:ZGS - packs a release from the chassis build (tools/build_tools.sh
-# --chassis): the launcher and the runner, their Sys/ and Resources/ folders,
-# any shared libraries beside them, the licenses and a short read-me, into
-#   dist/SR-ZGS-<version>-linux-<arch>.tar.gz     (Linux)
-#   dist/SR-ZGS-<version>-windows-x64.zip         (Windows, in Git Bash)
+# Sonic Riders: Source (SR-Source) - packs a release from the chassis build
+# (tools/build_tools.sh --chassis): the launcher and the runner, their Sys/
+# and Resources/ folders, any shared libraries beside them, the licenses and
+# a short read-me, into
+#   dist/SR-Source-<version>-linux-<arch>.tar.gz     (Linux)
+#   dist/SR-Source-<version>-windows-x64.zip         (Windows, in Git Bash)
 # with a .sha256 file next to it.
 #
 # No game files go in: players extract their own copy of the game with the
@@ -22,10 +23,10 @@ DIST="${DIST_DIR:-$ROOT/dist}"
 
 die() { echo "error: $*" >&2; exit 1; }
 
-VERSION="$(awk '/^project\(SR_ZGS/ {found=1} found && $1 == "VERSION" {print $2; exit}' \
+VERSION="$(awk '/^project\(SR_SOURCE/ {found=1} found && $1 == "VERSION" {print $2; exit}' \
   "$ROOT/CMakeLists.txt")"
 [[ "$VERSION" =~ ^[0-9]+(\.[0-9]+){0,3}$ ]] \
-  || die "can't read the version from project(SR_ZGS VERSION ...) in CMakeLists.txt"
+  || die "can't read the version from project(SR_SOURCE VERSION ...) in CMakeLists.txt"
 
 EXE=""
 case "$(uname -s)" in
@@ -48,14 +49,14 @@ esac
 [[ -d "$BUILD" ]] || die "no build in $BUILD: run tools/build_tools.sh --chassis first"
 
 # The launcher starts the runner beside it, so both must be in one folder.
-LAUNCHER="$(find "$BUILD" -type f -name "SR-ZGS$EXE" -print -quit)"
-[[ -n "$LAUNCHER" ]] || die "SR-ZGS$EXE is missing in $BUILD"
+LAUNCHER="$(find "$BUILD" -type f -name "SR-Source$EXE" -print -quit)"
+[[ -n "$LAUNCHER" ]] || die "SR-Source$EXE is missing in $BUILD"
 BIN="$(dirname "$LAUNCHER")"
 [[ -f "$BIN/moderngekko-run$EXE" ]] || die "moderngekko-run$EXE is missing beside $LAUNCHER"
 [[ -d "$BIN/Sys" ]] || die "Sys/ is missing beside $LAUNCHER"
 [[ -d "$BIN/Resources" ]] || die "Resources/ is missing beside $LAUNCHER"
 
-NAME="SR-ZGS-$VERSION-$PLATFORM"
+NAME="SR-Source-$VERSION-$PLATFORM"
 STAGE="$DIST/$NAME"
 rm -rf "$STAGE"
 mkdir -p "$STAGE"
@@ -105,53 +106,62 @@ if find "$STAGE" \( -iname '*.iso' -o -iname '*.wbfs' -o -iname '*.rvz' -o -inam
 fi
 
 cp "$ROOT/LICENSE" "$STAGE/LICENSE.txt"
-cp "$ROOT/docs/SR-ZGS Patch Notes.txt" "$STAGE/PATCH-NOTES.txt"
+cp "$ROOT/docs/SR-Source Patch Notes.txt" "$STAGE/PATCH-NOTES.txt"
 
 if [[ -n "$EXE" ]]; then
-  START='Double-click SR-ZGS.exe.'
-  START_ES='Abre SR-ZGS.exe con doble clic.'
-  USER_DIR='%LOCALAPPDATA%\sr-zgs'
+  START='Double-click SR-Source.exe.'
+  START_ES='Abre SR-Source.exe con doble clic.'
+  USER_DIR='%LOCALAPPDATA%\sr-source'
+  OLD_USER_DIR='%LOCALAPPDATA%\sr-zgs'
 else
-  START='Run ./SR-ZGS from this folder (or double-click SR-ZGS in your file manager).'
-  START_ES='Ejecuta ./SR-ZGS desde esta carpeta (o abre SR-ZGS con doble clic en tu gestor de archivos).'
-  USER_DIR='~/.local/share/sr-zgs'
+  START='Run ./SR-Source from this folder (or double-click SR-Source in your file manager).'
+  START_ES='Ejecuta ./SR-Source desde esta carpeta (o abre SR-Source con doble clic en tu gestor de archivos).'
+  USER_DIR='~/.local/share/sr-source'
+  OLD_USER_DIR='~/.local/share/sr-zgs'
 fi
 cat > "$STAGE/README.txt" <<EOF
-Sonic Riders: Zero Gravity Source (SR-ZGS) $VERSION
+Sonic Riders: Source (SR-Source) $VERSION
 
-SR-ZGS needs your own legally obtained copy of Sonic Riders: Zero Gravity for
-Wii (NTSC-U, RS9E8P) as an ISO, WBFS or RVZ image. No game files are included.
+SR-Source plays Sonic Riders (GameCube, NTSC-U, GXEE8P) and Sonic Riders:
+Zero Gravity (Wii, NTSC-U, RS9E8P) from your own legally obtained copies, as
+ISO, WBFS or RVZ images. No game files are included.
 
 1. $START
-2. Open Game Files, choose your disc image and press Extract Game (only once).
-3. Press PLAY.
+2. Open Game Files, choose your disc image and press Extract Game (only once
+   for each game).
+3. Press PLAY and choose the game.
 
-Keep this folder's files together: SR-ZGS starts moderngekko-run beside it.
+Keep this folder's files together: SR-Source starts moderngekko-run beside it.
 Your settings, saves, screenshots and logs are in $USER_DIR.
+Coming from SR-ZGS: the first time, the launcher moves your old folder
+($OLD_USER_DIR) there, with everything in it.
 The CPU core is JIT64; StaticRecomp needs a build from source.
 
-Source code (GNU GPL v3): https://github.com/KnivesDevilish/SR-ZGS
+Source code (GNU GPL v3): https://github.com/KnivesDevilish/SR-Source
 (tag v$VERSION, with the ModernGekko fork in external/ModernGekko).
-More: https://github.com/KnivesDevilish/SR-ZGS#readme
+More: https://github.com/KnivesDevilish/SR-Source#readme
 
 ---
 
-SR-ZGS necesita tu propia copia legal de Sonic Riders: Zero Gravity para Wii
-(NTSC-U, RS9E8P) en imagen ISO, WBFS o RVZ. No incluye archivos del juego.
+SR-Source juega Sonic Riders (GameCube, NTSC-U, GXEE8P) y Sonic Riders: Zero
+Gravity (Wii, NTSC-U, RS9E8P) con tus propias copias legales, en imagen ISO,
+WBFS o RVZ. No incluye archivos de los juegos.
 
 1. $START_ES
 2. Abre Archivos del juego, elige tu imagen del disco y pulsa Extraer juego
-   (solo la primera vez).
-3. Pulsa JUGAR.
+   (solo la primera vez con cada juego).
+3. Pulsa JUGAR y elige el juego.
 
-Deja juntos los archivos de esta carpeta: SR-ZGS abre moderngekko-run, que
+Deja juntos los archivos de esta carpeta: SR-Source abre moderngekko-run, que
 está a su lado. Tus ajustes, partidas, capturas y registros están en
 $USER_DIR.
+Si vienes de SR-ZGS: la primera vez, el launcher mueve ahí tu carpeta
+anterior ($OLD_USER_DIR), con todo lo que tiene.
 El núcleo de CPU es JIT64; StaticRecomp necesita compilarlo desde el código.
 
 This project is an independent fan project and is not affiliated with or
-endorsed by SEGA. Sonic Riders: Zero Gravity and its characters are
-trademarks of SEGA.
+endorsed by SEGA. Sonic Riders, Sonic Riders: Zero Gravity and their
+characters are trademarks of SEGA.
 EOF
 
 cd "$DIST"
