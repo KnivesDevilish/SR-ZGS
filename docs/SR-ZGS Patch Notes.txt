@@ -1,4 +1,9 @@
 [en]
+# 0.1.4
+A fix for the in-game menu, and the last update before the next big version.
+
+- Closing the in-game menu while holding a stick or the D-pad no longer leaves the game paused until you let go: it comes back as soon as you release the button that closed the menu
+
 # 0.1.3
 Free aspect ratio and controller icons.
 
@@ -49,6 +54,11 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Builds for Linux and, still experimental, for Windows
 
 [es]
+# 0.1.4
+Un arreglo del menú del juego, y la última actualización antes de la próxima versión grande.
+
+- Cerrar el menú del juego mientras mueves un stick o la cruceta ya no deja el juego en pausa hasta que los sueltas: vuelve en cuanto sueltas el botón con el que cerraste el menú
+
 # 0.1.3
 Relación de aspecto libre e iconos de mandos.
 
@@ -99,6 +109,11 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Builds para Linux y, todavía experimental, para Windows
 
 [ja]
+# 0.1.4
+ゲーム内メニューの修正です。次の大型バージョン前の最後のアップデートです。
+
+- スティックや十字キーを倒したままゲーム内メニューを閉じても、離すまでゲームが一時停止したままになることはなくなりました。メニューを閉じたボタンを離すとすぐに再開します
+
 # 0.1.3
 自由なアスペクト比とコントローラーのアイコン。
 

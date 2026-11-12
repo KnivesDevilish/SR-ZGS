@@ -15,7 +15,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 project(SR_ZGS
-  VERSION 0.1.3
+  VERSION 0.1.4
   DESCRIPTION "Sonic Riders: Zero Gravity Source"
   LANGUAGES C CXX)
 

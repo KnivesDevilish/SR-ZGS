@@ -61,6 +61,7 @@ Requires your own legally obtained copy of the game.
 - [x] 0.1.1: fixes from the first reports (Windows window and icon, Direct3D, menu button).
 - [x] 0.1.2: Steam Deck controls, a gamepad that stands in for a missing one, and Netplay help (firewall, logs, same-house play).
 - [x] 0.1.3: a freely adjustable aspect ratio (experimental) and the launcher showing the controller or keyboard in use.
+- [x] 0.1.4: the in-game menu no longer keeps the game paused while a stick is held; the last 0.1 update before 0.2.0.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
