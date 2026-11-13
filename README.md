@@ -706,4 +706,10 @@ SR-Source is focused on Sonic Riders and Sonic Riders: Zero Gravity. The project
 | Dear ImGui, pl_mpeg | MIT License |
 | Noto Sans CJK, Teko | SIL Open Font License 1.1 |
 
+---
+
+<p align="center">
+  <img src="docs/SR-Source%20Artwork%20Dev.png" alt="Sonic Riders: Source Artwork" width="750">
+</p>
+
 This project is an independent fan project and is not affiliated with or endorsed by SEGA. Sonic Riders, Sonic Riders: Zero Gravity and their characters are trademarks of SEGA.
