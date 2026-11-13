@@ -8,7 +8,7 @@ The biggest update yet: Sonic Riders: Source. One source, two riding experiences
 - From the launcher to the game without jumps: the launcher fades to black, a loading screen shows the game's logo, and the game opens right where the launcher was. When you close the game, the launcher comes back the same way
 - Complete save for Sonic Riders too, in Game Files, keeping your own save to bring back
 - Visual effects, now three and better: Remaster (crisper detail, richer colors, glowing lights and soft shadows in the corners), Anime outline (clean ink lines and flat, bright colors) and CRT. If you used Bloom, Vivid colors or Sharpen, you now get Remaster, which does all three
-- 16:9 and 4:3 fill the screen, with no bars: 16:9 widens the race to your screen's shape (Sonic Riders, made for 4:3, too), and 4:3 stretches the picture to fill it. Stretch, Ultrawide and the 4:3 borders are gone; Stretch and Ultrawide become 16:9
+- 16:9 and 4:3 fill the screen, with no bars: the picture is stretched to your screen, as Dolphin does. Custom (experimental) widens the race instead. Stretch, Ultrawide and the 4:3 borders are gone; Stretch and Ultrawide become 16:9
 - A bigger launcher: 1280x720, or as big as fits your screen
 - The PLAY banner moves: the flag waves, the layers follow the mouse and the two logos take turns
 - Netplay: choose the game when you host or join; everyone must choose the host's
@@ -84,7 +84,7 @@ La actualización más grande hasta ahora: Sonic Riders: Source. Una fuente, dos
 - Del launcher al juego sin saltos: el launcher funde a negro, una pantalla de carga muestra el logo del juego y el juego se abre justo donde estaba el launcher. Al cerrar el juego, el launcher vuelve igual
 - Partida completa también para Sonic Riders, en Archivos del juego, guardando la tuya para recuperarla
 - Efectos visuales, ahora tres y mejores: Remasterizado (más detalle, colores más ricos, luces que brillan y sombras suaves en los rincones), Contorno anime (líneas de tinta limpias y colores planos y vivos) y CRT. Si usabas Bloom, Colores vivos o Nitidez, ahora tienes Remasterizado, que hace las tres cosas
-- 16:9 y 4:3 llenan la pantalla, sin barras: 16:9 ensancha la carrera a la forma de tu pantalla (también Sonic Riders, hecho para 4:3), y 4:3 estira la imagen hasta llenarla. Se quitan Estirada, Ultrapanorámica y los bordes en 4:3; Estirada y Ultrapanorámica pasan a 16:9
+- 16:9 y 4:3 llenan la pantalla, sin barras: la imagen se estira a tu pantalla, como en Dolphin. Personalizada (experimental) ensancha la carrera en su lugar. Se quitan Estirada, Ultrapanorámica y los bordes en 4:3; Estirada y Ultrapanorámica pasan a 16:9
 - Un launcher más grande: 1280x720, o tan grande como quepa en tu pantalla
 - El banner de JUGAR se mueve: la bandera ondea, las capas siguen al ratón y los dos logos se turnan
 - Netplay: elige el juego al crear o al unirte; todos deben elegir el del anfitrión
@@ -160,7 +160,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - ランチャーからゲームへ途切れずに：ランチャーが暗転し、ロード画面にゲームのロゴが表示され、ゲームはランチャーがあった場所にそのまま開きます。ゲームを閉じると、ランチャーも同じように戻ります
 - Sonic Ridersにも完全セーブデータ：「ゲームファイル」からインストールでき、ご自身のセーブデータは保管されて元に戻せます
 - 映像エフェクトを3つに絞って強化：リマスター（くっきりした細部、豊かな色、輝く光、隅のやわらかな影）、アニメ風の輪郭（すっきりした線と、平らで鮮やかな色）、CRT。ブルーム、鮮やかな色、シャープを使っていた場合は、その3つをすべて含むリマスターになります
-- 16:9と4:3は帯なしで画面全体に表示：16:9はレースを画面の形に合わせて広げ（4:3向けのSonic Ridersも）、4:3は映像を画面いっぱいに引き伸ばします。「引き伸ばし」、「ウルトラワイド」と4:3の壁紙はなくなり、「引き伸ばし」と「ウルトラワイド」は16:9になります
+- 16:9と4:3は帯なしで画面全体に表示：Dolphinと同じく、映像を画面に合わせて引き伸ばします。「カスタム（試験的）」はレースの表示範囲を広げます。「引き伸ばし」、「ウルトラワイド」と4:3の壁紙はなくなり、「引き伸ばし」と「ウルトラワイド」は16:9になります
 - 大きくなったランチャー：1280x720、または画面に収まる最大の大きさ
 - 「プレイ」のバナーが動きます：旗がなびき、レイヤーがマウスに合わせて動き、2つのロゴが交互に表示されます
 - ネットプレイ：作成・参加のときにゲームを選びます。全員がホストと同じゲームを選んでください

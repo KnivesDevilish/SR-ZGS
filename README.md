@@ -528,13 +528,13 @@ Settings, controls and visual effects are the same for both games. **TIME PLAYED
 
 | Choice | What you see |
 | --- | --- |
-| 16:9 (Widescreen) | The default. The game draws in widescreen, and the race widens or narrows to your window's shape (on a 16:9 screen, nothing changes). Sonic Riders, made for 4:3, is widened too: its menus and HUD look a little stretched |
+| 16:9 (Widescreen) | The default. The game draws in widescreen, stretched to fill your window (on a 16:9 screen, nothing changes). Sonic Riders, made for 4:3, is stretched to fill it too, as Dolphin's Stretch to Window does |
 | 4:3 | The games' original 4:3 picture, menus and HUD included, stretched to fill the window, as Dolphin's Stretch to Window does |
 | Custom (experimental) | A shape you type or pick, from 1:1 to 6:1 (such as 16:10, 21:9 or 32:9); in a window of another shape, bars fill the rest |
 
-In 16:9 and Custom the race keeps its proportions: it is the game's 3D view that widens (Dolphin's widescreen hack), not the picture that stretches. Where the race is shown wider than the game draws it, something at the very edge of the screen can sometimes appear or disappear suddenly, since the game doesn't draw what it thinks is out of view. In 4:3 nothing is widened: the whole picture is stretched, characters included. In Netplay, everyone plays with the host's 16:9 or 4:3 choice, and each picture fills its own window.
+16:9 and 4:3 stretch the whole picture, characters included, as it is. Custom instead keeps the race's proportions: it is the game's 3D view that widens or narrows (Dolphin's widescreen hack), not the picture that stretches. Where it shows the race wider than the game draws it, something at the very edge of the screen can sometimes appear or disappear suddenly, since the game doesn't draw what it thinks is out of view: hence experimental. In Netplay, everyone plays with the host's 16:9 or 4:3 choice, and each picture fills its own window.
 
-Until 0.1.4 there were also **Stretch** and **Ultrawide**, which become 16:9 (it now fills 21:9 and wider screens as Ultrawide did), and pictures in the bars beside a 4:3 game (**4:3 borders**), which aren't needed now that 4:3 fills the window.
+Until 0.1.4 there were also **Stretch** and **Ultrawide**, which become 16:9 (now Stretch is what 16:9 does; for Ultrawide's wider race, choose Custom with your screen's shape), and pictures in the bars beside a 4:3 game (**4:3 borders**), which aren't needed now that 4:3 fills the window.
 
 ### In-game menu
 
