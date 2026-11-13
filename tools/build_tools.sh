@@ -65,8 +65,10 @@ if [[ "${1:-}" == "--chassis" ]]; then
   [[ "$SRZGS_VERSION" =~ ^[0-9]+(\.[0-9]+){0,3}$ ]] \
     || die "can't read the version from project(SR_SOURCE VERSION ...) in CMakeLists.txt"
 
-  # The Netplay lobby has no portrait beside it: MODERNGEKKO_LOBBY_ART is
-  # passed empty so a build folder made before forgets the one it had.
+  # The Netplay lobby has no portrait beside it, and 16:9 and 4:3 fill the
+  # window, so there are no bars for 4:3 borders: MODERNGEKKO_LOBBY_ART and
+  # MODERNGEKKO_GAME_BORDERS are passed empty so a build folder made before
+  # forgets the ones it had.
   echo "Building the chassis with $JOBS jobs. This compiles Dolphin's core: expect a long build."
   cmake -S "$MG" -B "$ROOT/build/chassis" -G Ninja \
         -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DDOLRECOMP_ENABLE_LLVM=OFF \
@@ -93,7 +95,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_APP_ICON="$ROOT/docs/SR-Source Icon.png" \
         -DMODERNGEKKO_APP_ICON_ICO="$ROOT/docs/SR-Source Icon.ico" \
         -DMODERNGEKKO_LAUNCHER_PATCH_NOTES="$ROOT/docs/SR-Source Patch Notes.txt" \
-        -DMODERNGEKKO_GAME_BORDERS="$ROOT/docs/borders" \
+        -DMODERNGEKKO_GAME_BORDERS="" \
         -DMODERNGEKKO_COMPLETE_SAVE="$ROOT/docs/complete-save" \
         -DMODERNGEKKO_GAME_SELECT="$ROOT/docs/game-select" \
         -DMODERNGEKKO_SCREENSHOT_NAME="SR-Source" \
