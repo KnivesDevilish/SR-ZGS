@@ -1,0 +1,43 @@
+name: Suggestion
+description: An idea, an improvement or feedback for SR-Source.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! Check the [roadmap](https://github.com/KnivesDevilish/SR-Source#project-status) first: it may already be planned.
+  - type: dropdown
+    id: area
+    attributes:
+      label: What is it about?
+      options:
+        - The launcher (Riders Terminal)
+        - The in-game menu or settings
+        - Graphics or performance
+        - Controls
+        - Netplay
+        - Something else
+    validations:
+      required: true
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Both games
+        - Sonic Riders (GameCube)
+        - "Sonic Riders: Zero Gravity (Wii)"
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: What you would like, and how you imagine it working.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it would help
+      description: What it would make better or easier for you.

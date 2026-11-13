@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Frequently asked questions
+    url: https://github.com/KnivesDevilish/SR-Source#-contributing--faq
+    about: Answers to common questions, such as which game versions work or what to do when a game closes with OpenGL on Linux.
+  - name: Downloads
+    url: https://github.com/KnivesDevilish/SR-Source/releases/latest
+    about: The newest version of SR-Source, for Linux and Windows.

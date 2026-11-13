@@ -1,0 +1,109 @@
+name: Bug report
+description: Something doesn't work in SR-Source (the launcher or a game).
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! The more of this you fill in, the sooner it can be fixed.
+        Check the [FAQ](https://github.com/KnivesDevilish/SR-Source#-contributing--faq) first: your problem may already have an answer there.
+
+        **Please don't attach game files** (disc images, `main.dol`, extracted game folders). Logs and screenshots are all that's needed.
+  - type: input
+    id: version
+    attributes:
+      label: SR-Source version
+      description: Shown at the top of the launcher's patch notes, and in the first line of the log.
+      placeholder: "0.2.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: system
+    attributes:
+      label: System
+      options:
+        - Linux
+        - Steam Deck
+        - Windows
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: system-details
+    attributes:
+      label: System version
+      description: Your Linux distribution or Windows version.
+      placeholder: "Bazzite 43, Ubuntu 24.04, Windows 11 24H2..."
+  - type: input
+    id: gpu
+    attributes:
+      label: Graphics card
+      description: Its model, and the driver version if you know it.
+      placeholder: "Intel HD Graphics 5500, NVIDIA GTX 1060 (driver 566.36)..."
+    validations:
+      required: true
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game
+      options:
+        - Sonic Riders (GameCube)
+        - "Sonic Riders: Zero Gravity (Wii)"
+        - Both games
+        - The launcher (before a game starts)
+    validations:
+      required: true
+  - type: dropdown
+    id: backend
+    attributes:
+      label: Graphics backend
+      description: In the launcher's Settings, under GRAPHICS.
+      options:
+        - Vulkan
+        - OpenGL
+        - Direct3D 11
+        - Direct3D 12
+        - I'm not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: cpu-core
+    attributes:
+      label: CPU core
+      description: In the launcher's Settings; the badge at the top right of the launcher shows it too.
+      options:
+        - JIT64 (the default)
+        - StaticRecomp (experimental)
+        - I'm not sure
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you expected, what happened instead, and when (at the start, in a menu, in a race...). Copy any error message exactly.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to make it happen
+      placeholder: |
+        1. Open the launcher
+        2. Press LAUNCH and choose Zero Gravity
+        3. ...
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: |
+        Attach `ModernGekko.log` (drag it here). It is written again every time you press PLAY, so take it right after the problem.
+        - Linux and Steam Deck: `~/.local/share/sr-source/Logs/ModernGekko.log`
+        - Windows: `%LOCALAPPDATA%\sr-source\Logs\ModernGekko.log` (paste that path in the File Explorer's address bar)
+  - type: checkboxes
+    id: copy
+    attributes:
+      label: Your copy of the game
+      options:
+        - label: I play with my own legally obtained copy of the game, and I haven't attached any game files.
+          required: true
