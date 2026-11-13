@@ -69,7 +69,7 @@ Requires your own legally obtained copy of each game you want to play.
 - [x] 0.1.2: Steam Deck controls, a gamepad that stands in for a missing one, and Netplay help (firewall, logs, same-house play).
 - [x] 0.1.3: a freely adjustable aspect ratio (experimental) and the launcher showing the controller or keyboard in use.
 - [x] 0.1.4: the in-game menu no longer keeps the game paused while a stick is held; the last 0.1 update before 0.2.0.
-- [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, three visual effects (Remaster, Anime outline and CRT) and a moving PLAY banner.
+- [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, three visual effects (Remaster, Anime outline and CRT), 16:9 and 4:3 filling any screen, and a moving PLAY banner.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -115,7 +115,6 @@ SR-Source uses a modified fork of ModernGekko: [KnivesDevilish/ModernGekko](http
 - The game selection screen, with each game's intro, and the loading screen between the launcher and the game (see [Game selection screen](#game-selection-screen)).
 - The Netplay lobby with invite codes (see [Netplay](#-netplay)).
 - GameCube controller profiles written for SR-Source, with a controller tester.
-- Pictures in the bars beside a 4:3 game, chosen in the launcher (see [4:3 borders](#43-borders)).
 - The in-game menu, visual effects and high-resolution screenshots (see [In-game menu](#in-game-menu)).
 - Small runtime adjustments, such as hiding the runtime's on-screen messages and skipping redundant checks of the game files at startup.
 
@@ -175,7 +174,7 @@ The repository is organized as follows:
 ```text
 SR-Source/
 ├── database/
-├── docs/                      # Launcher art, music, patch notes, 4:3 borders, complete saves and test notes
+├── docs/                      # Launcher art, music, patch notes, complete saves and test notes
 │   ├── banner/                # The PLAY banner in layers, and its layout.txt
 │   └── game-select/           # The game selection screen: layers, sounds, font and layout.txt
 ├── external/
@@ -495,7 +494,7 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 The launcher, **Riders Terminal**, is the program players open to play SR-Source. It is part of the ModernGekko fork and is built as `build/chassis/SR-Source`. Its window is 1280x720, or as big as fits a smaller screen (larger on a screen with a display scale above 100%), and most pages show their panels in two columns so they fit without scrolling.
 
 - **PLAY:** shows whether each game is ready (**GAME READY** or **NOT INSTALLED**) and starts it, alone or through Netplay. **LAUNCH** opens the [game selection screen](#game-selection-screen). The banner at the top moves: the checkered flag waves, Sonic floats, the layers lean with the mouse, and the Sonic Riders and Zero Gravity logos take turns every 10 seconds (its layers and their `layout.txt` are in `docs/banner/`). Summary cards show the time played, the controller (with a drawing of an Xbox, PlayStation or Nintendo controller, any other gamepad, or the keyboard), the display settings and the installed mods, and the **PATCH NOTES** panel shows what changed in this version.
-- **Settings:** CPU core, graphics backend (Vulkan or OpenGL; on Windows also Direct3D 11 and 12, and the launcher suggests another one if the chosen backend can't start), internal resolution, screenshot resolution, visual effect, game volume, aspect ratio (16:9, 4:3, stretched, an experimental ultrawide view for 21:9 screens, or an experimental custom shape from 1:1 to 6:1, such as 16:10, 21:9 or 32:9, typed in or picked from the suggestions; in both experimental ones the race keeps its proportions, and menus and the HUD may look stretched), 4:3 borders, window size, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution, the game volume and the 4:3 border can also be changed while playing, in the [in-game menu](#in-game-menu).
+- **Settings:** CPU core, graphics backend (Vulkan or OpenGL; on Windows also Direct3D 11 and 12, and the launcher suggests another one if the chosen backend can't start), internal resolution, screenshot resolution, visual effect, game volume, aspect ratio (see [Aspect ratio](#aspect-ratio)), window size, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution and the game volume can also be changed while playing, in the [in-game menu](#in-game-menu).
 - **Window size** (Settings → Display) is the game window's size when it isn't fullscreen. **Automatic**, the default, fits it to your screen: a 16:9 window about 85% of the primary monitor, in its middle. 960x540 to 2560x1440 are fixed sizes; one that doesn't fit your screen becomes the automatic one. How sharp the game looks is the internal resolution, not the window size: a small window with a high internal resolution looks very sharp.
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
 - **Game Files:** extracts your own copy of each game and installs the complete saves (see [Extracting with the Launcher](#extracting-with-the-launcher)).
@@ -506,7 +505,7 @@ The launcher, **Riders Terminal**, is the program players open to play SR-Source
 
 The bottom of the sidebar holds the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track; its volume is in **Settings → Audio**, next to the game's.
 
-Settings, controls, visual effects and the 4:3 borders are the same for both games. **TIME PLAYED** adds up both, and the **Screenshots** page shows the screenshots of both.
+Settings, controls and visual effects are the same for both games. **TIME PLAYED** adds up both, and the **Screenshots** page shows the screenshots of both.
 
 ### Game selection screen
 
@@ -523,20 +522,26 @@ Settings, controls, visual effects and the 4:3 borders are the same for both gam
 
 **From the launcher to the game:** the launcher fades to black and a loading screen shows the game's logo while the music fades out. The game window then opens where the launcher was, centred on it, and the launcher steps aside once the game's first picture is on screen. When you close the game, the launcher comes back the same way.
 
-### 4:3 borders
+### Aspect ratio
 
-When the game is shown in 4:3 on a wider screen, the bars beside it can show a picture instead of black: Sonic, Knuckles & Tails; Jet, Wave & Storm; a green grid; or a blue grid. The grids slide like the launcher's floor. Choose one in **Settings → Display → 4:3 borders**: **Random** (the default) picks one each time the game opens, and **None** keeps the bars black. The borders are drawn only on your screen, in Netplay too.
+**Settings → Display → Aspect ratio** decides the picture's shape. 16:9 and 4:3 fill the window, whatever its shape, with no bars beside the picture:
 
-The character borders are always shown whole and undistorted, as large as the bar allows, whatever the window's size, the screen's shape or fullscreen; any space left in the bar shows a blurred copy of the picture. The grids fill the whole bar.
+| Choice | What you see |
+| --- | --- |
+| 16:9 (Widescreen) | The default. The game draws in widescreen, and the race widens or narrows to your window's shape (on a 16:9 screen, nothing changes). Sonic Riders, made for 4:3, is widened too: its menus and HUD look a little stretched |
+| 4:3 | The games' original 4:3 picture, menus and HUD included, stretched to fill the window, as Dolphin's Stretch to Window does |
+| Custom (experimental) | A shape you type or pick, from 1:1 to 6:1 (such as 16:10, 21:9 or 32:9); in a window of another shape, bars fill the rest |
 
-The pictures and their list are in `docs/borders/`. `tools/make_game_borders.py` draws both grids from scratch, makes the blurred copies and writes `borders.txt`; it also builds the two character borders from their full artworks, which are kept outside the repository.
+In 16:9 and Custom the race keeps its proportions: it is the game's 3D view that widens (Dolphin's widescreen hack), not the picture that stretches. Where the race is shown wider than the game draws it, something at the very edge of the screen can sometimes appear or disappear suddenly, since the game doesn't draw what it thinks is out of view. In 4:3 nothing is widened: the whole picture is stretched, characters included. In Netplay, everyone plays with the host's 16:9 or 4:3 choice, and each picture fills its own window.
+
+Until 0.1.4 there were also **Stretch** and **Ultrawide**, which become 16:9 (it now fills 21:9 and wider screens as Ultrawide did), and pictures in the bars beside a 4:3 game (**4:3 borders**), which aren't needed now that 4:3 fills the window.
 
 ### In-game menu
 
 While playing, press **M** on the keyboard, or **Guide / Home** or **Select** (View, Share, −, ⧉) on the gamepad (the **Menu** and **−** buttons of the SR-Source controller), to open the menu. In solo play the game pauses. Move with the D-pad, the control stick or the arrow keys, choose with **A** (S on the keyboard) and go back with **B** (D); the same button again closes it. The line at the bottom of the menu shows those buttons as your controller prints them (Xbox's A and B, PlayStation's cross and circle, a Nintendo pad's B and A), or as keyboard keys if the keyboard was the last thing you pressed; if you remap A or B in your controller profile, it shows the new ones.
 
 - **Continue** goes back to the game.
-- **Quick settings** change the visual effect, the internal resolution, the game's volume and, when the game is in 4:3, the border. Choose a row and press left or right (A goes round the choices): the change shows at once, even with the game paused, and the launcher keeps it for next time.
+- **Quick settings** change the visual effect, the internal resolution and the game's volume. Choose a row and press left or right (A goes round the choices): the change shows at once, even with the game paused, and the launcher keeps it for next time.
 - **See controls** shows what each button of the GameCube controller is on your gamepad and on the keyboard, as your controller profile has them.
 - **Take screenshot** takes a screenshot at high resolution (see below); the menu stays open.
 - **Back to the launcher** closes the game and shows the launcher again.
@@ -556,7 +561,7 @@ An effect only sees the finished picture, not what is in it. So **Remaster** sha
 
 Until 0.1.4 there were more effects. Remaster has what Bloom, Vivid colors and Sharpen did: if one of them was chosen, Remaster is chosen instead; Chromatic aberration and Smooth edges (FXAA) become none.
 
-**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-Source_0001.png`, `SR-Source_0002.png` and so on, in `ScreenShots/<Game ID>/` inside the user directory (`~/.local/share/sr-source/ScreenShots/RS9E8P/` for Zero Gravity on Linux, `GXEE8P/` for Sonic Riders). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
+**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-Source_0001.png`, `SR-Source_0002.png` and so on, in `ScreenShots/<Game ID>/` inside the user directory (`~/.local/share/sr-source/ScreenShots/RS9E8P/` for Zero Gravity on Linux, `GXEE8P/` for Sonic Riders). As with Dolphin's own, they show the game's picture without the visual effect or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
 
 The launcher's **Screenshots** page shows them, newest first, without opening any other program: choose one to see it large, go to the next or previous one with the arrow keys or the buttons, and delete one you don't want. **Open folder** opens the folder they are in.
 
