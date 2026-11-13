@@ -7,7 +7,7 @@ The biggest update yet: Sonic Riders: Source. One source, two riding experiences
 - LAUNCH opens the new game selection screen, animated and with its own sounds; a game you haven't extracted shows in grey. Stay on a game for a few seconds and its intro plays, taken from your own copy of the game
 - From the launcher to the game without jumps: the launcher fades to black, a loading screen shows the game's logo, and the game opens right where the launcher was. When you close the game, the launcher comes back the same way
 - Complete save for Sonic Riders too, in Game Files, keeping your own save to bring back
-- New visual effect Remaster: crisper detail, richer colors and a soft glow on the lights
+- Visual effects, now three and better: Remaster (crisper detail, richer colors, glowing lights and soft shadows in the corners), Anime outline (clean ink lines and flat, bright colors) and CRT. If you used Bloom, Vivid colors or Sharpen, you now get Remaster, which does all three
 - A bigger launcher: 1280x720, or as big as fits your screen
 - The PLAY banner moves: the flag waves, the layers follow the mouse and the two logos take turns
 - Netplay: choose the game when you host or join; everyone must choose the host's
@@ -82,7 +82,7 @@ La actualización más grande hasta ahora: Sonic Riders: Source. Una fuente, dos
 - LANZAR abre la nueva pantalla de selección de juego, animada y con sus propios sonidos; el juego que no hayas extraído sale en gris. Quédate unos segundos en un juego y se reproduce su intro, sacada de tu propia copia del juego
 - Del launcher al juego sin saltos: el launcher funde a negro, una pantalla de carga muestra el logo del juego y el juego se abre justo donde estaba el launcher. Al cerrar el juego, el launcher vuelve igual
 - Partida completa también para Sonic Riders, en Archivos del juego, guardando la tuya para recuperarla
-- Nuevo efecto visual Remasterizado: más detalle, colores más ricos y un brillo suave en las luces
+- Efectos visuales, ahora tres y mejores: Remasterizado (más detalle, colores más ricos, luces que brillan y sombras suaves en los rincones), Contorno anime (líneas de tinta limpias y colores planos y vivos) y CRT. Si usabas Bloom, Colores vivos o Nitidez, ahora tienes Remasterizado, que hace las tres cosas
 - Un launcher más grande: 1280x720, o tan grande como quepa en tu pantalla
 - El banner de JUGAR se mueve: la bandera ondea, las capas siguen al ratón y los dos logos se turnan
 - Netplay: elige el juego al crear o al unirte; todos deben elegir el del anfitrión
@@ -157,7 +157,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - 「起動」で新しいゲーム選択画面が開きます。アニメーションと専用の効果音付きで、展開していないゲームはグレーで表示されます。ゲームを選んだまま数秒待つと、ご自身のゲームから取り出したオープニングが流れます
 - ランチャーからゲームへ途切れずに：ランチャーが暗転し、ロード画面にゲームのロゴが表示され、ゲームはランチャーがあった場所にそのまま開きます。ゲームを閉じると、ランチャーも同じように戻ります
 - Sonic Ridersにも完全セーブデータ：「ゲームファイル」からインストールでき、ご自身のセーブデータは保管されて元に戻せます
-- 新しい映像エフェクト「リマスター」：くっきりした細部、豊かな色、光のやわらかな輝き
+- 映像エフェクトを3つに絞って強化：リマスター（くっきりした細部、豊かな色、輝く光、隅のやわらかな影）、アニメ風の輪郭（すっきりした線と、平らで鮮やかな色）、CRT。ブルーム、鮮やかな色、シャープを使っていた場合は、その3つをすべて含むリマスターになります
 - 大きくなったランチャー：1280x720、または画面に収まる最大の大きさ
 - 「プレイ」のバナーが動きます：旗がなびき、レイヤーがマウスに合わせて動き、2つのロゴが交互に表示されます
 - ネットプレイ：作成・参加のときにゲームを選びます。全員がホストと同じゲームを選んでください

@@ -69,7 +69,7 @@ Requires your own legally obtained copy of each game you want to play.
 - [x] 0.1.2: Steam Deck controls, a gamepad that stands in for a missing one, and Netplay help (firewall, logs, same-house play).
 - [x] 0.1.3: a freely adjustable aspect ratio (experimental) and the launcher showing the controller or keyboard in use.
 - [x] 0.1.4: the in-game menu no longer keeps the game paused while a stick is held; the last 0.1 update before 0.2.0.
-- [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, a Remaster visual effect and a moving PLAY banner.
+- [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, three visual effects (Remaster, Anime outline and CRT) and a moving PLAY banner.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -548,16 +548,13 @@ The last two ask first, since progress the game hasn't saved is lost. In Netplay
 
 | Effect | What it does |
 | --- | --- |
-| Remaster | Crisper detail, richer colors and a soft glow on the lights, like a remaster |
-| Bloom | Lights and bright highlights glow softly |
-| Chromatic aberration | Red and blue drift apart toward the edges, as through a camera lens |
-| Vivid colors | Richer colors and a little more contrast |
-| Sharpen | Details and edges stand out more |
-| Outline | Dark lines along the edges, like a cartoon |
-| Smooth edges (FXAA) | Softens jagged edges |
+| Remaster | Crisper detail, richer colors, glowing lights and soft shadows in the corners, like a remaster |
+| Anime outline | Clean ink lines and flat, bright colors, like an anime |
 | CRT | Scanlines and darker corners, like an old TV |
 
-An effect only sees the finished picture, not what is in it, so **Outline** draws its lines around everything on screen with a clear edge (characters, the track, the menus), not around the characters alone. Soft shading and most textures get no line.
+An effect only sees the finished picture, not what is in it. So **Remaster** shades what is darker than its surroundings (corners, creases, the space under things), an ambient-occlusion look worked out from the picture rather than from the scene's depth, and **Anime outline** draws its lines around everything on screen with a clear edge (characters, the track, the menus), not around the characters alone; soft shading and most textures get no line.
+
+Until 0.1.4 there were more effects. Remaster has what Bloom, Vivid colors and Sharpen did: if one of them was chosen, Remaster is chosen instead; Chromatic aberration and Smooth edges (FXAA) become none.
 
 **Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-Source_0001.png`, `SR-Source_0002.png` and so on, in `ScreenShots/<Game ID>/` inside the user directory (`~/.local/share/sr-source/ScreenShots/RS9E8P/` for Zero Gravity on Linux, `GXEE8P/` for Sonic Riders). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
 
