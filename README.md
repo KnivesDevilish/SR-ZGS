@@ -40,7 +40,7 @@
 
 A modern static recompilation project for **Sonic Riders** (Nintendo GameCube) and **Sonic Riders: Zero Gravity** (Nintendo Wii), both played from one launcher, **Riders Terminal**, with the long-term goal of delivering a high-performance native PC experience on Linux and Windows, with Android support as a future target.
 
-The project uses **DolRecomp** to generate native code from the original PowerPC game executable and a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and GameCube and Wii hardware services. The fork also contains the SR-Source launcher and its Netplay lobby. Zero Gravity has the recompiled code so far; Sonic Riders plays through the same runtime with its JIT64 CPU core (see [Performance Notes](#performance-notes)).
+The project uses **DolRecomp** to generate native code from the original PowerPC game executable and a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and GameCube and Wii hardware services. The fork also contains the SR-Source launcher and its Netplay lobby. Both games run the same way, through the same runtime, launcher and settings; Zero Gravity's code was recompiled first, and Sonic Riders' is next (see [Performance Notes](#performance-notes)).
 
 Until 0.1.4 the project was **SR-ZGS** (Sonic Riders: Zero Gravity Source) and played Zero Gravity alone. From 0.2.0 it is **Sonic Riders: Source**: see [Updating from SR-ZGS](#updating-from-sr-zgs-01x).
 
@@ -70,6 +70,7 @@ Requires your own legally obtained copy of each game you want to play.
 - [x] 0.1.3: a freely adjustable aspect ratio (experimental) and the launcher showing the controller or keyboard in use.
 - [x] 0.1.4: the in-game menu no longer keeps the game paused while a stick is held; the last 0.1 update before 0.2.0.
 - [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, three visual effects (Remaster, Anime outline and CRT), 16:9 and 4:3 filling any screen, and a moving PLAY banner.
+- [ ] Recompiled code for Sonic Riders (GameCube), as Zero Gravity has.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -82,7 +83,7 @@ The 60 FPS result was achieved with Zero Gravity, using ModernGekko's JIT64 CPU 
 
 The StaticRecomp CPU core (`MODERNGEKKO_STATICRECOMP=1`) has also been tested with Zero Gravity, but currently exhibits significantly lower performance on the reference hardware.
 
-Sonic Riders (GameCube) runs with JIT64 and has been tested with it during development. It has no recompiled module yet: with StaticRecomp chosen, it plays with JIT64.
+Sonic Riders (GameCube) plays the same way, and has been tested with JIT64 during development. Its recompiled module is the next step; until it's there, choosing StaticRecomp plays it with JIT64.
 
 Improving the performance of the StaticRecomp execution path is an ongoing development goal.
 
@@ -662,8 +663,8 @@ The game successfully ran from start to finish at 60 FPS during developer testin
 ### Which versions of the games can I use?
 The NTSC-U releases of Sonic Riders for GameCube (`GXEE8P`) and of Sonic Riders: Zero Gravity for Wii (`RS9E8P`). Other releases (PAL, Japanese) and the PS2, Xbox and PC versions have different executables and are outside the current project scope.
 
-### Is Sonic Riders (GameCube) recompiled too?
-Not yet. It plays through the same runtime, launcher and settings as Zero Gravity, with ModernGekko's JIT64 CPU core; the recompiled module is Zero Gravity's for now.
+### Do both games run the same way?
+Yes. Sonic Riders and Zero Gravity play through the same runtime, launcher and settings, and the downloads run both with ModernGekko's JIT64 CPU core. The experimental StaticRecomp mode, for those who build from source, has Zero Gravity's recompiled code so far; Sonic Riders' is the next step.
 
 ### What happened to SR-ZGS?
 It is the same project: SR-ZGS (Sonic Riders: Zero Gravity Source) became Sonic Riders: Source in 0.2.0, when the original Sonic Riders joined. See [Updating from SR-ZGS](#updating-from-sr-zgs-01x).

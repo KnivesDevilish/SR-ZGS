@@ -13,6 +13,7 @@ The biggest update yet: Sonic Riders: Source. One source, two riding experiences
 - The PLAY banner moves: the flag waves, the layers follow the mouse and the two logos take turns
 - Netplay: choose the game when you host or join; everyone must choose the host's
 - TIME PLAYED adds up both games, and Screenshots shows those of both
+- Linux: the OpenGL graphics backend works now (before, it couldn't start)
 - Windows: the program is now SR-Source.exe, with the project's name in its details
 
 If you played 0.1.x:
@@ -89,6 +90,7 @@ La actualización más grande hasta ahora: Sonic Riders: Source. Una fuente, dos
 - El banner de JUGAR se mueve: la bandera ondea, las capas siguen al ratón y los dos logos se turnan
 - Netplay: elige el juego al crear o al unirte; todos deben elegir el del anfitrión
 - TIEMPO JUGADO suma los dos juegos, y Capturas muestra las de los dos
+- Linux: el motor gráfico OpenGL ya funciona (antes no llegaba a arrancar)
 - Windows: el programa ahora es SR-Source.exe, con el nombre del proyecto en sus detalles
 
 Si jugaste la 0.1.x:
@@ -165,6 +167,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - 「プレイ」のバナーが動きます：旗がなびき、レイヤーがマウスに合わせて動き、2つのロゴが交互に表示されます
 - ネットプレイ：作成・参加のときにゲームを選びます。全員がホストと同じゲームを選んでください
 - 「プレイ時間」は両方のゲームの合計になり、「スクリーンショット」には両方のスクリーンショットが表示されます
+- Linux：グラフィックバックエンドのOpenGLが使えるようになりました（これまでは起動できませんでした）
 - Windows：プログラム名がSR-Source.exeになり、ファイルの詳細にプロジェクト名が表示されます
 
 0.1.xを遊んでいた方へ：

@@ -36,6 +36,8 @@ if command -v pkg-config >/dev/null 2>&1; then
   need_pc alsa           "libasound2-dev"
   need_pc libpulse       "libpulse-dev"
   need_pc gl             "libgl1-mesa-dev"
+  # How Dolphin opens OpenGL on Linux: without it OpenGL can't start.
+  need_pc egl            "libegl-dev"
   # Not required by the chassis CMake (it forces evdev/hwdb off), but the
   # Dolphin CI package list includes them and SDL3 can use libudev.
   for opt in "libudev:libudev-dev" "libevdev:libevdev-dev"; do
@@ -53,12 +55,12 @@ if ((${#missing[@]})); then
   echo "Ubuntu/Debian:"
   echo "  sudo apt-get install -y build-essential cmake ninja-build pkg-config python3 git \\"
   echo "    libx11-dev libxi-dev libxrandr-dev libwayland-dev wayland-protocols libxkbcommon-dev \\"
-  echo "    libasound2-dev libpulse-dev libgl1-mesa-dev libudev-dev libevdev-dev \\"
+  echo "    libasound2-dev libpulse-dev libgl1-mesa-dev libegl-dev libudev-dev libevdev-dev \\"
   echo "    libsystemd-dev libbluetooth-dev libgtk-3-dev"
   echo "Fedora (package names not verified by us):"
   echo "  sudo dnf install -y gcc-c++ cmake ninja-build pkgconf-pkg-config python3 git \\"
   echo "    libX11-devel libXi-devel libXrandr-devel wayland-devel wayland-protocols-devel \\"
-  echo "    libxkbcommon-devel alsa-lib-devel pulseaudio-libs-devel mesa-libGL-devel \\"
+  echo "    libxkbcommon-devel alsa-lib-devel pulseaudio-libs-devel mesa-libGL-devel mesa-libEGL-devel \\"
   echo "    systemd-devel libevdev-devel bluez-libs-devel gtk3-devel"
   exit 1
 fi
