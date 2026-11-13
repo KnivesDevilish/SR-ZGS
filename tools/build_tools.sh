@@ -81,6 +81,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_USER_DIRECTORY_NAME="sr-source" \
         -DMODERNGEKKO_PREVIOUS_USER_DIRECTORY_NAMES="sr-zgs" \
         -DMODERNGEKKO_LAUNCHER_BANNER="$ROOT/docs/SR-Source Artwork.png" \
+        -DMODERNGEKKO_LAUNCHER_BANNER_LAYERS="$ROOT/docs/banner" \
         -DMODERNGEKKO_LAUNCHER_CONTROLLER_ART="$ROOT/docs/SR-Source Controller.png" \
         -DMODERNGEKKO_LAUNCHER_KEYBOARD_ART="$ROOT/docs/SR-Source Keyboard.png" \
         -DMODERNGEKKO_LAUNCHER_MODS_ART="$ROOT/docs/SR-Source Mods.png" \

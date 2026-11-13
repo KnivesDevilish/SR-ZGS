@@ -1,0 +1,10 @@
+# The PLAY page's banner in layers (ModernGekko's
+# tools/launcher_banner_layout.hpp): back to front, each picture 1787x576.
+#   layer <picture> <depth> [wave|float]   depth: pixels it moves with the mouse
+#   logo <picture> <depth>                 the logos take turns
+#   logo-seconds <seconds>                 how long each logo stays
+layer background.png 10 wave
+layer sonic.png 22 float
+logo logo-sonic-riders.png 34
+logo logo-zero-gravity.png 34
+logo-seconds 10
