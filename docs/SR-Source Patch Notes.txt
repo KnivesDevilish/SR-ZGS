@@ -1,4 +1,24 @@
 [en]
+# 0.2.0
+The biggest update yet: Sonic Riders: Source. One source, two riding experiences: the original Sonic Riders (GameCube) joins Zero Gravity (Wii).
+
+- SR-ZGS is now Sonic Riders: Source, and its launcher Riders Terminal
+- Sonic Riders (GameCube, US version GXEE8P) plays too: extract your own disc in Game Files, next to Zero Gravity. Settings, controls and visual effects are the same for both games
+- LAUNCH opens the new game selection screen, animated and with its own sounds; a game you haven't extracted shows in grey. Stay on a game for a few seconds and its intro plays, taken from your own copy of the game
+- From the launcher to the game without jumps: the launcher fades to black, a loading screen shows the game's logo, and the game opens right where the launcher was. When you close the game, the launcher comes back the same way
+- Complete save for Sonic Riders too, in Game Files, keeping your own save to bring back
+- New visual effect Remaster: crisper detail, richer colors and a soft glow on the lights
+- A bigger launcher: 1280x720, or as big as fits your screen
+- The PLAY banner moves: the flag waves, the layers follow the mouse and the two logos take turns
+- Netplay: choose the game when you host or join; everyone must choose the host's
+- TIME PLAYED adds up both games, and Screenshots shows those of both
+- Windows: the program is now SR-Source.exe, with the project's name in its details
+
+If you played 0.1.x:
+- Your settings, saves and screenshots move by themselves from the sr-zgs folder to sr-source the first time you open Sonic Riders: Source
+- Windows: the firewall asks again the first time you host Netplay, since the program has a new name. Allow it as before
+- Steam and Steam Deck: your shortcut opened SR-ZGS. Add SR-Source again as a non-Steam game, or change the shortcut's target
+
 # 0.1.4
 A fix for the in-game menu, and the last update before the next big version.
 
@@ -54,6 +74,26 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Builds for Linux and, still experimental, for Windows
 
 [es]
+# 0.2.0
+La actualización más grande hasta ahora: Sonic Riders: Source. Una fuente, dos experiencias: el Sonic Riders original (GameCube) se une a Zero Gravity (Wii).
+
+- SR-ZGS ahora es Sonic Riders: Source, y su launcher, Riders Terminal
+- También se juega Sonic Riders (GameCube, versión estadounidense GXEE8P): extrae tu propio disco en Archivos del juego, junto a Zero Gravity. Los ajustes, los controles y los efectos visuales son los mismos para los dos juegos
+- LANZAR abre la nueva pantalla de selección de juego, animada y con sus propios sonidos; el juego que no hayas extraído sale en gris. Quédate unos segundos en un juego y se reproduce su intro, sacada de tu propia copia del juego
+- Del launcher al juego sin saltos: el launcher funde a negro, una pantalla de carga muestra el logo del juego y el juego se abre justo donde estaba el launcher. Al cerrar el juego, el launcher vuelve igual
+- Partida completa también para Sonic Riders, en Archivos del juego, guardando la tuya para recuperarla
+- Nuevo efecto visual Remasterizado: más detalle, colores más ricos y un brillo suave en las luces
+- Un launcher más grande: 1280x720, o tan grande como quepa en tu pantalla
+- El banner de JUGAR se mueve: la bandera ondea, las capas siguen al ratón y los dos logos se turnan
+- Netplay: elige el juego al crear o al unirte; todos deben elegir el del anfitrión
+- TIEMPO JUGADO suma los dos juegos, y Capturas muestra las de los dos
+- Windows: el programa ahora es SR-Source.exe, con el nombre del proyecto en sus detalles
+
+Si jugaste la 0.1.x:
+- Tus ajustes, partidas y capturas pasan solos de la carpeta sr-zgs a sr-source la primera vez que abres Sonic Riders: Source
+- Windows: el firewall vuelve a preguntar la primera vez que creas un Netplay, porque el programa tiene otro nombre. Permítelo como antes
+- Steam y Steam Deck: tu acceso directo abría SR-ZGS. Añade SR-Source otra vez como juego no de Steam, o cambia el destino del acceso directo
+
 # 0.1.4
 Un arreglo del menú del juego, y la última actualización antes de la próxima versión grande.
 
@@ -109,6 +149,26 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Builds para Linux y, todavía experimental, para Windows
 
 [ja]
+# 0.2.0
+これまでで最大のアップデート：Sonic Riders: Source。ひとつのソースで、ふたつのライディング体験。初代Sonic Riders（ゲームキューブ）がZero Gravity（Wii）に加わりました。
+
+- SR-ZGSはSonic Riders: Sourceに、ランチャーはRiders Terminalになりました
+- Sonic Riders（ゲームキューブ、北米版GXEE8P）も遊べます：「ゲームファイル」でご自身のディスクをZero Gravityと並べて展開してください。設定、操作、映像エフェクトは両方のゲームで共通です
+- 「起動」で新しいゲーム選択画面が開きます。アニメーションと専用の効果音付きで、展開していないゲームはグレーで表示されます。ゲームを選んだまま数秒待つと、ご自身のゲームから取り出したオープニングが流れます
+- ランチャーからゲームへ途切れずに：ランチャーが暗転し、ロード画面にゲームのロゴが表示され、ゲームはランチャーがあった場所にそのまま開きます。ゲームを閉じると、ランチャーも同じように戻ります
+- Sonic Ridersにも完全セーブデータ：「ゲームファイル」からインストールでき、ご自身のセーブデータは保管されて元に戻せます
+- 新しい映像エフェクト「リマスター」：くっきりした細部、豊かな色、光のやわらかな輝き
+- 大きくなったランチャー：1280x720、または画面に収まる最大の大きさ
+- 「プレイ」のバナーが動きます：旗がなびき、レイヤーがマウスに合わせて動き、2つのロゴが交互に表示されます
+- ネットプレイ：作成・参加のときにゲームを選びます。全員がホストと同じゲームを選んでください
+- 「プレイ時間」は両方のゲームの合計になり、「スクリーンショット」には両方のスクリーンショットが表示されます
+- Windows：プログラム名がSR-Source.exeになり、ファイルの詳細にプロジェクト名が表示されます
+
+0.1.xを遊んでいた方へ：
+- 設定、セーブデータ、スクリーンショットは、Sonic Riders: Sourceを初めて開いたときにsr-zgsフォルダーからsr-sourceへ自動で移動します
+- Windows：プログラム名が変わったため、初めてネットプレイを作成するときにファイアウォールがもう一度確認します。以前と同じように許可してください
+- SteamとSteam Deck：ショートカットはSR-ZGSを開いていました。SR-Sourceを非Steamゲームとしてもう一度追加するか、ショートカットの対象を変更してください
+
 # 0.1.4
 ゲーム内メニューの修正です。次の大型バージョン前の最後のアップデートです。
 
