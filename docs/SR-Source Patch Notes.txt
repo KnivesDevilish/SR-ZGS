@@ -16,7 +16,7 @@ The biggest update yet: Sonic Riders: Source. One source, two riding experiences
 
 If you played 0.1.x:
 - Your settings, saves and screenshots move by themselves from the sr-zgs folder to sr-source the first time you open Sonic Riders: Source
-- Windows: the firewall asks again the first time you host Netplay, since the program has a new name. Allow it as before
+- Windows: the firewall asks again the first time you host Netplay from the new folder. Allow it as before
 - Steam and Steam Deck: your shortcut opened SR-ZGS. Add SR-Source again as a non-Steam game, or change the shortcut's target
 
 # 0.1.4
@@ -91,7 +91,7 @@ La actualización más grande hasta ahora: Sonic Riders: Source. Una fuente, dos
 
 Si jugaste la 0.1.x:
 - Tus ajustes, partidas y capturas pasan solos de la carpeta sr-zgs a sr-source la primera vez que abres Sonic Riders: Source
-- Windows: el firewall vuelve a preguntar la primera vez que creas un Netplay, porque el programa tiene otro nombre. Permítelo como antes
+- Windows: el firewall vuelve a preguntar la primera vez que creas un Netplay desde la carpeta nueva. Permítelo como antes
 - Steam y Steam Deck: tu acceso directo abría SR-ZGS. Añade SR-Source otra vez como juego no de Steam, o cambia el destino del acceso directo
 
 # 0.1.4
@@ -166,7 +166,7 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 
 0.1.xを遊んでいた方へ：
 - 設定、セーブデータ、スクリーンショットは、Sonic Riders: Sourceを初めて開いたときにsr-zgsフォルダーからsr-sourceへ自動で移動します
-- Windows：プログラム名が変わったため、初めてネットプレイを作成するときにファイアウォールがもう一度確認します。以前と同じように許可してください
+- Windows：新しいフォルダーから初めてネットプレイを作成するときに、ファイアウォールがもう一度確認します。以前と同じように許可してください
 - SteamとSteam Deck：ショートカットはSR-ZGSを開いていました。SR-Sourceを非Steamゲームとしてもう一度追加するか、ショートカットの対象を変更してください
 
 # 0.1.4

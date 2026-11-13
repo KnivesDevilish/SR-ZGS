@@ -38,15 +38,17 @@
   </a>
 </p>
 
-A modern static recompilation project for **Sonic Riders: Zero Gravity** (Nintendo Wii), with the long-term goal of delivering a high-performance native PC experience on Linux and Windows, with Android support as a future target.
+A modern static recompilation project for **Sonic Riders** (Nintendo GameCube) and **Sonic Riders: Zero Gravity** (Nintendo Wii), both played from one launcher, **Riders Terminal**, with the long-term goal of delivering a high-performance native PC experience on Linux and Windows, with Android support as a future target.
 
-The project uses **DolRecomp** to generate native code from the original PowerPC game executable and a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and Wii hardware services. The fork also contains the SR-Source launcher and its Netplay lobby.
+The project uses **DolRecomp** to generate native code from the original PowerPC game executable and a modified fork of **ModernGekko**, a Dolphin-derived runtime, to provide the execution environment and GameCube and Wii hardware services. The fork also contains the SR-Source launcher and its Netplay lobby. Zero Gravity has the recompiled code so far; Sonic Riders plays through the same runtime with its JIT64 CPU core (see [Performance Notes](#performance-notes)).
+
+Until 0.1.4 the project was **SR-ZGS** (Sonic Riders: Zero Gravity Source) and played Zero Gravity alone. From 0.2.0 it is **Sonic Riders: Source**: see [Updating from SR-ZGS](#updating-from-sr-zgs-01x).
 
 SR-Source aims to provide a clean, modular architecture that separates recompiled game logic, modding facilities, and hardware-agnostic platform interfaces, progressively reducing its reliance on existing emulation technology.
 
 **Current Status:** SR-Source is an experimental hybrid static recompilation project. It still relies on ModernGekko for graphics, audio, input and system-level functionality. A fully independent native runtime is a long-term development goal.
 
-Requires your own legally obtained copy of the game.
+Requires your own legally obtained copy of each game you want to play.
 
 ---
 
@@ -67,6 +69,7 @@ Requires your own legally obtained copy of the game.
 - [x] 0.1.2: Steam Deck controls, a gamepad that stands in for a missing one, and Netplay help (firewall, logs, same-house play).
 - [x] 0.1.3: a freely adjustable aspect ratio (experimental) and the launcher showing the controller or keyboard in use.
 - [x] 0.1.4: the in-game menu no longer keeps the game paused while a stick is held; the last 0.1 update before 0.2.0.
+- [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, a Remaster visual effect and a moving PLAY banner.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -75,9 +78,11 @@ Requires your own legally obtained copy of the game.
 
 ### Performance Notes
 
-The 60 FPS result was achieved using ModernGekko's JIT64 CPU core with `MODERNGEKKO_STATICRECOMP=0`.
+The 60 FPS result was achieved with Zero Gravity, using ModernGekko's JIT64 CPU core with `MODERNGEKKO_STATICRECOMP=0`.
 
-The StaticRecomp CPU core (`MODERNGEKKO_STATICRECOMP=1`) has also been tested, but currently exhibits significantly lower performance on the reference hardware.
+The StaticRecomp CPU core (`MODERNGEKKO_STATICRECOMP=1`) has also been tested with Zero Gravity, but currently exhibits significantly lower performance on the reference hardware.
+
+Sonic Riders (GameCube) runs with JIT64 and has been tested with it during development. It has no recompiled module yet: with StaticRecomp chosen, it plays with JIT64.
 
 Improving the performance of the StaticRecomp execution path is an ongoing development goal.
 
@@ -102,11 +107,12 @@ ModernGekko is based on Dolphin technology and currently provides:
 - Graphics and rendering.
 - Audio services.
 - Controller and input handling.
-- Wii system-level functionality.
+- GameCube and Wii system-level functionality.
 
 SR-Source uses a modified fork of ModernGekko: [KnivesDevilish/ModernGekko](https://github.com/KnivesDevilish/ModernGekko), branch `knives/srzgs-launcher`, based on the original [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko) by Hyperway. The `external/ModernGekko/` submodule points to this fork. On top of the original runtime, the fork adds:
 
-- The SR-Source launcher (see [The SR-Source Launcher](#-the-sr-source-launcher)).
+- The SR-Source launcher, Riders Terminal, which plays both games (see [The SR-Source Launcher](#-the-sr-source-launcher)).
+- The game selection screen, with each game's intro, and the loading screen between the launcher and the game (see [Game selection screen](#game-selection-screen)).
 - The Netplay lobby with invite codes (see [Netplay](#-netplay)).
 - GameCube controller profiles written for SR-Source, with a controller tester.
 - Pictures in the bars beside a 4:3 game, chosen in the launcher (see [4:3 borders](#43-borders)).
@@ -121,7 +127,7 @@ The project's own code connects the generated module to ModernGekko.
 
 Current source components:
 
-- `src/recompiled/`: Generated code produced by DolRecomp.
+- `src/recompiled/`: Generated code produced by DolRecomp (from Zero Gravity's `main.dol`).
 - `src/core/`: Project-specific hooks and replacements.
 - `src/platform/`: Module staging, runtime configuration and launch integration.
 - `tools/`: Build scripts and recompilation configuration.
@@ -142,7 +148,7 @@ The project does not yet provide its own independent renderer, audio backend or 
 - **Additional Tools:** Git and pkg-config.
 - **Recompilation Tools**: [DolRecomp](https://github.com/ExpansionPak/DolRecomp) and the SR-Source fork of [ModernGekko](https://github.com/KnivesDevilish/ModernGekko) (based on [ExpansionPak/ModernGekko](https://github.com/ExpansionPak/ModernGekko)).
   - Both come with the `external/ModernGekko/` submodule: DolRecomp is built from the revision ModernGekko pins, so nothing has to be downloaded separately.
-- **Game Assets**: A legally obtained NTSC-U copy of *Sonic Riders: Zero Gravity* (Wii, Game ID: `RS9E8P`), with its extracted game files.
+- **Game Assets**: Legally obtained NTSC-U copies of the games you want to play: *Sonic Riders: Zero Gravity* (Wii, Game ID: `RS9E8P`) and *Sonic Riders* (GameCube, Game ID: `GXEE8P`). Building the recompiled code needs Zero Gravity's extracted game files.
 
 ---
 
@@ -169,7 +175,9 @@ The repository is organized as follows:
 ```text
 SR-Source/
 ├── database/
-├── docs/                      # Launcher art, music, patch notes, 4:3 borders and test notes
+├── docs/                      # Launcher art, music, patch notes, 4:3 borders, complete saves and test notes
+│   ├── banner/                # The PLAY banner in layers, and its layout.txt
+│   └── game-select/           # The game selection screen: layers, sounds, font and layout.txt
 ├── external/
 │   └── ModernGekko/           # SR-Source fork of the Dolphin-derived runtime (submodule)
 ├── game_assets/               # User-provided game files (not distributed)
@@ -207,13 +215,13 @@ This is an observed test result, not a universal performance guarantee. Actual p
 
 ## 📦 Downloading a Release
 
-Ready-to-play builds are on the [Releases](https://github.com/KnivesDevilish/SR-Source/releases) page. They contain the launcher and the runtime, never the game: you still need your own copy of the game as an ISO, WBFS or RVZ image (see [Required Game Copy](#required-game-copy)).
+Ready-to-play builds are on the [Releases](https://github.com/KnivesDevilish/SR-Source/releases) page. They contain the launcher and the runtime, never the games: you still need your own copy of each game as an ISO, WBFS or RVZ image (a GameCube `.gcm` dump is an ISO: rename it to `.iso`). See [Required Game Copy](#required-game-copy).
 
 **Linux** (`SR-Source-<version>-linux-x86_64.tar.gz`):
 
 ```bash
-tar -xzf SR-Source-0.1.2-linux-x86_64.tar.gz
-cd SR-Source-0.1.2-linux-x86_64
+tar -xzf SR-Source-0.2.0-linux-x86_64.tar.gz
+cd SR-Source-0.2.0-linux-x86_64
 ./SR-Source
 ```
 
@@ -221,23 +229,43 @@ It is built on Ubuntu 24.04, so it needs a distribution at least that recent (gl
 
 **Windows** (`SR-Source-<version>-windows-x64.zip`, experimental): extract the whole zip to a folder of its own and open `SR-Source.exe`. It needs 64-bit Windows 10 or 11. The programs aren't signed, so Windows SmartScreen may warn the first time: choose **More info → Run anyway**.
 
-In both, keep the folder's files together (the launcher starts `moderngekko-run` beside it). The first time, open **Game Files**, choose your disc image and press **Extract Game**; then press **PLAY**. Settings, saves, screenshots and logs go to the SR-Source user directory: `~/.local/share/sr-source` on Linux, `%LOCALAPPDATA%\sr-source` on Windows. Each package has a `.sha256` file to check the download.
+In both, keep the folder's files together (the launcher starts `moderngekko-run` beside it). The first time, open **Game Files**, choose your disc image and press **Extract Game**, once for each game you have; then press **LAUNCH** on the **PLAY** page and choose the game. Settings, saves, screenshots and logs go to the SR-Source user directory: `~/.local/share/sr-source` on Linux, `%LOCALAPPDATA%\sr-source` on Windows. Each package has a `.sha256` file to check the download.
 
-The downloads play with the JIT64 CPU core. StaticRecomp needs the recompiled game module, which is made from your own copy of the game's code and therefore isn't distributed: build SR-Source from source to try it (see [Building & Getting Started](#-building--getting-started)).
+The downloads play with the JIT64 CPU core. StaticRecomp needs the recompiled game module, which is made from your own copy of the game's code and therefore isn't distributed: build SR-Source from source to try it with Zero Gravity (see [Building & Getting Started](#-building--getting-started)).
+
+### Updating from SR-ZGS (0.1.x)
+
+SR-ZGS became **Sonic Riders: Source** in 0.2.0. Download the new release into a folder of its own; nothing has to be copied by hand:
+
+- **Your settings, saves, screenshots and extracted game** move by themselves from the old user directory (`~/.local/share/sr-zgs`, `%LOCALAPPDATA%\sr-zgs`) to the new one (`sr-source`) the first time you open SR-Source. If the old folder can't be moved, SR-Source uses it where it is. The old program folder can be deleted afterwards.
+- **Windows:** the launcher is now `SR-Source.exe`. The firewall asks again the first time you host Netplay from the new folder, as with every new release folder: allow it as before (see [If your friends can't connect](#if-your-friends-cant-connect)).
+- **Steam and Steam Deck:** a non-Steam shortcut to `SR-ZGS` keeps opening the old version. Add `SR-Source` again, or change the shortcut's target to it.
+- **The repository** moved from `KnivesDevilish/SR-ZGS` to [KnivesDevilish/SR-Source](https://github.com/KnivesDevilish/SR-Source); GitHub sends the old links to the new place, and the 0.1.x launchers' update check still finds the new releases. In a clone made before, point it at the new address:
+
+  ```bash
+  git remote set-url origin https://github.com/KnivesDevilish/SR-Source.git
+  ```
 
 ---
 
 ## 🚧 Game Asset Setup
 
-SR-Source does not distribute copyrighted game executables or assets. You must provide your own legally obtained copy of **Sonic Riders: Zero Gravity** for Nintendo Wii.
+SR-Source does not distribute copyrighted game executables or assets. You must provide your own legally obtained copy of each game you want to play.
 
 ### Required Game Copy
 
-- NTSC-U release.
-- Game ID: `RS9E8P`.
+| Game | Platform | Release | Game ID |
+| --- | --- | --- | --- |
+| Sonic Riders: Zero Gravity | Nintendo Wii | NTSC-U | `RS9E8P` |
+| Sonic Riders | Nintendo GameCube | NTSC-U | `GXEE8P` |
+
 - A clean, unmodified disc dump is recommended.
+- One game is enough: the launcher greys out the one you don't have.
+- Other releases (PAL, Japanese) and other platforms (PS2, Xbox, PC) aren't supported.
 
 ### Extracting Game Files
+
+This is for building from source: the recompiled code is made from Zero Gravity's files in `game_assets/`. To play, the launcher extracts the games itself (see [Extracting with the Launcher](#extracting-with-the-launcher)).
 
 1. Extract the contents of your Wii disc image using a suitable tool, such as Dolphin Emulator, Wiimm's ISO Tools or CleanRip.
 2. Place the extracted game directory inside `game_assets/`.
@@ -260,9 +288,12 @@ The build configuration expects the extracted game root to contain both `sys/` a
 
 ### Extracting with the Launcher
 
-The launcher's **Game Files** page can also extract the game. Select your ISO, WBFS or RVZ image and press **Extract Game**: the launcher checks that the disc is `RS9E8P` and extracts it once into the SR-Source user directory (`~/.local/share/sr-source/games/RS9E8P` on Linux, `%LOCALAPPDATA%\sr-source\games\RS9E8P` on Windows), where it is reused every time you play.
+The launcher's **Game Files** page can also extract the games. Select your disc image and press **Extract Game**: the launcher checks which game the disc is (`RS9E8P` or `GXEE8P`) and extracts it once into the SR-Source user directory (`~/.local/share/sr-source/games/<Game ID>` on Linux, `%LOCALAPPDATA%\sr-source\games\<Game ID>` on Windows), where it is reused every time you play. **INSTALLED GAMES** shows which ones are ready.
 
-**Complete save:** the **Game Files** page can also install a save with the whole game completed at 100%, everything unlocked. Play once first, until the game makes its own save; then press **Install complete save**. Your save is copied first to `SaveBackups/RS9E8P/` in the user directory, and **Restore my save** brings it back. The complete save is in `docs/complete-save/`: only the game's save data (`0_Games.sav`), without the save's `banner.bin`, which holds the game's own icon and banner; your game's save keeps the one it made.
+**Complete save:** the **Game Files** page can also install, for each game, a save with the whole game completed at 100%, everything unlocked. Play once first, until the game makes its own save; then press **Install complete save**. Your save is copied first to `SaveBackups/<Game ID>/` in the user directory, and **Restore my save** brings it back. The complete saves are in `docs/complete-save/`, with only the games' save data:
+
+- **Zero Gravity:** `0_Games.sav`, without the save's `banner.bin`, which holds the game's own icon and banner; your game's save keeps the one it made.
+- **Sonic Riders:** `GXEE8P/8P-GXEE-SONICRIDERS_GAMEDATA_01.gci`, the save on the GameCube memory card (`GC/USA/Card A` in the user directory), with its picture and icon left blank, since they are the game's own art; the launcher puts in the ones of your own save. Restoring touches that save alone: the other saves on the card stay as they are.
 
 Building the recompiled code (step 3 below) reads `main.dol` from `game_assets/` by default. If you already extracted the game with the launcher, you can point the build at that copy instead of extracting it twice:
 
@@ -409,7 +440,7 @@ In Netplay, every player uses the host's CPU core. JIT64 is recommended, especia
 
 #### Controls
 
-SR-Source plays with a GameCube controller in port 1, which the Wii version of the game supports alongside the Wii Remote. The launcher writes its mapping to `Config/GCPadNew.ini` in the user directory the first time a gamepad is available, and **Controls → Replace with generated GameCube profile** writes it again. The first controller also answers to the keyboard:
+SR-Source plays with a GameCube controller in port 1: Sonic Riders is a GameCube game, and Zero Gravity's Wii version supports the GameCube controller alongside the Wii Remote. Both games use the same profile. The launcher writes its mapping to `Config/GCPadNew.ini` in the user directory the first time a gamepad is available, and **Controls → Replace with generated GameCube profile** writes it again. The first controller also answers to the keyboard:
 
 | GameCube | Gamepad | Keyboard |
 | --- | --- | --- |
@@ -442,8 +473,8 @@ On Linux the keyboard is read through X11, which the launcher uses by default. T
 `.github/workflows/release.yml` builds the Linux and Windows packages on GitHub's machines with `tools/build_tools.sh --chassis` (without DolRecomp: `SRZGS_SKIP_DOLRECOMP=1`) and `tools/package_release.sh`. Run it from the repository's **Actions** tab (**Release → Run workflow**) to get both packages as the run's artifacts, or push a tag that matches `project(SR_SOURCE VERSION ...)` in `CMakeLists.txt` to also get a draft release with them and the patch notes:
 
 ```bash
-git tag v0.1.2
-git push origin v0.1.2
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 `tools/package_release.sh` also packs a local build: after `tools/build_tools.sh --chassis` it writes `dist/SR-Source-<version>-linux-<arch>.tar.gz` and its `.sha256`. It never packs game files or the StaticRecomp module.
@@ -461,19 +492,36 @@ Build scripts, dependencies, and runtime behavior may change as the project evol
 
 ## 🎮 The SR-Source Launcher
 
-The launcher is the program players open to play SR-Source. It is part of the ModernGekko fork and is built as `build/chassis/SR-Source`. Its window is 1280x720, or as big as fits a smaller screen (larger on a screen with a display scale above 100%), and most pages show their panels in two columns so they fit without scrolling.
+The launcher, **Riders Terminal**, is the program players open to play SR-Source. It is part of the ModernGekko fork and is built as `build/chassis/SR-Source`. Its window is 1280x720, or as big as fits a smaller screen (larger on a screen with a display scale above 100%), and most pages show their panels in two columns so they fit without scrolling.
 
-- **PLAY:** starts the game alone or through Netplay. The banner at the top moves: the checkered flag waves, Sonic floats, the layers lean with the mouse, and the Sonic Riders and Zero Gravity logos take turns every 10 seconds (its layers and their `layout.txt` are in `docs/banner/`). Summary cards show the time played, the controller (with a drawing of an Xbox, PlayStation or Nintendo controller, any other gamepad, or the keyboard), the display settings and the installed mods, and the **PATCH NOTES** panel shows what changed in this version.
+- **PLAY:** shows whether each game is ready (**GAME READY** or **NOT INSTALLED**) and starts it, alone or through Netplay. **LAUNCH** opens the [game selection screen](#game-selection-screen). The banner at the top moves: the checkered flag waves, Sonic floats, the layers lean with the mouse, and the Sonic Riders and Zero Gravity logos take turns every 10 seconds (its layers and their `layout.txt` are in `docs/banner/`). Summary cards show the time played, the controller (with a drawing of an Xbox, PlayStation or Nintendo controller, any other gamepad, or the keyboard), the display settings and the installed mods, and the **PATCH NOTES** panel shows what changed in this version.
 - **Settings:** CPU core, graphics backend (Vulkan or OpenGL; on Windows also Direct3D 11 and 12, and the launcher suggests another one if the chosen backend can't start), internal resolution, screenshot resolution, visual effect, game volume, aspect ratio (16:9, 4:3, stretched, an experimental ultrawide view for 21:9 screens, or an experimental custom shape from 1:1 to 6:1, such as 16:10, 21:9 or 32:9, typed in or picked from the suggestions; in both experimental ones the race keeps its proportions, and menus and the HUD may look stretched), 4:3 borders, window size, fullscreen and FPS in the window title. Changes are saved right away and apply the next time you press **PLAY**; the visual effect, the internal resolution, the game volume and the 4:3 border can also be changed while playing, in the [in-game menu](#in-game-menu).
 - **Window size** (Settings → Display) is the game window's size when it isn't fullscreen. **Automatic**, the default, fits it to your screen: a 16:9 window about 85% of the primary monitor, in its middle. 960x540 to 2560x1440 are fixed sizes; one that doesn't fit your screen becomes the automatic one. How sharp the game looks is the internal resolution, not the window size: a small window with a high internal resolution looks very sharp.
 - **Controls:** chooses the controller, writes its GameCube profile (see [Controls](#controls)) and shows a tester that lights up whatever is pressed.
-- **Game Files:** extracts your own copy of the game (see [Extracting with the Launcher](#extracting-with-the-launcher)).
+- **Game Files:** extracts your own copy of each game and installs the complete saves (see [Extracting with the Launcher](#extracting-with-the-launcher)).
 - **Mods & expansions:** lists the mod packages installed, shows the folder they go in (`Mods` in the SR-Source user directory) with a button to open it, and presents the planned custom expansions (see [Future Ecosystem & Expansion Plans](#-future-ecosystem--expansion-plans)). SR-Source has no mods of its own yet.
 - **Credits:** the people and projects SR-Source is built on, their licenses, and the version check.
 
 **With a gamepad.** The launcher works with a gamepad as well as with the mouse and keyboard: the D-pad or the left stick moves, **A** chooses and **B** goes back to the sidebar; **LB** and **RB** change the page, the right stick scrolls, and **right** goes from the sidebar into the page. While a gamepad is in use, the bottom right corner shows its buttons as the controller prints them (Xbox, PlayStation or Nintendo). With the keyboard, the arrow keys move, **Enter** (or Space) chooses, **Escape** goes back, **Q** and **E** change the page, and the corner shows those keys instead. The bottom left corner draws what the game reads: the controller, or the keyboard when no gamepad is connected. Choosing **Controls** in the sidebar starts testing the controller, so its buttons only light up the drawing: hold **B** (or press Escape) to stop testing and move through the page. **LB** and **RB** pass through **Controls** without testing; press the top face button there (**Y**, the triangle on PlayStation) or **Test buttons** to start the test. The Netplay lobby works with a gamepad too.
 
 The bottom of the sidebar holds the language menu: English, Spanish, Japanese, or the system's language. The patch notes follow the chosen language. The launcher and the Netplay lobby each play their own music track; its volume is in **Settings → Audio**, next to the game's.
+
+Settings, controls, visual effects and the 4:3 borders are the same for both games. **TIME PLAYED** adds up both, and the **Screenshots** page shows the screenshots of both.
+
+### Game selection screen
+
+**LAUNCH** opens a screen split in two: Sonic Riders on the left, Zero Gravity on the right. The halves slide in, the divider drops between them, and the logos and **CHOOSE YOUR GAME** come in. The selected game's border glows, its logo breathes and its characters float a little more; the other one dims.
+
+- **Change game:** left and right (or A and D), the D-pad or the left stick, or the mouse over a half.
+- **Choose:** Enter, Space, **A** (the cross on PlayStation) or a click. The chosen half flashes and comes closer, and everything fades to black as the game starts.
+- **Go back:** Escape or **B**.
+- A game you haven't extracted is grey, with **NOT INSTALLED**, and shakes when you choose it.
+- The screen starts on the game you played last, and the hints at the bottom follow what you used last: the keyboard or the gamepad.
+- Its sounds are made for SR-Source (synthesized, no audio from the games) and follow the music volume.
+
+**Intros:** stay on a game for about five seconds and its intro plays in the screen's frame, with its logo kept on top: the opening's cuts of your own extracted game (`TITLE_G.SFD` for Sonic Riders, `OPENING.SFD` inside `Image3.cvm` for Zero Gravity), silent, with the launcher's music still playing. Any key or button, or moving the mouse, goes back to the choice. SR-Source carries no video, only the numbers of the frames to show; the videos are decoded with [pl_mpeg](https://github.com/phoboslab/pl_mpeg). The pictures, sounds, font and `layout.txt` of the screen are in `docs/game-select/`.
+
+**From the launcher to the game:** the launcher fades to black and a loading screen shows the game's logo while the music fades out. The game window then opens where the launcher was, centred on it, and the launcher steps aside once the game's first picture is on screen. When you close the game, the launcher comes back the same way.
 
 ### 4:3 borders
 
@@ -500,6 +548,7 @@ The last two ask first, since progress the game hasn't saved is lost. In Netplay
 
 | Effect | What it does |
 | --- | --- |
+| Remaster | Crisper detail, richer colors and a soft glow on the lights, like a remaster |
 | Bloom | Lights and bright highlights glow softly |
 | Chromatic aberration | Red and blue drift apart toward the edges, as through a camera lens |
 | Vivid colors | Richer colors and a little more contrast |
@@ -510,7 +559,7 @@ The last two ask first, since progress the game hasn't saved is lost. In Netplay
 
 An effect only sees the finished picture, not what is in it, so **Outline** draws its lines around everything on screen with a clear edge (characters, the track, the menus), not around the characters alone. Soft shading and most textures get no line.
 
-**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-Source_0001.png`, `SR-Source_0002.png` and so on, in `ScreenShots/RS9E8P/` inside the user directory (`~/.local/share/sr-source/ScreenShots/RS9E8P/` on Linux). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
+**Screenshots:** press **F9**, or choose **Take screenshot** in the menu. They are taken at **Settings → Graphics → Screenshot resolution** (3840x2160 by default, up to 5120x2880), whatever the internal resolution, and never below it: the game is drawn at that resolution only for the few frames the picture needs, then goes back to its own, and the setting doesn't change. A paused game runs those frames without sound or input and pauses again, so the picture is of a moment a fraction of a second later. A message at the bottom of the screen says when the picture is saved and its size. Screenshots are PNG files named `SR-Source_0001.png`, `SR-Source_0002.png` and so on, in `ScreenShots/<Game ID>/` inside the user directory (`~/.local/share/sr-source/ScreenShots/RS9E8P/` for Zero Gravity on Linux, `GXEE8P/` for Sonic Riders). As with Dolphin's own, they show the game's picture without the visual effect, the 4:3 borders or the menu. A high resolution needs more video memory: if screenshots fail, choose a lower one.
 
 The launcher's **Screenshots** page shows them, newest first, without opening any other program: choose one to see it large, go to the next or previous one with the arrow keys or the buttons, and delete one you don't want. **Open folder** opens the folder they are in.
 
@@ -524,7 +573,7 @@ The launcher keeps its settings in `config.ini` inside the SR-Source user direct
 
 ## 🌐 Netplay
 
-Netplay lets up to four players race together. On the launcher's **PLAY** page, one player presses **Host Netplay** and the others **Join Netplay**; everyone then waits in the Netplay lobby until the host starts the match. There are two ways to connect:
+Netplay lets up to four players race together. On the launcher's **PLAY** page, one player presses **Host Netplay** and the others **Join Netplay**; everyone then waits in the Netplay lobby until the host starts the match. Both have a **Game** row: everyone chooses the same game as the host. There are two ways to connect:
 
 - **Invite code** (default): the host gets an 8-character code (numbers and the letters a–f) to share with friends, who type it in **Join Netplay**. Nobody sees anybody else's IP address. Codes are handed out by the public server of the Dolphin project (`stun.dolphin-emu.org`); `invite_server` in the `[Netplay]` section of `config.ini` can name another one.
 - **Direct IP:** friends connect to the host's address and UDP port (2626 by default). It is meant for players on the same network or on [Tailscale](https://tailscale.com/).
@@ -559,7 +608,7 @@ Netplay is part of the experimental build and has had limited testing so far.
 
 ### 💽 Custom Story Expansions & Modding Support
 
-One of the long-term ambitions of **Sonic Riders: Zero Gravity Source** is to establish a modular ecosystem for custom content and community-created expansions.
+One of the long-term ambitions of **Sonic Riders: Source** is to establish a modular ecosystem for custom content and community-created expansions.
 
 The project aims to eventually support original story campaigns, additional characters, custom tracks, cutscenes and other fan-created content without requiring modifications to the original game assets.
 
@@ -608,8 +657,14 @@ Yes. From 0.1.0 on, the [Releases](https://github.com/KnivesDevilish/SR-Source/r
 ### Does the project run at 60 FPS?
 The game successfully ran from start to finish at 60 FPS during developer testing. This is an observed result from a specific test configuration, not a guarantee for every system.
 
-### Can I use files from the PS2 or GameCube versions?
-No. SR-Source specifically targets the NTSC-U Nintendo Wii release of Sonic Riders: Zero Gravity (`RS9E8P`). Other versions have different executable structures and are outside the current project scope.
+### Which versions of the games can I use?
+The NTSC-U releases of Sonic Riders for GameCube (`GXEE8P`) and of Sonic Riders: Zero Gravity for Wii (`RS9E8P`). Other releases (PAL, Japanese) and the PS2, Xbox and PC versions have different executables and are outside the current project scope.
+
+### Is Sonic Riders (GameCube) recompiled too?
+Not yet. It plays through the same runtime, launcher and settings as Zero Gravity, with ModernGekko's JIT64 CPU core; the recompiled module is Zero Gravity's for now.
+
+### What happened to SR-ZGS?
+It is the same project: SR-ZGS (Sonic Riders: Zero Gravity Source) became Sonic Riders: Source in 0.2.0, when the original Sonic Riders joined. See [Updating from SR-ZGS](#updating-from-sr-zgs-01x).
 
 ### Will Android be supported?
 Android is a long-term target for the project. However, there is currently no supported Android build or verified mobile compatibility.
@@ -621,13 +676,13 @@ Custom story campaigns, additional characters, tracks and other fan-created cont
 The launcher, its Netplay lobby and the patch notes are available in English, Spanish and Japanese. The game's own text and voices are those of your copy of the game. Additional text and audio localization options for the game may be explored in the future. No additional fan-dub integration is currently included in the working build.
 
 ### Do you plan to recompile other Sonic games?
-SR-Source is currently focused on Sonic Riders: Zero Gravity. The project does not currently have plans to expand its scope to other Sonic titles.
+SR-Source is focused on Sonic Riders and Sonic Riders: Zero Gravity. The project does not currently have plans to expand its scope to other Sonic titles.
 
 ---
 
 ## ❤️‍🔥 Credits & Acknowledgments
 
-**Created by** 奈依茲・悪魔的 (JP: Naizu Akumateki · EN: KnivesDevilish), with the SR-Source contributors and testers: research, development and testing. The launcher and Netplay lobby music are original tracks by KnivesDevilish.
+**Created by** 奈依茲・悪魔的 (JP: Naizu Akumateki · EN: KnivesDevilish), with the SR-Source contributors and testers: research, development and testing. The launcher and Netplay lobby music are original tracks by KnivesDevilish, and the game selection screen's sounds were made for SR-Source.
 
 **Built on:**
 
@@ -637,6 +692,7 @@ SR-Source is currently focused on Sonic Riders: Zero Gravity. The project does n
 - **Recomp template** — Literally God / MrPoloGit, who also added macOS support.
 - **Dolphin** — The Dolphin Team and its contributors: the foundation for much of the runtime technology.
 - **Invite codes** — The Dolphin project's public server (`stun.dolphin-emu.org`).
+- **pl_mpeg** — Dominic Szablewski: the MPEG-1 decoder that plays the games' intros on the game selection screen.
 
 **Licenses:**
 
@@ -645,7 +701,7 @@ SR-Source is currently focused on Sonic Riders: Zero Gravity. The project does n
 | SR-Source, ModernGekko | GNU GPL v3 |
 | Dolphin | GNU GPL v2 or later |
 | SDL 3 | zlib License |
-| Dear ImGui | MIT License |
-| Noto Sans CJK | SIL Open Font License 1.1 |
+| Dear ImGui, pl_mpeg | MIT License |
+| Noto Sans CJK, Teko | SIL Open Font License 1.1 |
 
-This project is an independent fan project and is not affiliated with or endorsed by SEGA. Sonic Riders: Zero Gravity and its characters are trademarks of SEGA.
+This project is an independent fan project and is not affiliated with or endorsed by SEGA. Sonic Riders, Sonic Riders: Zero Gravity and their characters are trademarks of SEGA.
