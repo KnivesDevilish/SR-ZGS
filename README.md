@@ -225,7 +225,7 @@ cd SR-Source-0.2.0-linux-x86_64
 ./SR-Source
 ```
 
-It is built on Ubuntu 24.04, so it needs a distribution at least that recent (glibc 2.39 or newer), a graphics driver with Vulkan, and PulseAudio or PipeWire for the sound.
+It is built on Ubuntu 24.04, so it needs a distribution at least that recent (glibc 2.39 or newer), a graphics driver with Vulkan or OpenGL, and PulseAudio or PipeWire for the sound.
 
 **Windows** (`SR-Source-<version>-windows-x64.zip`, experimental): extract the whole zip to a folder of its own and open `SR-Source.exe`. It needs 64-bit Windows 10 or 11. The programs aren't signed, so Windows SmartScreen may warn the first time: choose **More info → Run anyway**.
 
@@ -659,6 +659,15 @@ Yes. From 0.1.0 on, the [Releases](https://github.com/KnivesDevilish/SR-Source/r
 
 ### Does the project run at 60 FPS?
 The game successfully ran from start to finish at 60 FPS during developer testing. This is an observed result from a specific test configuration, not a guarantee for every system.
+
+### On Linux, a game closes as it starts with OpenGL ("The game process exited with code -11")
+That is the graphics driver (Mesa) failing on a damaged entry of its shader cache, not the game. Delete that cache; the driver makes it again:
+
+```bash
+rm -rf ~/.cache/mesa_shader_cache ~/.cache/mesa_shader_cache_db
+```
+
+It only holds saved shaders: games that use OpenGL make theirs again, so their first start takes a little longer. Choosing **Vulkan** in **Settings** avoids it too.
 
 ### Which versions of the games can I use?
 The NTSC-U releases of Sonic Riders for GameCube (`GXEE8P`) and of Sonic Riders: Zero Gravity for Wii (`RS9E8P`). Other releases (PAL, Japanese) and the PS2, Xbox and PC versions have different executables and are outside the current project scope.
