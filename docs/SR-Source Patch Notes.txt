@@ -1,4 +1,13 @@
 [en]
+# 0.2.1
+Netplay fixes, from the first reports on Windows.
+
+- Netplay: the first time you open the lobby with a game, SR-Source checks that every player has the same game files, which can take a few minutes. The loading screen now shows how far it has got, instead of staying black
+- That check keeps what it has read: if it's stopped, the next time it goes on from there, and later lobbies only read the files that changed
+- While a game loads, Esc or B (after a few seconds), or closing the launcher's window, stops the loading and brings the launcher back
+- The game no longer stays open in the background when the launcher is closed from the Task Manager or crashes
+- For those who build SR-Source: Sonic Riders gets its own recompiled module for the experimental StaticRecomp core, StaticRecomp is a little faster in both games, and DolRecomp's LLVM backend can be tried (experimental)
+
 # 0.2.0
 The biggest update yet: Sonic Riders: Source. One source, two riding experiences: the original Sonic Riders (GameCube) joins Zero Gravity (Wii).
 
@@ -76,6 +85,15 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Builds for Linux and, still experimental, for Windows
 
 [es]
+# 0.2.1
+Arreglos de Netplay, a partir de los primeros reportes en Windows.
+
+- Netplay: la primera vez que abres el lobby con un juego, SR-Source comprueba que todos los jugadores tengan los mismos archivos del juego, y puede tardar unos minutos. Ahora la pantalla de carga muestra cuánto lleva, en vez de quedarse en negro
+- Esa comprobación guarda lo que ya leyó: si se para, la siguiente vez sigue desde ahí, y los lobbies siguientes solo leen los archivos que cambiaron
+- Mientras un juego carga, Esc o B (pasados unos segundos), o cerrar la ventana del launcher, paran la carga y vuelven al launcher
+- El juego ya no se queda abierto de fondo cuando el launcher se cierra desde el Administrador de tareas o se cuelga
+- Para quien compila SR-Source: Sonic Riders tiene su propio módulo recompilado para el núcleo experimental StaticRecomp, StaticRecomp va un poco más rápido en los dos juegos, y se puede probar el backend LLVM de DolRecomp (experimental)
+
 # 0.2.0
 La actualización más grande hasta ahora: Sonic Riders: Source. Una fuente, dos experiencias: el Sonic Riders original (GameCube) se une a Zero Gravity (Wii).
 
@@ -153,6 +171,15 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Builds para Linux y, todavía experimental, para Windows
 
 [ja]
+# 0.2.1
+Windowsでの最初の報告をもとにしたネットプレイの修正です。
+
+- ネットプレイ：ゲームでロビーを初めて開くとき、SR-Sourceは全員が同じゲームファイルを持っているか確認するため、数分かかることがあります。ロード画面が黒い画面のままではなく、どこまで進んだかを表示するようになりました
+- この確認は読み終えた分を保存します：途中で止めても次回はそこから続き、2回目以降のロビーでは変更されたファイルだけを読みます
+- ゲームのロード中は、Esc か B（数秒後から）、またはランチャーのウィンドウを閉じると、ロードを止めてランチャーに戻ります
+- ランチャーをタスクマネージャーから閉じたり、ランチャーが強制終了したりしても、ゲームがバックグラウンドで開いたままになることがなくなりました
+- SR-Sourceをビルドする方へ：試験的なStaticRecompコア用に、Sonic Ridersにも専用の再コンパイル済みモジュールができました。StaticRecompのパフォーマンスが両方のゲームでわずかに上がり、DolRecompのLLVMバックエンドも試せます（試験的）
+
 # 0.2.0
 これまでで最大のアップデート：Sonic Riders: Source。ひとつのソースで、ふたつのライディング体験。初代Sonic Riders（ゲームキューブ）がZero Gravity（Wii）に加わりました。
 

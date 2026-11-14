@@ -70,7 +70,8 @@ Requires your own legally obtained copy of each game you want to play.
 - [x] 0.1.3: a freely adjustable aspect ratio (experimental) and the launcher showing the controller or keyboard in use.
 - [x] 0.1.4: the in-game menu no longer keeps the game paused while a stick is held; the last 0.1 update before 0.2.0.
 - [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, three visual effects (Remaster, Anime outline and CRT), 16:9 and 4:3 filling any screen, and a moving PLAY banner.
-- [ ] Recompiled code for Sonic Riders (GameCube), as Zero Gravity has.
+- [x] 0.2.1: Netplay's first check of the game files shows its progress on the loading screen and goes on where it stopped, a loading can be stopped (Esc, B or closing the window), and a game no longer stays in the background when the launcher is closed from the Task Manager or crashes.
+- [x] Recompiled code for Sonic Riders (GameCube), as Zero Gravity has. Most of its game code lives in `_Main.rel`, which StaticRecomp doesn't recompile yet: that part runs on the dynamic recompiler.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
 - [ ] Independent graphics and audio systems.
@@ -83,7 +84,7 @@ The 60 FPS result was achieved with Zero Gravity, using ModernGekko's JIT64 CPU 
 
 The StaticRecomp CPU core (`MODERNGEKKO_STATICRECOMP=1`) has also been tested with Zero Gravity, but currently exhibits significantly lower performance on the reference hardware.
 
-Sonic Riders (GameCube) plays the same way, and has been tested with JIT64 during development. Its recompiled module is the next step; until it's there, choosing StaticRecomp plays it with JIT64.
+Sonic Riders (GameCube) plays the same way, and has been tested with JIT64 during development. It has a recompiled module too, built from source like Zero Gravity's (see [Generate the Recompiled Game Code](#3-generate-the-recompiled-game-code)). Most of its game code lives in `_Main.rel`, a module the game loads as it starts, which StaticRecomp doesn't recompile yet: with StaticRecomp, that part still runs on the dynamic recompiler.
 
 Improving the performance of the StaticRecomp execution path is an ongoing development goal.
 
@@ -349,13 +350,16 @@ bash tools/build_tools.sh --chassis
 
 ### 3. Generate the Recompiled Game Code
 
-Run the recompilation script:
+Run the recompilation script once for each game you want to play with StaticRecomp. It reads the game from the copy the launcher extracted (see [Extracting with the Launcher](#extracting-with-the-launcher)), so extract it first:
 
 ```bash
-bash tools/dolrecomp/recompile.sh
+bash tools/dolrecomp/recompile.sh          # Sonic Riders: Zero Gravity (RS9E8P)
+bash tools/dolrecomp/recompile.sh GXEE8P   # Sonic Riders (GXEE8P)
 ```
 
-The generated code will be placed inside `src/recompiled/`.
+The generated code is placed in `src/recompiled/<Game ID>/`, and step 4 builds one module for each game there (`gRS9E8P_recomp`, `gGXEE8P_recomp`).
+
+DolRecomp's LLVM backend can be tried instead of the C one by putting `BACKEND=llvm` before the command, when LLVM 19 or 20 is installed (`tools/build_tools.sh` then builds DolRecomp with it). It is experimental: Zero Gravity doesn't get past its first black screen with it yet.
 
 ### 4. Configure and Build SR-Source
 
@@ -586,6 +590,8 @@ Netplay lets up to four players race together. On the launcher's **PLAY** page, 
 
 Every player needs the same SR-Source release and the same game files. Everyone plays with the host's CPU core and the host's 16:9 or 4:3 choice; JIT64 is recommended, especially when players are on different systems.
 
+The first time a player opens the Netplay lobby with a game, SR-Source reads all of that game's files to make sure everyone has the same ones: several GB, which can take a few minutes, longer on a hard disk. The loading screen shows how far it has got, what has been read is kept even if the loading is stopped, and later lobbies only read the files that changed. **Esc** or **B** (after a few seconds), or closing the launcher's window, stops the loading. If the launcher is closed from the Task Manager or crashes, the game it started ends with it instead of staying in the background.
+
 Netplay is part of the experimental build and has had limited testing so far.
 
 ### If your friends can't connect
@@ -669,11 +675,14 @@ rm -rf ~/.cache/mesa_shader_cache ~/.cache/mesa_shader_cache_db
 
 It only holds saved shaders: games that use OpenGL make theirs again, so their first start takes a little longer. Choosing **Vulkan** in **Settings** avoids it too.
 
+### The Netplay lobby takes a long time to open
+The first time, the lobby reads all of the game's files to check that every player has the same ones (several GB). From 0.2.1 the loading screen shows how far it has got; before, it stayed black and looked stuck. Let it finish once: the next times only the files that changed are read. If the launcher of an older release was closed meanwhile, end `moderngekko-run` in the Task Manager (Windows) or with `pkill -f moderngekko-run` (Linux) before trying again.
+
 ### Which versions of the games can I use?
 The NTSC-U releases of Sonic Riders for GameCube (`GXEE8P`) and of Sonic Riders: Zero Gravity for Wii (`RS9E8P`). Other releases (PAL, Japanese) and the PS2, Xbox and PC versions have different executables and are outside the current project scope.
 
 ### Do both games run the same way?
-Yes. Sonic Riders and Zero Gravity play through the same runtime, launcher and settings, and the downloads run both with ModernGekko's JIT64 CPU core. The experimental StaticRecomp mode, for those who build from source, has Zero Gravity's recompiled code so far; Sonic Riders' is the next step.
+Yes. Sonic Riders and Zero Gravity play through the same runtime, launcher and settings, and the downloads run both with ModernGekko's JIT64 CPU core. The experimental StaticRecomp mode, for those who build from source, has recompiled code for both; in Sonic Riders, most of the game's code still runs on the dynamic recompiler (see [Performance Notes](#performance-notes)).
 
 ### What happened to SR-ZGS?
 It is the same project: SR-ZGS (Sonic Riders: Zero Gravity Source) became Sonic Riders: Source in 0.2.0, when the original Sonic Riders joined. See [Updating from SR-ZGS](#updating-from-sr-zgs-01x).

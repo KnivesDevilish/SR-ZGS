@@ -3,7 +3,8 @@
 # Sonic Riders: Source (SR-Source) - build the external tools from the pinned
 # ModernGekko submodule.
 #
-#   tools/build_tools.sh            DolRecomp only (fast; all recompile.sh needs)
+#   tools/build_tools.sh            DolRecomp only (fast; all recompile.sh needs;
+#                                   with LLVM 19 or 20 installed, its LLVM backend too)
 #   tools/build_tools.sh --chassis  also the ModernGekko runner (heavy: builds Dolphin)
 #
 # DolRecomp is built from the revision ModernGekko pins, so the generated code
@@ -44,9 +45,58 @@ esac
 [[ -f "$DR_SRC/CMakeLists.txt" ]] || die "missing $DR_SRC
   git submodule update --init --recursive      # then retry"
 
+# DolRecomp's LLVM backend (BACKEND=llvm, see tools/dolrecomp/recompile.sh)
+# needs the development files of LLVM 19 or 20, no other version: Fedora
+# llvm20-devel, Debian and Ubuntu llvm-20-dev. They are looked for where
+# those packages put them; SRZGS_LLVM_DIR=<folder with LLVMConfig.cmake>
+# names another place, and SRZGS_LLVM=0 leaves the backend out. Without them
+# DolRecomp is built as before, with the C backend only.
+llvm_version() {
+  sed -n 's/^set(PACKAGE_VERSION "\([0-9.]*\)").*/\1/p' "$1/LLVMConfigVersion.cmake" 2>/dev/null | head -n 1
+}
+find_llvm() {
+  local dir config
+  if [[ -n "${SRZGS_LLVM_DIR:-}" ]]; then
+    echo "$SRZGS_LLVM_DIR"
+    return 0
+  fi
+  local candidates=()
+  for config in llvm-config-20 llvm-config-19 llvm-config; do
+    command -v "$config" > /dev/null 2>&1 \
+      && candidates+=("$("$config" --cmakedir 2>/dev/null || true)")
+  done
+  for version in 20 19; do
+    candidates+=(/usr/lib64/llvm$version/lib/cmake/llvm
+                 /usr/lib64/llvm$version/lib64/cmake/llvm
+                 /usr/lib/llvm-$version/lib/cmake/llvm
+                 /usr/lib/llvm$version/lib/cmake/llvm)
+  done
+  candidates+=(/usr/lib64/cmake/llvm /usr/lib/cmake/llvm /usr/local/lib/cmake/llvm)
+  for dir in "${candidates[@]}"; do
+    [[ -n "$dir" && -f "$dir/LLVMConfig.cmake" ]] || continue
+    [[ "$(llvm_version "$dir")" =~ ^(19|20)\. ]] || continue
+    echo "$dir"
+    return 0
+  done
+  return 1
+}
+
 if [[ "${SRZGS_SKIP_DOLRECOMP:-0}" != "1" ]]; then
+  DR_LLVM=(-DDOLRECOMP_ENABLE_LLVM=OFF)
+  if [[ -n "${SRZGS_LLVM_DIR:-}" && ! -f "${SRZGS_LLVM_DIR}/LLVMConfig.cmake" ]]; then
+    die "SRZGS_LLVM_DIR has no LLVMConfig.cmake: $SRZGS_LLVM_DIR"
+  fi
+  if [[ "${SRZGS_LLVM:-1}" != "0" ]]; then
+    if LLVM_DIR_FOUND="$(find_llvm)"; then
+      DR_LLVM=(-DDOLRECOMP_ENABLE_LLVM=ON "-DLLVM_DIR=$LLVM_DIR_FOUND")
+      echo "LLVM $(llvm_version "$LLVM_DIR_FOUND"): $LLVM_DIR_FOUND (DolRecomp gets its LLVM backend)"
+    else
+      echo "LLVM 19 or 20 not found: DolRecomp is built with the C backend only."
+      echo "  For the LLVM backend (Fedora): sudo dnf install llvm20-devel   then run this again"
+    fi
+  fi
   cmake -S "$DR_SRC" -B "$ROOT/build/dolrecomp" -G Ninja \
-        -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DDOLRECOMP_ENABLE_LLVM=OFF
+        -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF "${DR_LLVM[@]}"
   cmake --build "$ROOT/build/dolrecomp" --target dolrecomp -j"$JOBS"
   echo "DolRecomp: $ROOT/build/dolrecomp/dolrecomp"
 fi
@@ -65,6 +115,9 @@ if [[ "${1:-}" == "--chassis" ]]; then
   [[ "$SRZGS_VERSION" =~ ^[0-9]+(\.[0-9]+){0,3}$ ]] \
     || die "can't read the version from project(SR_SOURCE VERSION ...) in CMakeLists.txt"
 
+  # Sys/GameSettings/GXEE8P.ini and RS9E8P.ini: each game's StaticRecomp
+  # settings (see the files); Sonic Riders' replaces the one of ModernGekko's
+  # Dolphin. JIT64 doesn't read them.
   # The Netplay lobby has no portrait beside it, and 16:9 and 4:3 fill the
   # window, so there are no bars for 4:3 borders: MODERNGEKKO_LOBBY_ART and
   # MODERNGEKKO_GAME_BORDERS are passed empty so a build folder made before
@@ -98,6 +151,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_GAME_BORDERS="" \
         -DMODERNGEKKO_COMPLETE_SAVE="$ROOT/docs/complete-save" \
         -DMODERNGEKKO_GAME_SELECT="$ROOT/docs/game-select" \
+        -DMODERNGEKKO_GAME_SETTINGS_OVERRIDE="$ROOT/docs/game-settings/GXEE8P.ini;$ROOT/docs/game-settings/RS9E8P.ini" \
         -DMODERNGEKKO_SCREENSHOT_NAME="SR-Source" \
         -DMODERNGEKKO_FRONTEND_VERSION="$SRZGS_VERSION" \
         -DMODERNGEKKO_UPDATE_REPOSITORY="KnivesDevilish/SR-Source" \
