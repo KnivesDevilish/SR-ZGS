@@ -18,7 +18,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 project(SR_SOURCE
-  VERSION 0.2.1
+  VERSION 0.2.2
   DESCRIPTION "Sonic Riders: Source"
   LANGUAGES C CXX)
 

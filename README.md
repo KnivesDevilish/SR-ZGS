@@ -71,6 +71,7 @@ Requires your own legally obtained copy of each game you want to play.
 - [x] 0.1.4: the in-game menu no longer keeps the game paused while a stick is held; the last 0.1 update before 0.2.0.
 - [x] 0.2.0: **Sonic Riders: Source.** Sonic Riders (GameCube) joins Zero Gravity in one launcher, Riders Terminal: a game selection screen with each game's intro, a loading screen from the launcher to the game, complete saves for both games, three visual effects (Remaster, Anime outline and CRT), 16:9 and 4:3 filling any screen, and a moving PLAY banner.
 - [x] 0.2.1: Netplay's first check of the game files shows its progress on the loading screen and goes on where it stopped, a loading can be stopped (Esc, B or closing the window), and a game no longer stays in the background when the launcher is closed from the Task Manager or crashes.
+- [x] 0.2.2: the launcher opens with SR-Source's icon instead of all at once, a new Netplay lobby with the banner's art, the Netplay host's router opens its port by itself (UPnP) and the lobby says whether friends can reach it, and Netplay errors say why, in a small window of the launcher.
 - [x] Recompiled code for Sonic Riders (GameCube), as Zero Gravity has. Most of its game code lives in `_Main.rel`, which StaticRecomp doesn't recompile yet: that part runs on the dynamic recompiler.
 - [ ] Improve and optimize StaticRecomp execution performance.
 - [ ] Independent runtime implementation.
@@ -608,8 +609,13 @@ Netplay is part of the experimental build and has had limited testing so far.
     # ufw (Ubuntu, Linux Mint...)
     sudo ufw allow 2626/udp
     ```
-- **From different houses:** invite codes need both internet connections to allow them; mobile data and some internet providers (with CGNAT) don't. If codes keep failing, everyone can join the same [Tailscale](https://tailscale.com/) network and connect with **Direct IP** to the host's **Internet (Tailscale)** address.
-- **Reports:** after a failed attempt, `Logs/ModernGekko.log` in the user directory says why: whether the invite server answered, how long the connection was tried and the host's addresses (a public address is left out). Attach the log of the host and of the player who couldn't join.
+- **From different houses:** the host's computer asks its router to open the UDP port (UPnP), and the host's lobby says how it went, under the invite code or the addresses:
+  - **Your router opened the port:** friends in other houses can reach the host.
+  - **Shared connection (CGNAT)** or **Your router kept the port closed:** they may not. If they can't get in, another player hosts, ideally one whose lobby says the port is open. Invite codes can still work between two such connections, but mobile data and some internet providers don't allow it.
+  - Nothing: the router didn't answer (UPnP may be turned off in its settings).
+
+  As a last resort, everyone can join the same [Tailscale](https://tailscale.com/) network and connect with **Direct IP** to the host's **Internet (Tailscale)** address.
+- **Reports:** after a failed attempt, `Logs/ModernGekko.log` in the user directory says why: whether the invite server answered, what the host's router answered, how long the connection was tried and the host's addresses (a public address is left out). The error window's **Open the log folder** opens its folder. Attach the log of the host and of the player who couldn't join.
 
 ---
 

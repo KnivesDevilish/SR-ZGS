@@ -1,0 +1,7 @@
+# The Netplay lobby's background in layers (ModernGekko's
+# tools/launcher_banner_layout.hpp): back to front, each picture 1920x1080.
+#   layer <picture> <depth> [wave|float]   depth: pixels it moves with the mouse
+# Made by tools/make_lobby_layers.py from SR-Source Artwork Dev.png and
+# banner/background.png.
+layer backdrop.png 10 wave
+layer icon.png 22 float

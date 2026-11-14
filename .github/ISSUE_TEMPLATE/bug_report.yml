@@ -14,7 +14,7 @@ body:
     attributes:
       label: SR-Source version
       description: Shown at the top of the launcher's patch notes, and in the first line of the log.
-      placeholder: "0.2.1"
+      placeholder: "0.2.2"
     validations:
       required: true
   - type: dropdown

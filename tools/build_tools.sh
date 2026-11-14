@@ -145,6 +145,7 @@ if [[ "${1:-}" == "--chassis" ]]; then
         -DMODERNGEKKO_LAUNCHER_MUSIC="$ROOT/docs/SR-Source Launcher Track.mp3" \
         -DMODERNGEKKO_LOBBY_MUSIC="$ROOT/docs/SR-Source NetworkBattle Track.mp3" \
         -DMODERNGEKKO_LOBBY_BACKGROUND="$ROOT/docs/SR-Source Netplay Background.png" \
+        -DMODERNGEKKO_LOBBY_BACKGROUND_LAYERS="$ROOT/docs/lobby" \
         -DMODERNGEKKO_APP_ICON="$ROOT/docs/SR-Source Icon.png" \
         -DMODERNGEKKO_APP_ICON_ICO="$ROOT/docs/SR-Source Icon.ico" \
         -DMODERNGEKKO_LAUNCHER_PATCH_NOTES="$ROOT/docs/SR-Source Patch Notes.txt" \

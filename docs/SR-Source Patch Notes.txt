@@ -1,4 +1,13 @@
 [en]
+# 0.2.2
+A launcher that opens smoothly, a new Netplay lobby, and Netplay that tells you what's going on.
+
+- The launcher opens with SR-Source's icon and name for a moment, then fades into the launcher, instead of appearing all at once. Any key, click or button skips it
+- New Netplay lobby: the banner's light art in the background, with the flag waving and the icon floating under a big NETPLAY title; the lobby itself sits on a dark card beside it
+- Hosting Netplay asks your router to open Netplay's UDP port (UPnP) while the room is open, and the lobby tells you how it went: port opened, shared connection (CGNAT) or port closed. If your friends can't get in, the best one to host is whoever sees the port opened
+- Joining with an invite code now says why it failed: no room has that code, the host's computer didn't answer, or your two connections couldn't reach each other
+- Errors show in a small window of the launcher, with a button that opens the log's folder, instead of a system window that could take up half the screen on Windows
+
 # 0.2.1
 Netplay fixes, from the first reports on Windows.
 
@@ -85,6 +94,15 @@ First public build of SR-ZGS: Sonic Riders: Zero Gravity as a static recompilati
 - Builds for Linux and, still experimental, for Windows
 
 [es]
+# 0.2.2
+Un launcher que abre con suavidad, un lobby de Netplay nuevo y un Netplay que te dice qué pasa.
+
+- El launcher abre con el icono y el nombre de SR-Source durante un momento y luego da paso al launcher, en vez de aparecer de golpe. Cualquier tecla, clic o botón salta esa entrada
+- Lobby de Netplay nuevo: de fondo, el arte claro del banner, con la bandera ondeando y el icono flotando bajo un gran título NETPLAY; el lobby va en una tarjeta oscura a su lado
+- Al crear una sala de Netplay, tu PC pide a tu router que abra el puerto UDP de Netplay (UPnP) mientras la sala está abierta, y el lobby te dice cómo fue: puerto abierto, conexión compartida (CGNAT) o puerto cerrado. Si tus amigos no logran entrar, lo mejor es que hospede quien vea el puerto abierto
+- Unirse con un código de invitación ahora dice por qué falló: no hay ninguna sala con ese código, el equipo del anfitrión no respondió, o sus dos conexiones no lograron comunicarse
+- Los errores salen en una ventana pequeña del launcher, con un botón que abre la carpeta del registro, en vez de una ventana del sistema que en Windows podía ocupar media pantalla
+
 # 0.2.1
 Arreglos de Netplay, a partir de los primeros reportes en Windows.
 
@@ -171,6 +189,15 @@ Primera versión pública de SR-ZGS: Sonic Riders: Zero Gravity como recompilaci
 - Builds para Linux y, todavía experimental, para Windows
 
 [ja]
+# 0.2.2
+ランチャーがなめらかに開くようになり、ネットプレイのロビーが新しくなり、ネットプレイで何が起きているか分かるようになりました。
+
+- ランチャーを開くと、SR-Sourceのアイコンと名前が数秒表示されてから、ランチャーに切り替わります。すべてが一度に表示されることはなくなりました。キー、クリック、ボタンのどれかでスキップできます
+- 新しいネットプレイのロビー：背景はバナーの明るいアートで、旗がなびき、アイコンが大きなNETPLAYの文字の下で動きます。ロビーはその横の暗いカードに表示されます
+- ネットプレイでルームを作ると、ルームが開いている間、ルーターにネットプレイのUDPポートを開くよう求めます（UPnP）。ロビーにはどうなったかが表示されます：ポートが開いた、接続が共有されている（CGNAT）、またはポートが閉じている。友達が入れない場合は、ポートが開いた人がホストになるのがいちばんです
+- 招待コードで参加できなかったとき、その理由が表示されるようになりました：そのコードのルームがない、ホストのPCが応答しなかった、または2人のPCがお互いに接続できなかった
+- エラーはランチャー内のウィンドウに表示され、ログのフォルダーを開くボタンがあります。以前はシステムのウィンドウで、Windowsではとても大きくなることがありました
+
 # 0.2.1
 Windowsでの最初の報告をもとにしたネットプレイの修正です。
 
